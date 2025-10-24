@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Create new resource</title>
-    <link rel="stylesheet" href="./CreateNewResource.css">
-    <script src="./CreateNewResource.js" type="application/javascript" ></script>
+    <link rel="stylesheet" href="./create_new_resource.css">
+    <script src="../../staticData.js" type="text/javascript" ></script>
+    <script src="./create_new_resource.js" type="text/javascript" ></script>
+    
+    <script src="..//main_page/resource_management.js" type="text/javascript" ></script>
 </head>
 
 <body>
@@ -13,7 +16,8 @@
     <h4>Attributes of the new resource below:</h4>
 
     <!-- TODO create a seperate JS file AND variables-->
-    <form class="form-container" action="/resource_management/main_page/ResourceManagement.html" onsubmit="createResourceOnSubmit()">
+      <!-- action="../main_page/resource_management.html"  -->
+    <form class="form-container" onsubmit="createResourceOnSubmit(event)">
         <!-- Attributes of 1 new resource, make array or object out of it -->
         <!-- NAME  -->
         <label for="name">Name of new resource:</label>
@@ -30,10 +34,10 @@
         <!-- CAPACITIES (might want to make two seperate subpages or UL )-->
         <!-- FIXME: logic of creating new room or equipment -->
         <label for="capacities">Room capacity (0 if it's an equipement):</label>
-        <input type="text" id="capacities" name="capacities" placeholder="e.g. 22 people">
+        <input type="text" id="capacity" name="capacity" placeholder="e.g. 22 people">
         <!-- IMAGES -->
-        <label for="imagee">Upload image file:</label>
-        <input type="file" id="imagee" name="imagee">
+        <label for="image">Upload image file:</label>
+        <input type="file" id="image" name="image">
         <!-- SUBMIT BUTTON -->
         <input type="submit" />
     </form>

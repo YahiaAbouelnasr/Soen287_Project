@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Resource Dashboard</title>
+    <!-- We'll use Tailwind CSS for simple, modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- We'll use the Inter font family -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to your new external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+
+    <!-- Header / Navigation Bar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold text-gray-900">Campus Resource Booking</h1>
+                </div>
+                
+                <!-- Notification Bell -->
+                <div class="relative">
+                    <button id="notification-bell" class="relative p-2 rounded-full text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <span class="sr-only">View notifications</span>
+                        <!-- Bell Icon (SVG) -->
+                        <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <!-- Notification Count Badge -->
+                        <span id="notification-count" class="notification-badge" style="display: none;">0</span>
+                    </button>
+                    
+                    <!-- Notifications Panel (Dropdown) -->
+                    <div id="notifications-panel" 
+                         class="origin-top-right absolute right-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                         style="display: none; z-index: 10;">
+                        <div class="py-1">
+                            <div class="px-4 py-2 text-sm font-medium text-gray-900 border-b">
+                                Notifications
+                            </div>
+                            <ul id="notifications-list" class="divide-y divide-gray-100 max-h-60 overflow-y-auto">
+                                <!-- Notifications will be injected here by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- View Toggler (for Deliverable 1) -->
+        <div class="mb-6 p-4 bg-white rounded-lg shadow">
+            <h2 class="text-lg font-medium text-gray-900 mb-2">Toggle View</h2>
+            <p class="text-sm text-gray-600 mb-4">Simulate different user dashboards for Deliverable 1.</p>
+            <div class="flex space-x-2">
+                <button id="student-view-btn" class="view-btn active px-4 py-2 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-50">
+                    Student View
+                </button>
+                <button id="admin-view-btn" class="view-btn px-4 py-2 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-50">
+                    Admin View
+                </button>
+            </div>
+        </div>
+
+        <!-- Student Dashboard (Visible by default) -->
+        <div id="student-dashboard" class="space-y-6">
+            <h1 class="text-3xl font-bold text-gray-900">Welcome, Student!</h1>
+            
+            <!-- My Upcoming Bookings Section -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">My Upcoming Bookings</h2>
+                </div>
+                <ul id="upcoming-bookings-list" class="divide-y divide-gray-200">
+                    <!-- Bookings will be injected here by JavaScript -->
+                </ul>
+            </div>
+
+            <!-- Browse Resources Section (as per PDF) -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Browse Resources</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <a href="#" class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                        <p class="font-medium text-blue-600">Study Rooms</p>
+                        <p class="text-sm text-gray-600">Book private and group study spaces.</p>
+                    </a>
+                    <a href="#" class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                        <p class="font-medium text-blue-600">Computer Labs</p>
+                        <p class="text-sm text-gray-600">Find available stations with specific software.</p>
+                    </a>
+                    <a href="#" class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                        <p class="font-medium text-blue-600">Equipment</p>
+                        <p class="text-sm text-gray-600">Reserve cameras, projectors, and more.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard (Hidden by default) -->
+        <div id="admin-dashboard" class="space-y-6" style="display: none;">
+            <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+
+            <!-- Pending Booking Requests Section -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Pending Booking Requests</h2>
+                </div>
+                <ul id="pending-requests-list" class="divide-y divide-gray-200">
+                    <!-- Requests will be injected here by JavaScript -->
+                </ul>
+            </div>
+
+            <!-- Manage Resources Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Manage Resources</h2>
+                <ul class="space-y-3">
+                    <li class="p-4 bg-gray-50 rounded-lg flex justify-between items-center">
+                        <div>
+                            <p class="font-medium text-gray-900">Study Room 101</p>
+                            <p class="text-sm text-gray-500">Capacity: 4</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-sm font-medium text-blue-600 hover:text-blue-800">Edit</button>
+                            <button class="text-sm font-medium text-yellow-600 hover:text-yellow-800">Block</button>
+                        </div>
+                    </li>
+                    <li class="p-4 bg-gray-50 rounded-lg flex justify-between items-center">
+                        <div>
+                            <p class="font-medium text-gray-900">Computer Lab 205</p>
+                            <p class="text-sm text-gray-500">Capacity: 30</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-sm font-medium text-blue-600 hover:text-blue-800">Edit</button>
+                            <button class="text-sm font-medium text-yellow-600 hover:text-yellow-800">Block</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Usage Statistics</h2>
+                <div class="flex space-x-4">
+                    <div class="p-4 bg-blue-50 rounded-lg flex-1">
+                        <p class="text-3xl font-bold text-blue-600">128</p>
+                        <p class="text-sm font-medium text-blue-800">Bookings this week</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg flex-1">
+                        <p class="text-3xl font-bold text-green-600">85%</p>
+                        <p class="text-sm font-medium text-green-800">Utilization Rate</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Link to your new external JavaScript file 
+         'defer' tells the browser to wait until the HTML is fully loaded before running the script.
+    -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>
+

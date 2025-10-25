@@ -57,7 +57,7 @@ function showAdminView() {
 function toggleNotifications() {
     if (notificationsPanel.style.display === 'none') {
         notificationsPanel.style.display = 'block';
-        // When panel is opened, hide the badge (optional)
+        // When panel is opened, hide the badge
         // notificationCount.style.display = 'none';
     } else {
         notificationsPanel.style.display = 'none';
@@ -161,26 +161,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('cancel-btn')) {
             const bookingId = event.target.getAttribute('data-id');
             console.log('Cancel booking with ID:', bookingId);
-            // For D1, just remove it from the list to simulate the action
             event.target.closest('li').remove();
-            // In a real app, you'd also remove it from the `studentBookings` array and call the backend
         }
     });
 
-    // Handle clicks on "Approve/Reject" buttons (using event delegation)
+    // Handle clicks on "Approve/Reject" buttons using event delegation
     pendingRequestsList.addEventListener('click', function(event) {
         const button = event.target;
         const requestId = button.getAttribute('data-id');
         
         if (button.classList.contains('approve-btn')) {
             console.log('Approve request with ID:', requestId);
-            // For D1, just remove it to simulate action
             button.closest('li').remove();
         }
 
         if (button.classList.contains('reject-btn')) {
             console.log('Reject request with ID:', requestId);
-            // For D1, just remove it to simulate action
             button.closest('li').
             remove();
         }

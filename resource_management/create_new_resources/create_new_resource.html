@@ -4,43 +4,48 @@
 <head>
     <meta charset="UTF-8" />
     <title>Create new resource</title>
+    <link rel="stylesheet" href="../../shared/css/pico.min.css">
     <link rel="stylesheet" href="./create_new_resource.css">
-    <script src="../../staticData.js" type="text/javascript" ></script>
-    <script src="./create_new_resource.js" type="text/javascript" ></script>
-    
-    <script src="..//main_page/resource_management.js" type="text/javascript" ></script>
+    <script src="../../staticData.js" type="text/javascript"></script>
+    <script src="./create_new_resource.js" type="text/javascript"></script>
+
+    <script src="..//main_page/resource_management.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <h1>Create new resource</h1>
-    <h4>Attributes of the new resource below:</h4>
+
 
     <!-- TODO create a seperate JS file AND variables-->
-      <!-- action="../main_page/resource_management.html"  -->
-    <form class="form-container" onsubmit="createResourceOnSubmit(event)">
-        <!-- Attributes of 1 new resource, make array or object out of it -->
-        <!-- NAME  -->
-        <label for="name">Name of new resource:</label>
-        <input type="text" id="name" name="name" placeholder="e.g. 3D printer, CS lab ">
-        <!-- TODO: give it a variable & user input for ALL boxes-->
-        <label for="Type">Type:</label>
-        <input type="text" id="type" name="type" placeholder="e.g. Room, equipement">
-        <!-- DESCRIPTION -->
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"></textarea>
-        <!-- LOCATION -->
-        <label for="location">Location (or where it could be found):</label>
-        <input type="location" id="location" name="location" placeholder="e.g. Hall 101.00">
-        <!-- CAPACITIES (might want to make two seperate subpages or UL )-->
-        <!-- FIXME: logic of creating new room or equipment -->
-        <label for="capacities">Room capacity (0 if it's an equipement):</label>
-        <input type="text" id="capacity" name="capacity" placeholder="e.g. 22 people">
-        <!-- IMAGES -->
-        <label for="image">Upload image file:</label>
-        <input type="file" id="image" name="image">
-        <!-- SUBMIT BUTTON -->
-        <input type="submit" />
-    </form>
+    <!-- action="../main_page/resource_management.html"  -->
+    <section class="container">
+        <h1>Create new resource</h1>
+        <h3>Attributes of the new resource below:</h3>
+        <form class="form-container" onsubmit="createResourceOnSubmit(event)">
+            <!-- Attributes of 1 new resource, make array or object out of it -->
+            <!-- NAME  -->
+            <label for="name">Name of new resource:</label>
+            <input type="text" id="name" name="name" placeholder="e.g. 3D printer, CS lab ">
+            <!-- TODO: give it a variable & user input for ALL boxes-->
+            <label for="Type">Type:</label>
+            <input type="text" id="type" name="type" placeholder="e.g. Room, equipement">
+            <!-- DESCRIPTION -->
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+            <!-- LOCATION -->
+            <label for="location">Location (or where it could be found):</label>
+            <input type="location" id="location" name="location" placeholder="e.g. Hall 101.00">
+            <!-- CAPACITIES (might want to make two seperate subpages or UL )-->
+            <!-- FIXME: logic of creating new room or equipment -->
+            <label for="capacities">Room capacity (0 if it's an equipement):</label>
+            <input type="text" id="capacity" name="capacity" placeholder="e.g. 22 people">
+            <!-- IMAGES -->
+            <label for="image">Upload image file:</label>
+            <input type="file" id="image" name="image">
+            <!-- SUBMIT BUTTON -->
+            <input type="submit" />
+        </form>
+    </section>
+
 </body>
 
 </html>

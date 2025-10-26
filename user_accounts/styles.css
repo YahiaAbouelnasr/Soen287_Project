@@ -1,0 +1,139 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --bg: #17191d;
+    --card: #0a1b9a8f;
+    --ink: #e9e6fc;
+    --muted: #a9b3c9;
+    --accent: #14192a;
+    --danger: #f90000;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(59,130,246,.25);
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  
+
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #1c2536;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .site-header h1 {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  #nav a {
+    color: #e9e6fc;
+    margin-left: 12px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid #1f2a44;
+  }
+  #nav a:hover {
+    background: #043cb4;
+  }
+  
+  .container {
+    max-width: 980px;
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+  
+  .card {
+    background: var(--card);
+    border: 1px solid #1c2536;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card.narrow {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  
+  .form {
+    display: grid;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .form label {
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  input, select {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #1f2a44;
+    background: #0d1320;
+    color: var(--ink);
+  }
+  
+  .btn {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #163c95;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn:hover {
+    filter: brightness(1.05);
+  }
+  .btn--danger {
+    background: var(--danger);
+  }
+  
+  .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .muted {
+    color: var(--muted);
+  }
+  code {
+    background: #103688;
+    border: 1px solid #1f2a44;
+    border-radius: 8px;
+    padding: 2px 6px;
+  }
+  
+.home-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     
+  justify-content: center; 
+  min-height: 80vh;        
+  gap: 24px;               
+}
+
+.quick-start {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin-top: 40px;
+}

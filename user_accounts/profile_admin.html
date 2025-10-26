@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Profile (Demo)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Campus Resource Booking</h1>
+    <nav id="nav">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="profile_student.html">Student</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <section class="card narrow">
+      <h2>Your Profile - Admin (Demo)</h2>
+
+      <form class="form" action="#">
+        <label>
+          Full name
+          <input value="Demo Admin" />
+        </label>
+
+        <label>
+          Email (read only)
+          <input value="admin@concordia.ca" readonly />
+        </label>
+
+        <label>
+          New password (optional)
+          <input type="password" placeholder="Leave it blank to not change" />
+        </label>
+
+        <label>
+          Role
+          <select>
+            <option>Student</option>
+            <option selected>Admin</option>
+            <option>Faculty</option>
+          </select>
+        </label>
+
+        <div class="row">
+          <button class="btn" type="button">Save changes</button>
+          <button class="btn btn--danger" type="button">Delete account</button>
+        </div>
+        <p class="muted">Demo, buttons do nothing.</p>
+      </form>
+    </section>
+  </div>
+</body>
+</html>

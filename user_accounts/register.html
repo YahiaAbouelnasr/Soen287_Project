@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - Campus Resource Booking</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <h1>User Management</h1>
+    <nav id="nav">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="admin.html">Admin</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card narrow">
+      <h2>Create Account</h2>
+      <form id="registerForm" class="form">
+        <label>Full name
+          <input type="text" id="name" required placeholder="Firstname Lastname" />
+        </label>
+        <label>Email
+          <input type="email" id="email" required placeholder="name@email.com" />
+        </label>
+        <label>Password
+          <input type="password" id="password" placeholder="********" />
+          <small class="muted">At least 8 characters.</small>
+        </label>
+        <label>Role
+          <select id="role" required>
+            <option value="student">Student</option>
+            <option value="faculty">Fauclty</option>
+            <option value="admin">Admin</option>
+          </select>
+        </label>
+        <button type="submit" class="btn">Create account</button>
+      </form>
+      <p class="muted">Already have an account? <a href="login.html">Sign in</a>.</p>
+    </section>
+  </main>
+</body>
+</html>

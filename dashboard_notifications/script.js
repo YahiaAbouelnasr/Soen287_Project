@@ -1,4 +1,4 @@
-// --- HARD-CODED DATA (for Deliverable 1) ---
+// --- HARD-CODED DATA ---
 
 // Data for student's upcoming bookings
 const studentBookings = [
@@ -33,6 +33,7 @@ const notificationsPanel = document.getElementById('notifications-panel');
 
 const upcomingBookingsList = document.getElementById('upcoming-bookings-list');
 const pendingRequestsList = document.getElementById('pending-requests-list');
+
 const notificationsList = document.getElementById('notifications-list');
 
 // --- FUNCTIONS ---
@@ -55,69 +56,63 @@ function showAdminView() {
 
 // Function to toggle the notifications panel
 function toggleNotifications() {
-    if (notificationsPanel.style.display === 'none') {
+    if (notificationsPanel.style.display === 'none' || notificationsPanel.style.display === '') {
         notificationsPanel.style.display = 'block';
-        // When panel is opened, hide the badge
-        // notificationCount.style.display = 'none';
     } else {
         notificationsPanel.style.display = 'none';
     }
 }
 
-// Function to load student bookings into the list
+// Function to load student bookings into the table
 function loadStudentBookings() {
-    upcomingBookingsList.innerHTML = ''; // Clear existing list
+    upcomingBookingsList.innerHTML = ''; // Clear existing table body
     
     if (studentBookings.length === 0) {
-        upcomingBookingsList.innerHTML = '<li class="p-6 text-sm text-gray-500">You have no upcoming bookings.</li>';
+        upcomingBookingsList.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #6b7280; padding: 16px;">You have no upcoming bookings.</td></tr>';
         return;
     }
 
     studentBookings.forEach(booking => {
-        const li = document.createElement('li');
-        li.className = 'p-6 flex justify-between items-center';
-        li.innerHTML = `
-            <div>
-                <p class="font-semibold text-blue-600">${booking.room}</p>
-                <p class="text-sm text-gray-600">${booking.time}</p>
-            </div>
-            <button data-id="${booking.id}" class="cancel-btn px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-full hover:bg-red-200">
-                Cancel
-            </button>
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${booking.room}</td>
+            <td>${booking.time}</td>
+            <td>
+                <button data-id="${booking.id}" class="btn btn-danger cancel-btn" style="padding: 4px 8px; font-size: 12px;">
+                    Cancel
+                </button>
+            </td>
         `;
-        upcomingBookingsList.appendChild(li);
+        upcomingBookingsList.appendChild(tr);
     });
 }
 
-// Function to load pending requests into the admin list
+// Function to load pending requests into the admin table
 function loadPendingRequests() {
-    pendingRequestsList.innerHTML = ''; // Clear existing list
+    pendingRequestsList.innerHTML = ''; // Clear existing table body
 
     if (pendingRequests.length === 0)
     {
-        pendingRequestsList.innerHTML = '<li class="p-6 text-sm text-gray-500">No pending requests.</li>';
+        pendingRequestsList.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #6b7280; padding: 16px;">No pending requests.</td></tr>';
         return;
     }
 
     pendingRequests.forEach(request => {
-        const li = document.createElement('li');
-        li.className = 'p-6 flex flex-col sm:flex-row justify-between sm:items-center space-y-3 sm:space-y-0';
-        li.innerHTML = `
-            <div>
-                <p class="font-semibold text-blue-600">${request.room}</p>
-                <p class="text-sm text-gray-600">Student: ${request.student}</p>
-                <p class="text-sm text-gray-600">${request.time}</p>
-            </div>
-            <div class="flex space-x-2 flex-shrink-0">
-                <button data-id="${request.id}" class="approve-btn px-3 py-1 text-sm font-medium text-green-600 bg-green-100 rounded-full hover:bg-green-200">
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${request.room}</td>
+            <td>${request.student}</td>
+            <td>${request.time}</td>
+            <td>
+                <button data-id="${request.id}" class="btn approve-btn" style="padding: 4px 8px; font-size: 12px; background: #16a34a; border-color: #16a34a;">
                     Approve
                 </button>
-                <button data-id="${request.id}" class="reject-btn px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-full hover:bg-red-200">
+                <button data-id="${request.id}" class="btn btn-danger reject-btn" style="padding: 4px 8px; font-size: 12px; margin-left: 4px;">
                     Reject
                 </button>
-            </div>
+            </td>
         `;
-        pendingRequestsList.appendChild(li);
+        pendingRequestsList.appendChild(tr);
     });
 }
 
@@ -126,28 +121,26 @@ function loadNotifications() {
     notificationsList.innerHTML = ''; // Clear list
 
     if (notifications.length === 0) {
-        notificationsList.innerHTML = '<li class="p-4 text-sm text-gray-500">No new notifications.</li>';
+        notificationsList.innerHTML = '<li style="padding: 12px 16px; color: #6b7280; font-size: 14px;">No new notifications.</li>';
         notificationCount.style.display = 'none';
         return;
     }
 
     notifications.forEach(notif => {
         const li = document.createElement('li');
-        li.className = 'p-4 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer';
         li.innerHTML = `
-            <p class="font-medium text-gray-900">${notif.title}</p>
-            <p class="text-gray-500">${notif.body}</p>
+            <p class="dropdown-list-title">${notif.title}</p>
+            <p class="dropdown-list-body">${notif.body}</p>
         `;
         notificationsList.appendChild(li);
     });
     
     // Update and show the notification count
     notificationCount.innerText = notifications.length;
-    notificationCount.style.display = 'flex';
+    notificationCount.style.display = 'inline-block'; // Use 'inline-block' for badge
 }
 
 // --- EVENT LISTENERS ---
-// We must wait for the DOM to be fully loaded before trying to find elements
 document.addEventListener('DOMContentLoaded', () => {
     // View toggles
     studentBtn.addEventListener('click', showStudentView);
@@ -156,29 +149,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Notification bell
     notificationBell.addEventListener('click', toggleNotifications);
 
-    // Handle clicks on the "Cancel" buttons (using event delegation)
+    // Handle clicks on the "Cancel" buttons
     upcomingBookingsList.addEventListener('click', function(event) {
         if (event.target.classList.contains('cancel-btn')) {
             const bookingId = event.target.getAttribute('data-id');
             console.log('Cancel booking with ID:', bookingId);
-            event.target.closest('li').remove();
+            // Remove the table row
+            event.target.closest('tr').remove();
         }
     });
 
-    // Handle clicks on "Approve/Reject" buttons using event delegation
+    // Handle clicks on "Approve/Reject" buttons
     pendingRequestsList.addEventListener('click', function(event) {
         const button = event.target;
         const requestId = button.getAttribute('data-id');
         
         if (button.classList.contains('approve-btn')) {
             console.log('Approve request with ID:', requestId);
-            button.closest('li').remove();
+            // Remove the table row
+            button.closest('tr').remove();
         }
 
         if (button.classList.contains('reject-btn')) {
             console.log('Reject request with ID:', requestId);
-            button.closest('li').
-            remove();
+            // Remove the table row
+            button.closest('tr').remove();
         }
     });
 

@@ -13,7 +13,12 @@ const weekHeader = document.getElementById('weekHeader');
 
 
 const pad = n => String(n).padStart(2, '0');
-const toISODate = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+function toISODate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 function mondayOf(date) {
   const d = new Date(date);
@@ -110,4 +115,5 @@ anyDay.addEventListener('change', renderWeek);
   anyDay.value = toISODate(monday);
   renderWeek();
 })();
+
 

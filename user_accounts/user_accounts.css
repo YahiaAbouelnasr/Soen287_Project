@@ -1,12 +1,10 @@
-/* --- Styles specific to the User Accounts page --- */
-
 .site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
   border-bottom: 1px solid var(--border);
-  background: var(--card); /* Use shared card background */
+  background: var(--card);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -15,7 +13,6 @@
 .site-header h1 {
   font-size: 20px;
   margin: 0;
-  /* Link back to homepage */
   text-decoration: none;
   color: var(--text);
 }
@@ -25,24 +22,21 @@
   color: inherit;
 }
 
-/* Style the nav links like secondary buttons */
-#nav a {
-  display:inline-block; 
-  padding: 8px 12px; 
-  border-radius:8px; 
-  border:1px solid var(--border);
-  background:var(--bg); /* Use main background */
-  color:var(--text); 
-  text-decoration:none; 
-  cursor:pointer; 
-  font-weight:600;
-  font-size: 14px;
-  margin-left: 8px;
+#nav {
+  display: flex;
+  gap: 8px;
 }
 
-#nav a:hover {
-  background: #f0f0f0; /* A slight hover effect */
-  border-color: #ccc;
+#nav .btn {
+  margin-left: 0;
+}
+
+.card{
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .card.narrow {
@@ -50,10 +44,9 @@
   margin: 24px auto;
 }
 
-/* Styles for your form layout */
 .form {
   display: grid;
-  gap: 16px; /* Use shared .field gap */
+  gap: 16px;
   margin-top: 8px;
 }
 
@@ -69,14 +62,7 @@
   flex-wrap: wrap;
 }
 .muted {
-  color: #6b7280; /* A soft text color */
-}
-code {
-  background: #eef2ff; /* Use shared badge background */
-  border: 1px solid var(--border);
-  color: #3730a3; /* Use shared badge text */
-  border-radius: 8px;
-  padding: 2px 6px;
+  color: #6b7280;
 }
 
 .home-main {
@@ -88,15 +74,34 @@ code {
   gap: 24px;               
 }
 
-.quick-start {
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* This adds space above buttons in forms */
 .form .btn[type="submit"],
 .form .btn[type="button"] {
-  margin-top: 8px; /* Adds a small space above form buttons */
+  margin-top: 8px;
 }
+
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #3b82f6;
+  background: #3b82f6;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn:hover { 
+  background: #1228d3; 
+  border-color: #cbd5e1;}
+
+  .btn-danger{
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    background:#dc2626;
+  }

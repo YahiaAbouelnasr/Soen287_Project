@@ -9,16 +9,16 @@
 
 </head>
 
-<body onload="loadResources()">
+<body>
     <h1>Administrative Resource Management</h1>
     <h4>Create, edit, and remove resources (names, description, locations, capacities, images)</h4>
     <button id="newResource" type="button"
-        onclick="redirectCreate('../create_new_resources/create_new_resource.html')">Create new resource</button>
+        onclick="redirect('../create_new_resources/create_new_resource')">Create new resource</button>
     <button id="editResource" type="button" onclick="redirect('../edit_resource/edit_resource')">Edit existing
         resource</button>
     <button id="deleteResource" type="button" onclick="redirect('../remove_resource/remove_resource')">Remove existing
         resource</button>
-    <ul>
+    <!-- <ul>
         <li>Resource Name</li>
         <li><span id="resource-name"></span></li>
         <li>Resource Type</li>
@@ -28,7 +28,7 @@
         <li>Resource Image</li>
         <li> <img id="resource-image" alt="image of a mac" width="200" height="400" />
         </li>
-    </ul>
+    </ul> -->
 </body>
 
 </html>

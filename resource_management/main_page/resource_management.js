@@ -1,24 +1,16 @@
-import { allResources as demoResources } from "../../shared/js/staticData.js";
-const resource = {
-    name: 'M4 Macbook Air',
-    type: 'laptop',
-    description: 'a computer than can be used by students or teachers',
-    image: 'https://www.apple.com/v/macbook-air/w/images/overview/design/color/design_top_skyblue__eepkvlvjzcia_large_2x.jpg'
-}
-
-// const demoResources = [{
-//         name: 'resourceName', 
-//         type: 'resourceType', 
-//         description: 'resourceDescription', 
-//         capabilities: 'resourceCapabilities', 
-//         image: resourceImage
-// }];
-
-// localStorage.setItem("demoResources", JSON.stringify(demoResources));
+import { allResources as staticResources } from "../../shared/js/staticData.js";
+let demoResources = JSON.parse(localStorage.getItem("demoResources")) || staticResources ;
+// const resource = {
+//     name: 'M4 Macbook Air',
+//     type: 'laptop',
+//     description: 'a computer than can be used by students or teachers',
+//     image: 'https://www.apple.com/v/macbook-air/w/images/overview/design/color/design_top_skyblue__eepkvlvjzcia_large_2x.jpg'
+// }
 
 export function redirect(route){
     window.location.href = route;
 }
+
 
 export function viewExistingResources(){
     let container = document.getElementById("resourceList");
@@ -35,6 +27,9 @@ export function viewExistingResources(){
         <img src="${demoResources[index].image}" width="200" alt="${demoResources[index].name}"><br>
         </p>`;
         }
+        localStorage.setItem("demoResources", JSON.stringify(demoResources));
+
+    // location.reload();
 }
 window.viewExistingResources = viewExistingResources;
 window.addEventListener("DOMContentLoaded", viewExistingResources);
@@ -60,5 +55,6 @@ export function loadResources() {
     document.getElementById('resource-image').setAttribute('src', resource.image);
 }
 
-
+window.redirect = redirect;
+window.addEventListener("event", redirect);
 

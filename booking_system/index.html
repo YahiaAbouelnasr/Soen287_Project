@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resources</title>
+    <link rel="stylesheet" href="../shared/css/pico.min.css" />
+  </head>
+  <body>
+    <header class="container">
+      <article class="card">
+        <nav>
+          <ul>
+            <li><h2>Booking System</h2></li>
+          </ul>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./booking/booking.html">Create booking</a></li>
+            <li><a href="./calendar/calendar.html">Calendar</a></li>
+            <li>
+              <a href="./booking_history/booking_history.html"
+                >Booking history</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </article>
+    </header>
+    <main class="container">
+      <article class="card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Capacity</th>
+              <th>Location</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="resourcesTbody"></tbody>
+        </table>
+      </article>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

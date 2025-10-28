@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Profile (Demo)</title>
-<link rel="stylesheet" href="../shared/styles.css">
-<link rel="stylesheet" href="user_accounts.css">
-</head>
-<body>
-  <header class="site-header">
-    <h1><a href="../index.html">Campus Resource Booking</a></h1>
-    <nav id="nav">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="profile_student.html">Student</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Profile (Demo)</title>
+    <link rel="stylesheet" href="../shared/css/pico.min.css" />
+  </head>
+  <body>
+    <header class="container">
+      <article class="header-content">
+        <nav>
+          <ul>
+            <li><h2>User Management</h2></li>
+          </ul>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </nav>
+      </article>
+    </header>
 
-  <div class="container">
-    <section class="card narrow">
-      <h2>Your Profile - Admin (Demo)</h2>
+    <main class="container">
+      <article class="card narrow">
+        <h2>Your Profile - Admin (Demo)</h2>
 
-      <form class="form" action="#">
-        <label>
-          Full name
-          <input value="Demo Admin" class="input" />
-        </label>
+        <form class="form" action="#">
+          <label>
+            Full name
+            <input value="Demo Admin" />
+          </label>
 
-        <label>
-          Email (read only)
-          <input value="admin@concordia.ca" readonly class="input" />
-        </label>
+          <label>
+            Email (read only)
+            <input value="admin@concordia.ca" readonly />
+          </label>
 
-        <label>
-          New password (optional)
-          <input type="password" placeholder="Leave it blank to not change" class="input" />
-        </label>
+          <label>
+            New password (optional)
+            <input type="password" placeholder="Leave it blank to not change" />
+          </label>
 
-        <label>
-          Role
-          <select class="input" >
-            <option>Student</option>
-            <option selected>Admin</option>
-            <option>Faculty</option>
-          </select>
-        </label>
+          <label>
+            Role
+            <select>
+              <option>Student</option>
+              <option selected>Admin</option>
+              <option>Faculty</option>
+            </select>
+          </label>
 
-        <div class="row">
-          <button class="btn" type="button">Save changes</button>
-          <button class="btn btn--danger" type="button">Delete account</button>
-        </div>
-        <p class="muted">Demo, buttons do nothing.</p>
-      </form>
-    </section>
-  </div>
-</body>
+          <div class="row">
+            <button class="btn" type="button">Save changes</button>
+            <button class="btn btn--danger" type="button">
+              Delete account
+            </button>
+          </div>
+          <p class="muted">Demo, buttons do nothing.</p>
+        </form>
+      </article>
+    </main>
+  </body>
 </html>

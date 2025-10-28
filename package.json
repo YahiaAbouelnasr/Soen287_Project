@@ -1,0 +1,22 @@
+{
+  "name": "soen287_project",
+  "version": "1.0.0",
+  "description": "front end for the soen287_project",
+  "scripts": {
+    "start": "http-server -p 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YahiaAbouelnasr/Soen287_Project.git"
+  },
+  "author": "Concordia Students",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YahiaAbouelnasr/Soen287_Project/issues"
+  },
+  "homepage": "https://github.com/YahiaAbouelnasr/Soen287_Project#readme",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

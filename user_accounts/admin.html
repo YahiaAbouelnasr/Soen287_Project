@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin - Campus Resource Booking</title>
-<link rel="stylesheet" href="../shared/styles.css">
-<link rel="stylesheet" href="user_accounts.css">
-</head>
-<body>
-  <header class="site-header">
-    <h1><a href="../index.html">User Management</a></h1>
-    <nav id="nav">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="profile.html">Proflie</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Campus Resource Booking</title>
+    <link rel="stylesheet" href="../shared/css/pico.min.css" />
+  </head>
+  <body>
+    <header class="container">
+      <article class="header-content">
+        <nav>
+          <ul>
+            <li><h2>User Management</h2></li>
+          </ul>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </nav>
+      </article>
+    </header>
 
-  <main class="container">
-    <section class="card">
-      <h2>Admin Area</h2>
-      <p class="muted">This page is only for <strong>admins</strong></p>
-      <form class="form">
-        <label>Email (Admin Login)</label>
-        <input type="email" placeholder="admin@concordia.ca" required class="input">
-        <label>Password</label>
-        <input type="password" placeholder="********" required class="input">
-        <button class="btn" type="button">Login</button>
-      </form>
-      <p class="muted">Demo, login does nothing.</p>
-    </section>
-  </main>
-</body>
+    <main class="container">
+      <article class="card">
+        <h3>Admin Area</h3>
+        <p class="muted">This page is only for <strong>admins</strong></p>
+        <form class="form">
+          <label>Email (Admin Login)</label>
+          <input type="email" placeholder="admin@concordia.ca" required />
+          <label>Password</label>
+          <input type="password" placeholder="********" required />
+          <button class="btn" type="button">Login</button>
+        </form>
+        <p class="muted">Demo, login does nothing.</p>
+      </article>
+    </main>
+  </body>
 </html>

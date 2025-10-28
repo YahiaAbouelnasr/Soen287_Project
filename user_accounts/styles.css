@@ -94,9 +94,3 @@ code {
   text-align: center;
   margin-top: 40px;
 }
-
-/* This adds space above buttons in forms */
-.form .btn[type="submit"],
-.form .btn[type="button"] {
-  margin-top: 8px; /* Adds a small space above form buttons */
-}

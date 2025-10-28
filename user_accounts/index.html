@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home - Campus Resource Booking</title>
-<link rel="stylesheet" href="../shared/styles.css">
-<link rel="stylesheet" href="user_accounts.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Campus Resource Booking</title>
+    <link rel="stylesheet" href="../shared/css/pico.min.css" />
+  </head>
 
-<body>
-  <header class="site-header">
-    <h1><a href="../index.html">User Management</a></h1>
-    <nav id="nav">
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="admin.html">Admin</a>
-      <a href="profile.html">Profile</a>
-    </nav>
-  </header>
+  <body class="container">
+    <header class="container">
+      <article class="header-content">
+        <nav>
+          <ul>
+            <li><h2>User Management</h2></li>
+          </ul>
+          <ul>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </nav>
+      </article>
+    </header>
 
-  <main class="container home-main">
-    <section class="card">
-      <h2>Welcome</h2>
-      <p>
-        This is the <strong>Deliverable 1</strong> version <em> User Mangement: <strong>Campus Resource Booking & Management System </strong></em>.
-      </p>
-      <ul>
-        <li>Create account</li>
-        <li>Log in</li>
-        <li>View (or edit) your profile</li>
-        <li>See a basic Student/admin page</li>
-      </ul>
-      
-    </section>
-  </main>
-</body>
+    <main class="container home-main">
+      <article class="card">
+        <h3>Welcome</h3>
+        <p>
+          This is the <strong>Deliverable 1</strong> version
+          <em>
+            User Management:
+            <strong>Campus Resource Booking & Management System </strong></em
+          >.
+        </p>
+        <ul>
+          <li>Create account</li>
+          <li>Log in</li>
+          <li>View (or edit) your profile</li>
+          <li>See a basic Student/admin page</li>
+        </ul>
+      </article>
+    </main>
+
+    <div hx-get="../shared/fragments/footer.html" hx-trigger="load"></div>
+  </body>
 </html>
-

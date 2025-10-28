@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Booking history</title>
+    <link rel="stylesheet" href="../../shared/css/pico.min.css" />
+    <!-- <link rel="stylesheet" href="./booking_history.css" /> -->
+  </head>
+  <body>
+    <header class="container">
+      <article class="card">
+        <nav>
+          <ul>
+            <li><h2>Booking System</h2></li>
+          </ul>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../booking/booking.html">Create booking</a></li>
+            <li><a href="../calendar/calendar.html">Calendar</a></li>
+            <li>
+              <a href="../booking_history/booking_history.html"
+                >Booking history</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </article>
+    </header>
+    <main class="container">
+      <article class="card">
+        <h3>Booking history</h3>
+
+        <div class="row">
+          <label for="who">Filter by name</label>
+          <input id="who" placeholder="Enter your name to see your bookings" />
+          <button id="filterBtn" class="btn">Filter</button>
+          <button id="allBtn" class="btn">Show all</button>
+        </div>
+
+        <table class="table" style="margin-top: 12px">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Resource</th>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Purpose</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </article>
+    </main>
+
+    <script type="module" src="./booking_history.js"></script>
+  </body>
+</html>

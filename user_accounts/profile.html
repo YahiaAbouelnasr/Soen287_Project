@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profile - Campus Resource Booking</title>
-<link rel="stylesheet" href="../shared/styles.css">
-<link rel="stylesheet" href="user_accounts.css">
-</head>
-<body>
-  <header class="site-header">
-    <h1><a href="../index.html">Campus Resource Booking</a></h1>
-    <nav id="nav">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="admin.html">Admin</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Campus Resource Booking</title>
+    <link rel="stylesheet" href="../shared/css/pico.min.css" />
+  </head>
+  <body>
+    <header class="container">
+      <article class="header-content">
+        <nav>
+          <ul>
+            <li><h2>User Management</h2></li>
+          </ul>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </nav>
+      </article>
+    </header>
 
-  <main class="container">
-    <section class="card narrow"> 
-    <h2> Select one of the below:</h2>
-  <div class="row" style="margin-top:12px;">
-    <a class="btn" href="profile_student.html">View Student</a>
-    <a class="btn" href="profile_admin.html">View Admin</a>
-  </div>
-  <p class="muted" style="margin-top:8px;">Demo, no login required</p>
-</section>  
-</main>
-</body>
+    <main class="container">
+      <article class="card narrow">
+        <h3>Select one of the below:</h3>
+        <a class="btn" href="profile_student.html">View Student</a>
+        <br />
+        <a class="btn" href="profile_admin.html">View Admin</a>
+        <p class="muted" style="margin-top: 8px">Demo, no login required</p>
+      </article>
+    </main>
+  </body>
 </html>

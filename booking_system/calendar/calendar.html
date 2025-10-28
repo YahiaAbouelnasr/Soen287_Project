@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Availability (Week view)</title>
+    <link rel="stylesheet" href="../../shared/css/pico.min.css" />
+    <link rel="stylesheet" href="./calendar.css" />
+  </head>
+  <body>
+    <header class="container">
+      <article class="card">
+        <nav>
+          <ul>
+            <li><h2>Booking System</h2></li>
+          </ul>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../booking/booking.html">Create booking</a></li>
+            <li><a href="../calendar/calendar.html">Calendar</a></li>
+            <li>
+              <a href="../booking_history/booking_history.html"
+                >Booking history</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </article>
+    </header>
+    <main class="container">
+      <article class="card">
+        <h4>Availability (Week view)</h4>
+
+        <div class="toolbar">
+          <div class="row">
+            <label for="resourceId">Resource</label>
+            <select id="resourceId"></select>
+          </div>
+
+          <div class="row">
+            <label for="anyDay">Week</label>
+            <input id="anyDay" type="date" />
+          </div>
+        </div>
+
+        <div id="weekHeader" class="week-header"></div>
+        <div id="grid" class="week-grid" aria-live="polite"></div>
+      </article>
+    </main>
+
+    <script type="module" src="./calendar.js"></script>
+  </body>
+</html>

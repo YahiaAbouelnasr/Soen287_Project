@@ -44,3 +44,24 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 .table th, .table td{ border:1px solid var(--border); padding:10px; }
 .table th{ background:#f3f4f6; text-align:left; }
 .badge{ padding:2px 8px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:12px; }
+.btn-home {
+  display: inline-block;
+  padding: 16px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,.04);
+  transition: all 0.2s ease;
+}
+
+.btn-home:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+

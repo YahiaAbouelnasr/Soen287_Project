@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Campus Resource Booking</title>
-  <link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="user_accounts.css">
 </head>
 <body>
   <header class="site-header">
@@ -22,10 +23,10 @@
       <h2>Login</h2>
       <form id="loginForm" class="form">
         <label>Email
-          <input type="email" id="email" required placeholder="name@email.com" />
+          <input type="email" id="email" required placeholder="name@email.com" class="input" />
         </label>
         <label>Password
-          <input type="password" id="password" required placeholder="********" />
+          <input type="password" id="password" required placeholder="********" class="input" />
         </label>
         <button type="submit" class="btn">Sign in</button>
       </form>

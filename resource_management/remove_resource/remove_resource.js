@@ -1,4 +1,7 @@
+import { allResources } from "../../shared/js/staticData.js";
 isName = document.getElementById("isName").value;
+
+
 
 function deleteResource(isName){
     // Finds index
@@ -13,7 +16,10 @@ function deleteResource(isName){
     if (!userConfirm) return false;
 
     // Deletes object and shifts the rest forward in the array
-    allResources.splice(index, 1);
+    if (userConfirm)
+        {
+            allResources.splice(index, 1);
+        }
 
     alert("Resource was successfully deleted!");
 }

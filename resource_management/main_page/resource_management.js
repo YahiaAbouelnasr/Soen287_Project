@@ -1,3 +1,4 @@
+import { allResources } from "../../shared/js/staticData";
 const resource = {
     name: 'M4 Macbook Air',
     type: 'laptop',
@@ -20,10 +21,11 @@ function redirect(route){
 }
 
 function viewExistingResources(){
-    let container = document.getElementById("resourcelist");
-    container.innerHTML = "";
+    let container = document.getElementById("resourceList");
 
     for (let index = 0; index < array.length; index++) {
+        container.innerHTML = "";
+
         container.innerHTML += `<p>
         <strong>${index+1}.--------------------</strong><br>
         Name: ${allResources[index].name}<br>

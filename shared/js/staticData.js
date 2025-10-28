@@ -1,4 +1,4 @@
-const allResources = [
+export const allResources = [
   {
     name: "3D Printer A1",
     type: "Equipment",

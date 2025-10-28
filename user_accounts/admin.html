@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin - Campus Resource Booking</title>
-  <link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="user_accounts.css">
 </head>
 <body>
   <header class="site-header">
@@ -23,9 +24,9 @@
       <p class="muted">This page is only for <strong>admins</strong></p>
       <form class="form">
         <label>Email (Admin Login)</label>
-        <input type="email" placeholder="admin@concordia.ca" required>
+        <input type="email" placeholder="admin@concordia.ca" required class="input">
         <label>Password</label>
-        <input type="password" placeholder="********" required>
+        <input type="password" placeholder="********" required class="input">
         <button class="btn" type="button">Login</button>
       </form>
       <p class="muted">Demo, login does nothing.</p>

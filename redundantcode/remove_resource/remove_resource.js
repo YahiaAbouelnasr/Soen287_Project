@@ -1,6 +1,6 @@
 
-import { getResources, deleteResourceById } from '../shared/shared_data.js';
-import { escapeHtml } from '../shared/shared_ui.js';
+import { getResources, deleteResourceById } from '../../booking_system/ProjectSOEN287_FrontEnd/shared/shared_data.js';
+import { escapeHtml } from '../../booking_system/ProjectSOEN287_FrontEnd/shared/shared_ui.js';
 
 const tbody = document.getElementById('removeTbody');
 

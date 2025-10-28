@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Resource Removal</title>
+    <script src="./remove_resource.js" type="module"></script>
+    <script src="../main_page/resource_management.js" type="module"></script>
+    <link rel="stylesheet" href="../../shared/css/shared.css">
+    <script src="../../shared/js/staticData.js" type="module"></script>
+
+</head>
+
+<body>
+        <a href="../../main/index.html" class="btn-home">Back to Home</a>
+
+    <section class="container card">
+        <h1>Resource Removal</h1>
+        <h3>Please write the name of the resource you wish to remove from the resource catalogue:</h3>
+        <div id="resource"></div>
+
+        <label for="isName">Resource Name: </label>
+        <input type="text" id="isName" name="isName">
+        <button class="btn" type="button" id="delete" onclick="deleteResource()">Delete</button>
+        <!-- <a class="btn" id="back" href="../../main/index.html">Back</a> -->
+        <div class="searchResult" id="resourceList"></div>
+
+    </section>
+
+</body>
+
+</html>

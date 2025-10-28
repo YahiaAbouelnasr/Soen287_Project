@@ -1,4 +1,4 @@
-import { getResources, getResourceById, updateResource } from '../shared/shared_data.js';
+import { getResources, getResourceById, updateResource } from '../../booking_system/ProjectSOEN287_FrontEnd/shared/shared_data.js';
 
 const select = document.getElementById('resourceSelect');
 const form   = document.getElementById('editForm');

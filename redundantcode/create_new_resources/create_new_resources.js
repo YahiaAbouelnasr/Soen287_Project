@@ -1,5 +1,5 @@
 
-import { addResource } from '../shared/shared_data.js';
+import { addResource } from '../../booking_system/ProjectSOEN287_FrontEnd/shared/shared_data.js';
 
 const form = document.getElementById('createForm');
 

@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Register - Campus Resource Booking</title>
-  <link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="user_accounts.css">
 </head>
 <body>
   <header class="site-header">
@@ -22,17 +23,17 @@
       <h2>Create Account</h2>
       <form id="registerForm" class="form">
         <label>Full name
-          <input type="text" id="name" required placeholder="Firstname Lastname" />
+          <input type="text" id="name" required placeholder="Firstname Lastname" class="input" />
         </label>
         <label>Email
-          <input type="email" id="email" required placeholder="name@email.com" />
+          <input type="email" id="email" required placeholder="name@email.com" class="input" />
         </label>
         <label>Password
-          <input type="password" id="password" placeholder="********" />
+          <input type="password" id="password" placeholder="********" class="input" />
           <small class="muted">At least 8 characters.</small>
         </label>
         <label>Role
-          <select id="role" required>
+          <select id="role" required class="input" >
             <option value="student">Student</option>
             <option value="faculty">Fauclty</option>
             <option value="admin">Admin</option>

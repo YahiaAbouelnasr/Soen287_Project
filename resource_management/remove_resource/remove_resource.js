@@ -1,27 +1,28 @@
-import { allResources } from "../../shared/js/staticData.js";
-isName = document.getElementById("isName").value;
+import { allResources as demoResources } from "../../shared/js/staticData.js";
+import { findIndexByName } from "../main_page/resource_management.js";
+
+JSON.parse(localStorage.getItem("demoResources"));
 
 
-
-function deleteResource(isName){
-    // Finds index
-    if (findIndexByName(isName) == false){
-        return false; // No name found
-    }
-    // sets found index
-    index = findIndexByName(isName);
-
+export function deleteResource(){
     // Prompt "are you sure?"
-    const userConfirm = confirm(`Are you sure you want to delete "${allResources[index].name}"?`);
+    const isName = document.getElementById("isName").value;
+    const index = findIndexByName(isName);
+
+    const userConfirm = confirm(`Are you sure you want to delete "${demoResources[index].name}"?`);
     if (!userConfirm) return false;
 
     // Deletes object and shifts the rest forward in the array
     if (userConfirm)
         {
-            allResources.splice(index, 1);
+            demoResources.splice(index, 1);
         }
-
     alert("Resource was successfully deleted!");
+    
+    localStorage.setItem("demoResources", JSON.stringify(demoResources));
 }
 
 // TODO: Repeat same pattern of "check hardcoded data and change them there"
+window.deleteResource = deleteResource;
+window.addEventListener("button", deleteResource);
+

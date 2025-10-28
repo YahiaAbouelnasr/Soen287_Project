@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Profile (Demo)</title>
-  <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="user_accounts.css">
 </head>
 <body>
   <header class="site-header">
@@ -24,22 +25,22 @@
       <form class="form" action="#">
         <label>
           Full name
-          <input value="Demo Admin" />
+          <input value="Demo Admin" class="input" />
         </label>
 
         <label>
           Email (read only)
-          <input value="admin@concordia.ca" readonly />
+          <input value="admin@concordia.ca" readonly class="input" />
         </label>
 
         <label>
           New password (optional)
-          <input type="password" placeholder="Leave it blank to not change" />
+          <input type="password" placeholder="Leave it blank to not change" class="input" />
         </label>
 
         <label>
           Role
-          <select>
+          <select class="input" >
             <option>Student</option>
             <option selected>Admin</option>
             <option>Faculty</option>

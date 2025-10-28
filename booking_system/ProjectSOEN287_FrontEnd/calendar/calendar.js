@@ -110,3 +110,4 @@ anyDay.addEventListener('change', renderWeek);
   anyDay.value = toISODate(monday);
   renderWeek();
 })();
+

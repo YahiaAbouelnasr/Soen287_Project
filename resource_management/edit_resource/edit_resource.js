@@ -1,6 +1,4 @@
-
-
-import { allResources as staticResources } from "../../shared/js/staticData.js";
+import { allResources as staticResources } from "../main_page/staticData.js";
 import { findIndexByName } from "../main_page/resource_management.js";
 
 // Load saved resources if available

@@ -1,4 +1,4 @@
-import { allResources as staticResources } from "../../shared/js/staticData.js";
+import { allResources as staticResources } from "../main_page/staticData.js";
 
 let localResources = JSON.parse(localStorage.getItem("demoResources"));
 let demoResources = localResources && localResources.length > 0 ? localResources : staticResources;

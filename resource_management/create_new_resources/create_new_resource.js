@@ -1,4 +1,4 @@
-import { allResources as staticResources } from "../../shared/js/staticData.js";
+import { allResources as staticResources } from "../main_page/staticData.js";
 
 let demoResources = localStorage.setItem("demoResources", JSON.stringify([])) || staticResources;
 
@@ -41,6 +41,6 @@ function createResourceOnSubmit(e){
 
     localStorage.setItem("demoResources", JSON.stringify(demoResources));
 
-    
+    location.reload();
 }
 window.createResourceOnSubmit = createResourceOnSubmit;

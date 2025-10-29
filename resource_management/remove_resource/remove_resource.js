@@ -1,4 +1,4 @@
-import { allResources as staticResources } from "../../shared/js/staticData.js";
+import { allResources as staticResources } from "../main_page/staticData.js";
 import { findIndexByName, getResourceHtml } from "../main_page/resource_management.js";
 
 let localResources = JSON.parse(localStorage.getItem("demoResources"));

@@ -1,86 +1,120 @@
-/* --- Styles from calendar.css --- */
+/* --- Styles for Tab Navigation --- */
+.tabs-nav {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+/* --- Styles for Tabbed Views --- */
+.view-container {
+    display: none; /* Hide all views by default */
+}
+
+.view-container.active {
+    display: block; /* Show only the active view */
+}
+
+/* Fix for .row class inside the new combined file */
+/* This ensures <label> and <input> stack nicely */
+.view-container .row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+    max-width: 600px;
+}
+
+.view-container .row label {
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Ensure inputs use the shared class */
+.view-container .input {
+    width: 100%;
+}
 
 .toolbar {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: end;
-  margin-bottom: 12px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: end;
+    margin-bottom: 12px;
+    /* Remove grid layout to work with new .row styles */
 }
 
 .week-header {
-  display: grid;
-  grid-template-columns: 90px repeat(7, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 10px 10px 0 0;
-  overflow: hidden;
+    display: grid;
+    grid-template-columns: 90px repeat(7, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
 }
 
 .week-header .cell {
-  background: var(--panel, #f3f4f6); 
-  padding: 10px 8px;
-  font-weight: 700;
-  text-align: center;
+    /* Assuming var(--panel) is defined in shared.css, otherwise use a fallback */
+    background: var(--panel, #f3f4f6);
+    padding: 10px 8px;
+    font-weight: 700;
+    text-align: center;
 }
 
 .week-grid {
-  display: grid;
-  grid-template-columns: 90px repeat(7, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-top: 0;
-  border-radius: 0 0 10px 10px;
-  overflow: hidden;
+    display: grid;
+    grid-template-columns: 90px repeat(7, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
 }
 
 .cell {
-  background: white;
-  padding: 6px 8px;
-  font-size: 14px;
-  line-height: 1.2;
-  min-height: 28px;
+    background: white;
+    padding: 6px 8px;
+    font-size: 14px;
+    line-height: 1.2;
+    min-height: 28px;
 }
 
 .cell.time {
-  background: var(--panel, #f3f4f6);
-  font-weight: 600;
-  text-align: right;
+    background: var(--panel, #f3f4f6);
+    font-weight: 600;
+    text-align: right;
 }
 
 .cell.booked {
-  background: #ffebeb;
-  border-left: 4px solid #e11d48; 
+    background: #ffebeb;
+    border-left: 4px solid #e11d48;
 }
 
 .cell.booked .tag {
-  display: inline-block;
-  background: #e11d48;
-  color: white;
-  border-radius: 999px;
-  padding: 2px 8px;
-  font-size: 12px;
-  margin-right: 6px;
+    display: inline-block;
+    background: #e11d48;
+    color: white;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin-right: 6px;
 }
 
 .cell.free {
-  background: white;
+    background: white;
 }
 
 .cell.dim {
-  color: #9aa2af;
+    color: #9aa2af;
 }
 
 .danger {
-  background: #e23c39;
-  color: #fff;
-  border-color: #e23c39; /* Added this to override default border */
+    background: #e23c39;
+    color: #fff;
+    border-color: #e23c39;
 }
-
-.danger:hover {
-  background: #c02a28; /* Added a hover state */
-  border-color: #c02a28;
-}
-

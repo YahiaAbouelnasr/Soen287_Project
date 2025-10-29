@@ -5,19 +5,19 @@ let demoResources = localStorage.setItem("demoResources", JSON.stringify([])) ||
 
 function createResourceOnSubmit(e){
     e.preventDefault();
-
+    
     // gets input value from users
-    const resourceName = document.getElementById('name').value;
-    const resourceType = document.getElementById('type').value;
-    const resourceDescription = document.getElementById('description').value;
-    const resourceCapabilities = document.getElementById('capacity').value;
-    const resourceImage = document.getElementById('image').files[0];
+    const resourceName = document.getElementById('name').value.trim();
+    const resourceType = document.getElementById('type').value.trim();
+    const resourceDescription = document.getElementById('description').value.trim();
+    const resourceCapabilities = document.getElementById('capacity').value.trim();
+    const resourceImage = document.getElementById('image').value.trim();
 
-    if (resourceName == "" 
-        && resourceType == ""
-        && resourceDescription == "" 
-        && resourceCapabilities == ""
-        && resourceImage == null){
+    if (resourceName === "" 
+        || resourceType === ""
+        || resourceDescription === "" 
+        || resourceCapabilities === ""
+        || resourceImage === ""){
             alert("Missing information, resource creation unsuccessful.");
             return;
         }
@@ -41,6 +41,6 @@ function createResourceOnSubmit(e){
 
     localStorage.setItem("demoResources", JSON.stringify(demoResources));
 
-    location.reload();
+    document.querySelector("form").reset();
 }
 window.createResourceOnSubmit = createResourceOnSubmit;

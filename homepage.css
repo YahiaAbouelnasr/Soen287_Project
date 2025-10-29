@@ -23,7 +23,9 @@
 }
 
 .homepage-links {
-    display: grid;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     /* Create 2 columns on small screens, 4 on larger */
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -57,4 +59,12 @@
     border-color: var(--accent);
     box-shadow: 0 6px 20px rgba(0,0,0,.08);
     transform: translateY(-2px);
+}
+
+.names{
+    text-align: center;
+    font-size: 0.8rem;
+    color: #555555;
+    margin-top: auto;
+    padding: 8px;
 }

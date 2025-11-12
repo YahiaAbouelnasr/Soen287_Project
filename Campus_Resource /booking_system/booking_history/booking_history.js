@@ -1,4 +1,5 @@
 import { getBookings, saveBookings, getResources } from '../shared/shared_data.js';
+// Ana -> same comments as others '../shared/shared_data.js'?
 
 const whoInput  = document.getElementById('who');
 const filterBtn = document.getElementById('filterBtn');

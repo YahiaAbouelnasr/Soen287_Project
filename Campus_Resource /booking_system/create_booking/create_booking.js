@@ -1,4 +1,5 @@
 import { getResources, getBookings, saveBookings } from '../shared/shared_data.js';
+// Ana -> same comments as others '../shared/shared_data.js'?
 
 const sel = document.getElementById('resourceId');
 const msg = document.getElementById('msg');

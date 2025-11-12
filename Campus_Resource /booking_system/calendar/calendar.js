@@ -1,4 +1,5 @@
 import { getResources, getBookings } from '../shared/shared_data.js';
+// Anastasia: What is ../shared/shared_data.js. Ali might've deleted it (go back in commit if needed in old)
 
 
 const SLOT_MIN = 30;

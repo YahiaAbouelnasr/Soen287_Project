@@ -1,0 +1,193 @@
+:root{
+  --accent:#3b82f6;
+  --border:#e5e7eb;
+  --bg:#f9fafb;
+  --text:#111827;
+  --card:#ffffff;
+}
+
+*{ box-sizing:border-box; }
+html,body{ 
+  margin:0; 
+  padding:0; 
+  font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; 
+  color:var(--text); 
+  background:var(--bg); 
+}
+
+.container{
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+  margin-bottom: 24px; /* Added for spacing */
+}
+
+h1{ margin:0 0 16px; }
+h2{ margin:0 0 16px; }
+
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid var(--border);
+  background:var(--accent); color:white; text-decoration:none; cursor:pointer; font-weight:600;
+}
+.btn.secondary{ background:#fff; color:#111; }
+.btn-danger{ background:#ef4444; border-color:#ef4444; }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+.input, select, textarea{
+  width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:16px;
+}
+label{ font-weight:600; display:block; margin-bottom:6px; }
+.field{ margin-bottom:16px; }
+.row{ display:flex; gap:12px; flex-wrap:wrap; }
+.col-6{ flex:1 1 300px; }
+.table{ width:100%; border-collapse:collapse; }
+.table th, .table td{ border:1px solid var(--border); padding:10px; }
+.table th{ background:#f3f4f6; text-align:left; }
+.badge{ padding:2px 8px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:12px; }
+
+/* --- STYLES ADDED FOR DASHBOARD --- */
+
+/* Header/Navbar */
+.navbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+}
+.navbar-content {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+.navbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Notification Bell */
+.notification-wrapper {
+  position: relative;
+}
+.notification-bell {
+  position: relative;
+  padding: 8px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+}
+.notification-bell:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+.bell-icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* The .badge class from shared CSS is used for the count */
+
+/* Notification Dropdown Panel */
+.dropdown-panel {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  width: 320px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+  z-index: 10;
+  display: none; /* Hidden by default */
+}
+.dropdown-header {
+  padding: 12px 16px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+.dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.dropdown-list li {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.dropdown-list li:last-child {
+  border-bottom: none;
+}
+.dropdown-list-title {
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+.dropdown-list-body {
+  font-size: 14px;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Active state for view toggle buttons */
+.btn.active {
+  background: var(--accent);
+  color: white;
+}
+.btn.secondary.active {
+    background: #e0e7ff; /* A light accent color */
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Simple list for "Browse Resources" */
+.resource-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.resource-list-item a {
+  display: block;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+}
+.resource-list-item a:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+.resource-list-item p {
+  margin: 0;
+}
+.resource-list-item .title {
+  font-weight: 600;
+  color: var(--accent);
+}
+.resource-list-item .desc {
+  font-size: 14px;
+  color: #4b5563;
+}

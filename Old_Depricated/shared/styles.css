@@ -1,0 +1,60 @@
+/* --- This is a shared CSS file --- */
+:root{
+  --accent:#3b82f6;
+  --border:#e5e7eb;
+  --bg:#f9fafb;
+  --text:#111827;
+  --card:#ffffff;
+}
+
+*{ box-sizing:border-box; }
+
+/* Apply base styles to html/body so all pages match */
+html,body{ 
+  margin:0; 
+  padding:0; 
+  font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; 
+  color:var(--text); 
+  background:var(--bg); 
+}
+
+/* Base styles for containers, cards, buttons, etc. */
+.container{
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+  margin-bottom: 24px; /* Added for spacing */
+}
+
+h1{ margin:0 0 16px; }
+h2{ margin:0 0 16px; }
+
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid var(--border);
+  background:var(--accent); color:white; text-decoration:none; cursor:pointer; font-weight:600;
+}
+.btn.secondary{ background:#fff; color:#111; }
+.btn-danger{ background:#ef4444; border-color:#ef4444; }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+.input, select, textarea{
+  width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:16px;
+}
+label{ font-weight:600; display:block; margin-bottom:6px; }
+.field{ margin-bottom:16px; }
+.row{ display:flex; gap:12px; flex-wrap:wrap; }
+.col-6{ flex:1 1 300px; }
+.table{ width:100%; border-collapse:collapse; }
+.table th, .table td{ border:1px solid var(--border); padding:10px; }
+.table th{ background:#f3f4f6; text-align:left; }
+.badge{ padding:2px 8px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:12px; }
+
+

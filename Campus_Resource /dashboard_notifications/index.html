@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Resource Dashboard</title>
+    
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <!-- Logo/Title - UPDATED this part -->
+            <a href="../index.html" style="text-decoration: none; color: inherit;">
+                <h1 class="navbar-title">Campus Resource System</h1>
+            </a>
+            
+            <!-- Notification Bell -->
+            <div class="notification-wrapper">
+                <button id="notification-bell" class="notification-bell">
+                    <span class="sr-only">View notifications</span>
+                    <!-- Bell Icon (SVG) -->
+                    <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <!-- Notification Count Badge -->
+                    <span id="notification-count" class="badge" style="display: none; position: absolute; top: 0; right: 0;">0</span>
+                </button>
+                
+                <!-- Notifications Panel (Dropdown) -->
+                <div id="notifications-panel" class="dropdown-panel">
+                    <div class="dropdown-header">
+                        Notifications
+                    </div>
+                    <ul id="notifications-list" class="dropdown-list">
+                        <!-- Notifications will be injected here by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        
+        <!-- View Toggler -->
+        <div class="card">
+            <h2>Toggle View</h2>
+            <p style="margin-bottom: 16px; color: #4b5563; font-size: 14px;">Simulate different user dashboards for Deliverable 1.</p>
+            <div>
+                <button id="student-view-btn" class="btn secondary active">
+                    Student View
+                </button>
+                <button id="admin-view-btn" class="btn secondary">
+                    Admin View
+                </button>
+            </div>
+        </div>
+
+        <!-- Student Dashboard (Visible by default) -->
+        <div id="student-dashboard">
+            <h1>Welcome, Student!</h1>
+            
+            <!-- My Upcoming Bookings Section -->
+            <div class="card">
+                <h2>My Upcoming Bookings</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="upcoming-bookings-list">
+                        <!-- Bookings will be injected here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Browse Resources Section -->
+            <div class="card">
+                <h2>Browse Resources</h2>
+                <ul class="resource-list">
+                    <li class="resource-list-item">
+                        <a href="#">
+                            <p class="title">Study Rooms</p>
+                            <p class="desc">Book private and group study spaces.</p>
+                        </a>
+                    </li>
+                    <li class="resource-list-item">
+                        <a href="#">
+                            <p class="title">Computer Labs</p>
+                            <p class="desc">Find available stations with specific software.</p>
+                        </a>
+                    </li>
+                    <li class="resource-list-item">
+                        <a href="#">
+                            <p class="title">Equipment</p>
+                            <p class="desc">Reserve cameras, projectors, and more.</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard (Hidden by default) -->
+        <div id="admin-dashboard" style="display: none;">
+            <h1>Admin Dashboard</h1>
+
+            <!-- Pending Booking Requests Section -->
+            <div class="card">
+                <h2>Pending Booking Requests</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Student</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pending-requests-list">
+                        <!-- Requests will be injected here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Manage Resources Section -->
+            <div class="card">
+                <h2>Manage Resources</h2>
+                <table class="table">
+                   <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Capacity</th>
+                            <th>Actions</th>
+                        </tr>
+                   </thead>
+                   <tbody>
+                        <tr>
+                            <td>Study Room 101</td>
+                            <td>4</td>
+                            <td>
+                                <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Edit</button>
+                                <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Block</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Computer Lab 205</td>
+                            <td>30</td>
+                            <td>
+                                <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Edit</button>
+                                <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Block</button>
+                            </td>
+                        </tr>
+                   </tbody>
+                </table>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="card">
+                <h2>Usage Statistics</h2>
+                <div class="row">
+                    <div class="col-6" style="background: #eef2ff; padding: 16px; border-radius: 8px;">
+                        <h1 style="color: var(--accent); margin: 0; font-size: 36px;">128</h1>
+                        <p style="margin: 0; font-weight: 600;">Bookings this week</p>
+                    </div>
+                    <div class="col-6" style="background: #f0fdf4; padding: 16px; border-radius: 8px;">
+                        <h1 style="color: #16a34a; margin: 0; font-size: 36px;">85%</h1>
+                        <p style="margin: 0; font-weight: 600;">Utilization Rate</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>

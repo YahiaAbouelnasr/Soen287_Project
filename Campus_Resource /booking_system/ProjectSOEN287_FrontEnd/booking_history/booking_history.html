@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Booking history</title>
+  <link rel="stylesheet" href="../shared/css/shared.css" />
+  <link rel="stylesheet" href="./booking_history.css" />
+  <h1><a href="../../../index.html" class="decor">Campus Resource System</a></h1>
+</head>
+<body>
+  <div class="container card">
+    <h1>Booking history</h1>
+
+    <div class="row">
+      <label for="who">Filter by name</label>
+      <input id="who" placeholder="Enter your name to see your bookings" />
+      <button id="filterBtn" class="btn">Filter</button>
+      <button id="allBtn" class="btn">Show all</button>
+    </div>
+
+    <table class="table" style="margin-top:12px;">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Resource</th>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Purpose</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <div class="row" style="margin-top:12px;">
+      <a class="btn" href="../main/index.html">Back</a>
+    </div>
+  </div>
+
+  <script type="module" src="./booking_history.js"></script>
+</body>
+</html>
+

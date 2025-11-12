@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Availability (Week view)</title>
+  <link rel="stylesheet" href="../shared/css/shared.css" />
+  <link rel="stylesheet" href="./calendar.css" />
+  <h1><a href="../../../index.html" class="decor">Campus Resource System</a></h1>
+</head>
+<body>
+  <div class="container card">
+    <h1>Availability (Week view)</h1>
+
+    <div class="toolbar">
+      <div class="row">
+        <label for="resourceId">Resource</label>
+        <select id="resourceId"></select>
+      </div>
+
+      <div class="row">
+        <label for="anyDay">Week</label>
+        <input id="anyDay" type="date" />
+      </div>
+    </div>
+
+    <div id="weekHeader" class="week-header"></div>
+    <div id="grid" class="week-grid" aria-live="polite"></div>
+
+    <div class="row" style="margin-top:12px;">
+      <a class="btn" href="../main/index.html">Back</a>
+    </div>
+  </div>
+
+  <script type="module" src="./calendar.js"></script>
+</body>
+</html>
+

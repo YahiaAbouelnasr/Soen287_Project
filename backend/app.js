@@ -1,5 +1,60 @@
+const express = require('express');
+//     // Load express (the backend framework)
+// const cors = require('cors');
+//     // Load CORS so frontend can talk to backend 
+//     // - The install of cors fixes errors like when frontend runs on port 5500 and backend runs on port 3000
+//     // - Without cors, request blocked. With it, everything works.
+
+const app = express();
+//     // Create your backend app. 
+const PORT = 3000; 
+//     // Backend will run on this port.
+
+// app.use(cors());
+ 
+// Allow requests from your frontend.
+ app.use(express.json());
+//     // Automatically read JSON sent in requests.
+//     // Lets read objects (i.e. frontend sends "{"username":"ana","password":"1234"}" <- String)
+//     // (i.e. express.json() converts it to { username: "ana", password: "1234" } <- REAL js object)
+
+app.get('/', (req, res) => {
+    res.send('Backend is working :)')
+})
+
+app.post('/users/:id', (req, res) => {
+    const id = req.params.id
+    const logo = req.body.logo
+
+    if (!logo) {
+        res.status(500).send({ message: 'We need a logoo!' });
+    }
+
+    res.send({
+        tshirt: `we have your tshirt ${logo} and ID of ${id}`
+    })
+
+})
+//     // Create a test route at / that returns text
+
+// // Import all routes files
+// const usersRouter = require('./routes/users');
+// const dashboardsRouter = require('./routes/dashboards');
+// const bookingsRouter = require('./routes/bookings');
+// const resourcesRouter = require('./routes/resources');
+//     // P.S. .js is almost never needed in pathing (95% of the time)
+
+// app.use('/api/users', usersRouter);
+// app.use('/api/dashboards', dashboardsRouter);
+// app.use('/api/bookings', bookingsRouter);
+// app.use('/api/resources', resourcesRouter);
 
 
+app.listen(
+    PORT,
+    () => console.log('its alive on http://localhost:${PORT}')
+);
+    // starts the app
 
 
 

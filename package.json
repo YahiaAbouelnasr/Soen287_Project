@@ -1,0 +1,26 @@
+{
+  "name": "soen287_project",
+  "version": "1.0.0",
+  "description": "SOEN 287 Project for school",
+  "homepage": "https://github.com/YahiaAbouelnasr/Soen287_Project#readme",
+  "bugs": {
+    "url": "https://github.com/YahiaAbouelnasr/Soen287_Project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YahiaAbouelnasr/Soen287_Project.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http_server"
+  },
+  "dependencies": {
+    "firebase": "^12.6.0"
+  },
+  "devDependencies": {
+    "http_server": "^1.0.12"
+  }
+}

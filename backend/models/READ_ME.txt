@@ -1,4 +1,4 @@
-TLDR of Models [DATABASE]: 
+TLDR of Models **[your data IS NOT stored here. BLUEPRINT of data]**: 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Models = “data structure + database logic”
 
@@ -22,7 +22,7 @@ In school projects without a real database, models are usually:
 - Define a shape for your data.
     (like a blueprint)
 
-- Hold your data.
+- Hold your data. [MISLEADING. it doesn't hold data.]
     (in memory or a real database)
 
 - Provide small helper functions to get, save, update, or delete data.
@@ -31,5 +31,5 @@ Basically:
 If it describes the structure of data → it’s a model.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-How they should all connect (chatGPT says):
+"work order" (chatGPT says):
 "Frontend → Routes → Controller → Model → Controller → Routes → Frontend"

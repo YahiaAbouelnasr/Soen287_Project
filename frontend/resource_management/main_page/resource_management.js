@@ -1,7 +1,11 @@
 import { allResources as staticResources } from "./staticData.js";
 
-let localResources = JSON.parse(localStorage.getItem("demoResources"));
-let demoResources = localResources && localResources.length > 0 ? localResources : staticResources;
+let saved = localStorage.getItem("demoResources");
+let localResources = saved ? JSON.parse(saved) : null;
+
+let demoResources = (localResources && localResources.length > 0)
+  ? localResources
+  : staticResources;
 
 window.addEventListener("load", viewExistingResources);
 window.addEventListener("load", bindSearchEvent);
@@ -51,24 +55,21 @@ export function getResourceHtml(resource) {
     `;
 }
 
-export function findIndexByName(isName, demoResources) {
-    for (let index = 0; index < demoResources.length; index++) {
-        if (demoResources[index].name.toLowerCase() === isName.toLowerCase().trim()) {
-            return index;
-        }
+// TODO: implement this
+function groupByCategory(demoResources){
+    let room = [];
+    let equipment = [];
+
+    demoResources.forEach(resource => {
+        if (resource.type === "Room") room.push(resource)
+        else if (resource.type === "Equipment") equipment.push(resource)
+    });
+
+    return {
+        Room: room,
+        Equipment: equipment
     }
-    alert("Resource not found");
-    return -1;
 }
-
-export function loadResources() {
-    document.getElementById('resource-name').innerText = resource.name;
-    document.getElementById('resource-type').innerText = resource.type;
-    document.getElementById('resource-description').innerText = resource.description;
-    document.getElementById('resource-image').setAttribute('src', resource.image);
-}
-
-
 
 function searchResource(query) {
     if (!demoResources || !query || demoResources.length === 0) return;

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Campus Resource Booking</title>
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+
+    <div id="headerBanner">
+        <h1> Campus Resource System</h1>
+        <span>Concordia University</span>
+    </div> 
+
+    <h2 id="welcome"></h2>
+
+  <main class="container">
+    <section class="card-narrow">
+      <form id="loginForm">
+      <h2>Login</h2>
+        <label>Email
+          <input type="email" id="email" required placeholder="name@live.concordia.ca" class="input" />
+        </label>
+        <label>Password
+          <input type="password" id="password" required minlength="8" class="input" />
+        </label>
+        <button type="submit" class="btn">Log in</button>
+      </form>
+      <p class="muted">No account? <a href="../user_accounts/register.html">Create one</a></p>
+      <p class="muted">Are you an Admin? <a href="../user_accounts/admin.html">Log in Here</a></p>
+    </form>
+    </section>
+  </main>
+  <script type="module" src="user_accounts/auth/login.js"></script>
+
+  <script> 
+    const message = "Welcome to our Campus Resource System, please login to continue";
+    const word = message.split(" ");
+    let index=0;
+
+    function display() {
+      if (index <word.length) {
+        document.getElementById("welcome").textContent += word[index] + " ";
+        index++;
+        setTimeout(display, 100);
+      }
+    }
+
+    window.onload = display;
+  </script>
+</body>
+</html>

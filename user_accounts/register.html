@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - Campus Resource Booking</title>
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="user_accounts.css">
+</head>
+<body>
+
+
+  <div id="headerBanner">
+    <h1> <a href="../home.html">Campus Resource System </a></h1>
+    <span>Concordia University</span>
+  </div> 
+
+
+  <main class="container">
+    <section class="card-narrow">
+      <h2>Sign up</h2>
+      <form id="registerForm" class="form">
+
+      <label>Full name
+        <input type="text" id="name" required placeholder="Alan Smith" class="input" />
+      </label>
+
+        <label>Email
+          <input type="email" id="email" required placeholder="name@live.concordia.ca" class="input" />
+        </label>
+
+        <label>Password
+          <input type="password" id="password" required minlength="8" class="input" />
+        </label>
+
+        <button type="submit" class="btn">Create Account</button>
+      </form>
+      <p class="muted">Already have an account? <a href="../home.html">Log in</a>.</p>
+    </section>
+  </main>
+  <script type="module" src="auth/register.js"></script>
+</body>
+</html>

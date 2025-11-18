@@ -1,0 +1,129 @@
+/* --- Styles specific to the homepage --- */
+:root {
+    --bgColor: #6A1414; 
+}
+body {
+    height: 100vh;
+    background:linear-gradient(#00000094, #161616), url('lib.jpg');
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+}
+
+#headerBanner {
+    background-color: var(--bgColor);
+    color: #ffffff;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px #d48a8a;
+}
+
+#headerBanner h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 1.5px;
+}
+
+#headerBanner span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+main.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 4;
+    padding: 20px;
+}
+  
+  .card-narrow {
+   background: #9a97978d;
+   padding: 40px;
+   width: 430px;
+   border-radius: 20px;
+   text-align: left;
+  }
+
+  .card-narrow h2{
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .card-narrow label{
+    display: block;
+    margin-bottom: 12px;
+    font-weight: bold;
+
+  }
+
+  .card-narrow input{
+    width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 4px;
+  }
+
+  .card-narrow .btn {
+    width: 100%;
+    background-color: #7D1717;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .card-narrow .btn:hover{ 
+    background: #5A1010; 
+    border-color: #cbd5e1;}
+
+  
+
+  .muted {
+    color: #24262c;
+    margin-bottom: 5px;
+    margin: 5px;
+  }
+
+  .muted a{
+    color: #1a0dab;
+  }
+
+  .muted a:visited{
+    color:#1a0dab
+  }
+
+  #loginWarn {
+    color: red;
+  }
+
+  #welcome {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    animation: ease-out;
+  }
+
+
+
+  /*#7D1717
+
+#8F1A1A
+
+Slightly darker (good for default button state):
+
+#5A1010
+
+#4C0D0D
+

@@ -31,15 +31,6 @@ async function createResourceOnSubmit(e){
         capacity: resourceCapacity, 
         image: resourceImage 
     };
-    
-    //const demoResources = JSON.parse(localStorage.getItem("demoResources"));
-    
-    //demoResources.push(newResource);
-
-    //console.log(JSON.stringify(demoResources));
-
-    //localStorage.setItem("demoResources", JSON.stringify(demoResources));
-
 
     // Add a new document in collection "cities"
     const collectionRef = collection(database, "resources");

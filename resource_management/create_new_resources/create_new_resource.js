@@ -1,9 +1,6 @@
-import { allResources as staticResources } from "../main_page/staticData.js";
-import { doc, setDoc } from "firebase/firestore"; 
+
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js"; 
 import { database } from "../../firebase.js"
-
-let demoResources = localStorage.setItem("demoResources", JSON.stringify([])) || staticResources;
-
 
 async function createResourceOnSubmit(e){
     e.preventDefault();
@@ -12,13 +9,13 @@ async function createResourceOnSubmit(e){
     const resourceName = document.getElementById('name').value.trim();
     const resourceType = document.getElementById('type').value.trim();
     const resourceDescription = document.getElementById('description').value.trim();
-    const resourceCapabilities = document.getElementById('capacity').value.trim();
+    const resourceCapacity = document.getElementById('capacity').value.trim();
     const resourceImage = document.getElementById('image').value.trim();
 
     if (resourceName === "" 
         || resourceType === ""
         || resourceDescription === "" 
-        || resourceCapabilities === ""
+        || resourceCapacity === ""
         || resourceImage === ""){
             alert("Missing information, resource creation unsuccessful.");
             return;
@@ -31,7 +28,7 @@ async function createResourceOnSubmit(e){
         name: resourceName, 
         type: resourceType, 
         description: resourceDescription, 
-        capabilities: resourceCapabilities, 
+        capacity: resourceCapacity, 
         image: resourceImage 
     };
     
@@ -45,9 +42,8 @@ async function createResourceOnSubmit(e){
 
 
     // Add a new document in collection "cities"
-    const newResourceDoc = doc(database, "resources", newResource.name)
-
-    await setDoc(newResourceDoc, newResource);
+    const collectionRef = collection(database, "resources");
+    await addDoc(collectionRef, newResource);
 
     document.querySelector("form").reset();
 }

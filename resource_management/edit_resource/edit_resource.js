@@ -31,7 +31,7 @@ function loadFormData(resource) {
   document.getElementById("newName").value = resource.name;
   document.getElementById("newType").value = resource.type;
   document.getElementById("newDescription").value = resource.description;
-  document.getElementById("newCapabilities").value = resource.capabilities;
+  document.getElementById("newCapacity").value = resource.capacity;
   document.getElementById("newImage").value = resource.image;
 }
 
@@ -46,7 +46,7 @@ saveBtn.addEventListener("click", () => {
     name: document.getElementById("newName").value.trim(),
     type: document.getElementById("newType").value.trim(),
     description: document.getElementById("newDescription").value.trim(),
-    capabilities: document.getElementById("newCapabilities").value.trim(),
+    capacity: document.getElementById("newCapacity").value.trim(),
     image: document.getElementById("newImage").value.trim(),
   };
 

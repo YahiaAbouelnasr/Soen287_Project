@@ -1,17 +1,17 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase";
-import { getFirestore } from "firebase/firestore"; 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js"; 
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCSZLPhEEKO7cymNy-0NtXMB-LUU_Vqn0I",
-  authDomain: "soen-287-proj.firebaseapp.com",
-  projectId: "soen-287-proj",
-  storageBucket: "soen-287-proj.firebasestorage.app",
-  messagingSenderId: "714004706656",
-  appId: "1:714004706656:web:e8e33d9bc0336bdb5f9a05"
+  apiKey: "AIzaSyBiHJmw1kFDkmIHcT--Tg3fo2Ynr8EkJUQ",
+  authDomain: "crbs-b358b.firebaseapp.com",
+  projectId: "crbs-b358b",
+  storageBucket: "crbs-b358b.firebasestorage.app",
+  messagingSenderId: "732684413138",
+  appId: "1:732684413138:web:cf3f37485c55b43da0e50b",
+  measurementId: "G-8K0H6MV0JC"
 };
-
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);

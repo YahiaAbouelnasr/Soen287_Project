@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - My Bookings</title>
+    
+    <!-- Links to shared team styles and page styles -->
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <!-- Link to Homepage -->
+            <a href="../index.html" style="text-decoration: none; color: inherit;">
+                <h1 class="navbar-title">Campus Resource Booking</h1>
+            </a>
+            
+            <!-- Notification Bell -->
+            <div class="notification-wrapper">
+                <button id="notification-bell" class="notification-bell">
+                    <!-- Bell Icon -->
+                    <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span id="notification-count" class="badge" style="display: none;">0</span>
+                </button>
+                
+                <!-- Notifications Panel (Dropdown) -->
+                <div id="notifications-panel" 
+                     class="dropdown-panel"
+                     style="display: none;">
+                    <div class="dropdown-header">
+                        Notifications
+                    </div>
+                    <ul id="notifications-list" class="dropdown-list">
+                        <!-- Content loaded by script.js -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        
+        <h1 style="margin-top: 0;">Welcome, Student!</h1>
+        
+        <!-- My Upcoming Bookings Section -->
+        <div class="card">
+            <h2>My Upcoming Bookings</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="upcoming-bookings-list">
+                    <!-- Content loaded by script.js -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Browse Resources Section -->
+        <div class="card">
+            <h2>Browse Resources</h2>
+            <ul class="resource-list">
+                <li class="resource-list-item">
+                    <a href="#">
+                        <p class="title">Study Rooms</p>
+                        <p class="desc">Book private and group study spaces.</p>
+                    </a>
+                </li>
+                <li class="resource-list-item">
+                    <a href="#">
+                        <p class="title">Computer Labs</p>
+                        <p class="desc">Find available stations with specific software.</p>
+                    </a>
+                </li>
+                <li class="resource-list-item">
+                    <a href="#">
+                        <p class="title">Equipment</p>
+                        <p class="desc">Reserve cameras, projectors, and more.</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>

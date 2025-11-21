@@ -6,22 +6,18 @@
     <meta charset="UTF-8" />
     <title>Resource Removal</title>
     <script src="./remove_resource.js" type="module"></script>
-    <script src="../main_page/resource_management.js" type="module"></script>
     <link rel="stylesheet" href="../edit_resource/edit_resource.css">
-    <script src="../main_page/staticData.js" type="module"></script>
 
 </head>
 
 <body>
-        <a href="../main_page/main_page.html" class="btn-home">Back to Home</a>
+          <a href="../main_page/resource_management.html" class="btn-home">Back to Resource Management</a>
 
     <section class="container card">
         <h1>Resource Removal</h1>
-        <h3>Please write the name of the resource you wish to remove from the resource catalogue:</h3>
+
         <div id="resource"></div>
 
-        <label for="isName">Resource Name: </label>
-        <input type="text" id="isName" name="isName">
         <button class="btn" type="button" id="delete" onclick="deleteResource()">Delete</button>
 
     </section>

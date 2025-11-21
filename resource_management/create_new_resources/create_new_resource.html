@@ -6,13 +6,11 @@
     <title>Create new resource</title>
     <link rel="stylesheet" href="./create_new_resource.css">
     <link rel="stylesheet" href="../edit_resource/edit_resource.css">
-    <script src="../main_page/staticData.js" type="module"></script>
     <script src="./create_new_resource.js" type="module"></script>
-    <script src="../main_page/resource_management.js" type="module"></script>
 </head>
 
 <body>
-    <a href="../main_page/main_page.html" class="btn-home">Back to Home</a>
+    <a href="../main_page/resource_management.html" class="btn-home">Back to Resource Management</a>
     <section class="container card">
         <h1>Create new resource</h1>
         <h3>Attributes of the new resource below:</h3>
@@ -20,14 +18,12 @@
             <!-- NAME  -->
             <label for="name">Name of new resource:</label>
             <input type="text" id="name" name="name" placeholder="e.g. 3D printer, CS lab ">
-            <!-- TYPE -->
-            <label for="Type">Type:</label>
-            <input type="text" id="type" name="type" placeholder="e.g. Room, equipement">
-            <label for="myDropdown">Choose an option:</label>
-            <select id="myDropdown" name="myDropdown">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+            <!-- TYPE --> 
+            <label for="myDropdown">Type:</label>
+            <select id="type" name="myDropdown" onchange="handleType(event)">
+                <option value="">Select</option>
+                <option value="room">Room</option>
+                <option value="equipment">Equipment</option>
             </select>
             <!-- DESCRIPTION -->
             <label for="description">Description:</label>
@@ -35,9 +31,18 @@
             <!-- LOCATION -->
             <label for="location">Location (or where it could be found):</label>
             <input type="location" id="location" name="location" placeholder="e.g. Hall 101.00">
-            <!-- CAPACITIES (might want to make two seperate subpages or UL )-->
-            <label for="capacities">Room capacity (0 if it's an equipement):</label>
-            <input type="text" id="capacity" name="capacity" placeholder="e.g. 22 people">
+            <!-- CAPACITIES -->
+            <div id="roomField" style="display:none;">
+                <label for="capacities">Room capacity:</label>
+                <input type="text" id="capacity" name="capacity" placeholder="e.g. 22 people">
+            </div>
+            <!-- AVAILABILITY -->
+            <label for="myDropdown">Availability:</label>
+            <select id="availability" name="myDropdown">
+                <option value="">Select</option>
+                <option value="Available">Available</option>
+                <option value="Unavailable">Unavailable</option>
+            </select>
             <!-- IMAGES -->
             <label for="image">Upload image file:</label>
             <input type="url" id="image" name="image" placeholder="Enter image URL">

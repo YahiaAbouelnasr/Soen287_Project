@@ -1,16 +1,37 @@
 import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 import { database } from '../../firebase.js'
+import { getResourceHtml } from "../../shared/shared_functions.js";
 
-
-const resources = []; 
+export const resources = []; 
+let currentCategory = "All";
+let currentSearchQuery = "";
+let isSearchMode = false;
+let showUnavailable = false;
+let result;
 
 window.addEventListener("load", loadResources);
-window.addEventListener("load", viewExistingResources);
 window.addEventListener("load", bindSearchEvent);
+window.addEventListener("load", bindResetEvent);
+window.addEventListener("load", bindSortByCategoryBtn);
+window.addEventListener("load", bindSortBySearchCategoryBtn);
+document.getElementById("createRedirect").addEventListener("click", () =>
+    {
+        window.location.href = "../create_new_resources/create_new_resource.html";
+    });
+document.getElementById("toggleUnavailable").addEventListener("change", event => {
+    showUnavailable = event.target.checked;
+    viewExistingResources();
+});
+
+document.getElementById("toggleSearchUnavailable").addEventListener("click", event => {
+    showUnavailable = event.target.checked;
+    search();
+});
+
 
 async function loadResources() {
     const collectionRef = collection(database, "resources")
-    const queryRef = query(collectionRef, where("capacity", "==", "0"));
+    const queryRef = query(collectionRef);
     const documents = await getDocs(queryRef);
     documents.forEach((doc) => {
         const resourceDoc = doc.data();
@@ -18,71 +39,205 @@ async function loadResources() {
         resources.push(resourceDoc);
     }); 
     console.log(resources)
+    viewExistingResources();
+    const allBtn = document.querySelectorAll("[data-type='All']");
+    if (allBtn) allBtn.forEach(btn => btn.classList.add("active"));
 }
 
 function bindSearchEvent() {
     const searchBtn = document.getElementById('searchBtn');
-    if (searchBtn) searchBtn.addEventListener("click", search);
+    if (searchBtn) {
+        currentCategory = "All";
+        searchBtn.addEventListener("click", search);  
+    }
+    
+}
+function search() {
+    const searchInput = document.getElementById('search');
+    const searchResult = document.getElementById('searchResult');
+
+    if (!searchInput || !searchResult) return;
+    
+
+    currentSearchQuery = searchInput.value.toLowerCase().trim();
+
+    if (!isSearchMode){
+        currentCategory = "All";
+        showUnavailable = false;
+        document.getElementById("toggleSearchList").classList.remove("hidden");
+    }
+
+    // get unified filtered results
+    result = [];
+    result = getFilteredResources(resources)
+        .filter(r => r.name.toLowerCase().includes(currentSearchQuery)).slice(0, 3);
+        
+    resultHandler(result); // changes display list -> result (if exists)
+    isSearchMode = true;
+    searchResult.innerHTML = "";
+
+    if (result.length === 0) {
+        searchResult.innerHTML = "<p>No resources found</p>";
+        return;
+    }
+
+    result.forEach(resource => {
+        searchResult.innerHTML += getResourceHtml(resource);
+    });
+    
 }
 
-function search() {
+function bindResetEvent() {
+    const resetBtn = document.getElementById('resetBtn');
+    if (resetBtn) resetBtn.addEventListener("click", reset);
+    
+}
+// FIXME: do i even need to export these if i have window (unless for another js)
+export function reset(){
     const search = document.getElementById('search');
     const searchResult = document.getElementById('searchResult');
 
-    if (!search || !searchResult) return;
-
-    const result = searchResource(search.value);
+    currentSearchQuery = ""; 
+    search.value = "";
     searchResult.innerHTML = "";
-    result.forEach((resource) => {
-        searchResult.innerHTML += getResourceHtml(resource) +
-            `<div class="resource-actions">
-                <a href="../edit_resource/edit_resource.html?resourceId=${resource.id}">Edit</a>
-                <a href="../remove_resource/remove_resource.html?resourceId=${resource.id}">Delete</a> 
-            </div> </div>
-            <br />`
-    });
+
+    document.getElementById('toggleList').classList.remove("hidden");
+    document.getElementById('resetBtn').classList.add("hidden");
+
+    document.getElementById('toggleUnavailable').checked = false;
+    document.getElementById('toggleSearchUnavailable').checked = false;
+    showUnavailable = false;
+    isSearchMode = false;
+    currentCategory = "All";
+
+    document.querySelectorAll("#categoryButtons button, #searchCategoryButtons button")
+    .forEach(buttonByCategory => buttonByCategory.classList.remove("active"));
+
+    document.getElementById("toggleSearchList").classList.add("hidden");
+
+    document.querySelector('#categoryButtons [data-type="All"]').classList.add("active");
+    document.querySelector('#searchCategoryButtons [data-type="All"]').classList.add("active");
+
+    document.getElementById('list').scrollIntoView();
+
+    viewExistingResources();
+   
 }
 
 export function viewExistingResources() {
-    let container = document.getElementById("resourceList");
-
+    const filteredResources = getFilteredResources(resources);
+    const container = document.getElementById("list");
     if (!container) return;
+    container.innerHTML = ""; // clears my display depending on button click
 
-    for (let index = 0; index < resources.length; index++) {
+    filteredResources.forEach(resource => {
+        container.insertAdjacentHTML("beforeend", getResourceHtml(resource));
+    })
 
-        container.innerHTML += `${getResourceHtml(resources[index])}`;
+    if ( (resources.length %2 ) != 0 ) {
+        list.classList.add("center-single");
+    } else {
+        list.classList.remove("center-single");
     }
 }
+function sortResourcesByName(resources) {
+    if (!resources || !Array.isArray(resources)) return [];
+    return resources.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
 
-export function getResourceHtml(resource) {
-    return `<div class='resource-card'><h3>${resource.name}</h3>
-      <p><strong>Type:</strong> ${resource.type}</p>
-      <p><strong>Description:</strong> ${resource.description}</p>
-      <p><strong>Capacity:</strong> ${resource.capacity || "—"}</p>
-      <img src="${resource.image}" alt="${resource.name}">
-    `;
+    // Does this start with a number?? TEST
+    const isNumA = /^\d/.test(nameA); 
+    const isNumB = /^\d/.test(nameB);
+
+    // If A starts with number but B doesn't, then A first
+    if (isNumA && !isNumB) return -1;
+
+    // If B starts with number but A doesn't, then B first
+    if (!isNumA && isNumB) return 1;
+
+    // If both either numbers or both letters, its just a normal A-Z sort
+    return nameA.localeCompare(nameB);
+    
+  });
 }
 
-// TODO: implement this
-function groupByCategory(demoResources){
-    let room = [];
-    let equipment = [];
+export function bindSortByCategoryBtn(){
+    const sortBtn = document.getElementById('categoryButtons');
+    if (sortBtn) sortBtn.addEventListener("click", sortByCategory);
+}
+export function bindSortBySearchCategoryBtn(){
+    const sortBtn = document.getElementById('searchCategoryButtons');
+    if (sortBtn) sortBtn.addEventListener("click", sortByCategory);
+}
 
-    demoResources.forEach(resource => {
-        if (resource.type === "Room") room.push(resource)
-        else if (resource.type === "Equipment") equipment.push(resource)
-    });
+export function sortByCategory(event){
 
-    return {
-        Room: room,
-        Equipment: equipment
+    const categoryBtn = event.target.closest("button");
+    if (!categoryBtn) return;
+
+    currentCategory = categoryBtn.dataset.type;
+    
+    // Only clears the buttons inside this strip
+    const parentStrip = categoryBtn.closest(".title-buttons");
+    parentStrip.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+
+
+    categoryBtn.classList.add("active");
+
+    updateUI()
+
+}
+
+function resultHandler(result){
+    const searchResult = document.getElementById('searchResult');
+    if (!result){
+        document.getElementById('toggleList').classList.remove("hidden");
+        document.getElementById('resetBtn').classList.add("hidden");
+        document.getElementById('toggleSearchList').classList.add("hidden");
+        isSearchMode = false;
+        document.getElementById('list').scrollIntoView();
+        return;
+    }
+    else if (result.length === 0){
+        searchResult.innerHTML = "No resources found";
+        return;
+    }
+    if (isSearchMode) return; 
+        document.getElementById('toggleList').classList.add("hidden");
+        document.getElementById('resetBtn').classList.remove("hidden");
+        document.getElementById('toggleSearchList').classList.remove("hidden");
+        document.getElementById('searchResult').scrollIntoView();
+}
+
+function getFilteredResources(resources) {
+    let list = [...resources];
+
+    // CATEGORY filter
+    if (currentCategory !== "All") {
+        list = list.filter(r => r.type === currentCategory);
+    }
+
+    // AVAILABILITY filter
+    if (!showUnavailable) {
+        list = list.filter(r => r.availability === "Available");
+    }
+
+    // SEARCH filter (inactive until later)
+    if (currentSearchQuery.trim() !== "") {
+        const q = currentSearchQuery.toLowerCase();
+        list = list.filter(r => r.name.toLowerCase().includes(q));
+    }
+
+    // SORT (my existing sorting)
+    sortResourcesByName(list);
+
+    return list;
+}
+function updateUI() {
+    if (isSearchMode) {
+        search();        // update search results 
+    } else {
+        viewExistingResources();  // update main list
     }
 }
-
-function searchResource(query) {
-    if (!resources || !query || resources.length === 0) return;
-    return resources.filter((resource) => resource.name.toLowerCase().includes(query.toLowerCase())).slice(0, 3)
-}
-
-
-

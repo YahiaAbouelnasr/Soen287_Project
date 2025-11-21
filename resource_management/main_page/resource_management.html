@@ -12,13 +12,55 @@
 </head>
 
 <body>
-    <a href="./main_page.html" class="btn-home">Back to Home</a>
+    <a href="../../dashboard_notifications/index.html" class="btn-home">Back to Dashboard</a>
+    <!-- Search display -->
     <section class="container card">
-        <h1>Find a Resource</h1>
-        <h3>Search for a resource</h3>
-        <input type="text" id="search" name="search" placeholder="Resource name...">
-        <button type="subtmi" id="searchBtn"  class="btn">Search</button>
+        <div class="find-resource-container">
+            <div class="left-side">
+                <h1>Find a Resource</h1>
+                <h3>Search for a resource</h3>
+                <input type="text" id="search" name="search" placeholder="Resource name...">
+                <button type="submit" id="searchBtn" class="btn">Search</button>
+                <button type="button" id="resetBtn" class="hidden btn reset">Reset</button>
+            </div>
+            <div class="new-resource-box">
+                <span>Can't find resource?</span>
+                <button class="create-resource-btn" id="createRedirect">
+                    Create New Resource</button>
+            </div>
+        </div>
+
+
+        <!-- <div id="searchResult" class="searchResult"></div> -->
+    </section>
+    <!-- Resource list display -->
+    <section class="container card" id="toggleList">
+        <div class="resource-title">
+            <span class="title-text">Resource List</span>
+            <div class="title-buttons" id="categoryButtons">
+                <button class="title-btn" data-type="All">All</button>
+                <button class="title-btn" data-type="room">Rooms</button>
+                <button class="title-btn" data-type="equipment">Equipment</button>
+                <label class="unavailable-toggle">
+                    <input type="checkbox" id="toggleUnavailable">Show Unavailable</label>
+            </div>
+        </div>
+        <div id="list" class="searchResult"></div>
+    </section>
+    <!-- Search list display -->
+    <section class="container card hidden" id="toggleSearchList">
+        <div class="resource-title">
+            <span class="title-text">Resources found:</span>
+            <div class="title-buttons" id="searchCategoryButtons">
+                <button class="title-btn" data-type="All">All</button>
+                <button class="title-btn" data-type="room">Rooms</button>
+                <button class="title-btn" data-type="equipment">Equipment</button>
+                <label class="unavailable-toggle">
+                    <input type="checkbox" id="toggleSearchUnavailable">Show Unavailable</label>
+            </div>
+        </div>
         <div id="searchResult" class="searchResult"></div>
     </section>
 </body>
+
 </html>

@@ -4,21 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit Resource</title>
-  <script src="../main_page/resource_management.js" type="module"></script>
+  <!-- <script src="../main_page/resource_management.js" type="module"></script> -->
   <link rel="stylesheet" href="./edit_resource.css">
   <script src="./edit_resource.js" type="module"></script>
-  <script src="../main_page/staticData.js" type="module"></script>
 </head>
 
 <body>
-  <a href="../main_page/main_page.html" class="btn-home">Back to Home</a>
+  <a href="../main_page/resource_management.html" class="btn-home">Back to Resource Management</a>
 
   <section class="container card">
-    <h1>Edit an Existing Resource</h1>
-    <h3>Find a resource to edit</h3>
-
-    <input type="text" id="editName" name="editName" placeholder="Resource name...">
-    <button class="btn" type="button" id="loadBtn">Load Resource</button>
+    <h1>Edit Resource</h1>
 
     <div id="editForm" style="display:none; margin-top:20px;">
       <h3>Edit Resource Details</h3>
@@ -26,14 +21,25 @@
       <label>Name:</label>
       <input type="text" id="newName"><br><br>
 
-      <label>Type:</label>
-      <input type="text" id="newType"><br><br>
+      <label for="myDropdown">Type:</label>
+      <select id="newType" name="myDropdown">
+          <option value="room">Room</option>
+          <option value="equipment">Equipment</option>
+      </select><br><br>
 
-      <label>Description:</label><br>
+      <label>Description:</label>
       <textarea id="newDescription" rows="3" cols="40"></textarea><br><br>
 
-      <label>Capacity:</label>
-      <input type="text" id="newCapacity"><br><br>
+      <div id="capacityDisplay">
+        <label>Capacity:</label>
+        <input type="text" id="newCapacity"><br><br>
+      </div>
+
+      <label for="myDropdown">Resource Status:</label>
+        <select id="newAvailability" name="myDropdown">
+          <option value="Available">Available</option>
+          <option value="Unavailable">Unavailable</option>
+        </select><br><br>
 
       <label>Image URL:</label>
       <input type="text" id="newImage"><br><br>

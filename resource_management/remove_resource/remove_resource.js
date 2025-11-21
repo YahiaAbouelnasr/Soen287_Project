@@ -1,52 +1,51 @@
-import { allResources as staticResources } from "../main_page/staticData.js";
-import { findIndexByName, getResourceHtml } from "../main_page/resource_management.js";
+import { doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { database } from "../../firebase.js"
+import { getResourceHtml } from "../../shared/shared_functions.js";
 
-let localResources = JSON.parse(localStorage.getItem("demoResources"));
-let demoResources = localResources && localResources.length > 0 ? localResources : staticResources;
+let resource;
 
+window.addEventListener("load", loadResource);
 
-export function deleteResource(){
-    // Prompt "are you sure?"
-    const isName = document.getElementById("isName").value;
-    const index = findIndexByName(isName, demoResources);
-
-    if (index === -1) {
-    return;
-  }
-
-    const userConfirm = confirm(`Are you sure you want to delete "${demoResources[index].name}"?`);
-    if (!userConfirm) return false;
-
-    // Deletes object and shifts the rest forward in the array
-    if (userConfirm)
-        {
-            demoResources.splice(index, 1);
-        }
-    alert("Resource was successfully deleted!");
-    
-    localStorage.setItem("demoResources", JSON.stringify(demoResources));
-    
-    const url = new URL(window.location.href);
-    url.search = ''
-    location.replace(url);
+async function deleteResource(){
+  const searchParams = new URLSearchParams(window.location.search);
+  
+  const userConfirm = confirm(`Are you sure you want to delete "${resource.name}"?`);
+  if (!userConfirm) return false;
+  if (userConfirm)
+      {
+        const resourceId = searchParams.get('resourceId');
+        await deleteDoc(doc(database, "resources", resourceId));
+      }
+  alert("Resource was successfully deleted!");
+  window.location.href = "../main_page/resource_management.html";
 }
 
 window.deleteResource = deleteResource;
 
-window.addEventListener("load", loadResource)
 
-function loadResource() {
+
+async function loadResource() {
   const searchParams = new URLSearchParams(window.location.search);
-  if (!searchParams) return;
+  if (!searchParams) return; //FIXME: whats the point of this
 
-  const index = searchParams.get('resourceId');
-  const resource = demoResources[index];
+  const resourceId = searchParams.get('resourceId');
+  const resourceDocRef = doc(database, "resources",  resourceId);
+  const resourceDoc = await getDoc(resourceDocRef);
 
-  const resourceDiv = document.getElementById("resource");
+  if (resourceDoc.exists()) {
+    resource = resourceDoc.data();
+    resource.id = resourceDocRef.id; 
+    console.log(resource);
+  } else {
+    alert("No such document!");
+    window.location.href = "../main_page/resource_management.html";
+  }
+
+  let resourceDiv = document.getElementById("resource");
 
   if(!resourceDiv || !resource ) return;
 
-  document.getElementById("isName").setAttribute("value", resource.name)
-  resourceDiv.innerHTML = getResourceHtml(resource);
+  resourceDiv.innerHTML = getResourceHtml(resource, false);
 }
 
+window.loadResource = loadResource;

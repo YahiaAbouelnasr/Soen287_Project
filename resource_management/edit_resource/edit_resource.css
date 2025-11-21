@@ -1,5 +1,6 @@
 :root {
   --accent: #3b82f6;
+  --accentHover: #2563eb;
   --border: #e5e7eb;
   --bg: #f9fafb;
   --text: #111827;
@@ -33,6 +34,17 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
 }
 
+.resource-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns */
+    gap: 20px;
+}
+
+.center-single {
+    display: flex;
+    justify-content: center;
+}
+
 h1 {
   margin: 0 0 16px;
 }
@@ -47,6 +59,17 @@ h1 {
   text-decoration: none;
   cursor: pointer;
   font-weight: 600;
+}
+
+.btn:hover {
+  background: var(--accentHover);
+}
+
+.reset {
+  background:#cc2e2e;
+}
+.reset:hover {
+  background:#b42828;
 }
 
 .btn.secondary {
@@ -142,64 +165,316 @@ label {
 .resource-card {
   background-color: #ffffff;
   border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px 20px;
+  border-radius: 10px;
+  padding: 14px 16px;
   margin: 20px auto;
   width: 380px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: system-ui, sans-serif;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   flex-basis: 48%;
-
+      display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
 }
 
 
 .resource-card img {
   display: block;
-  margin: 12px auto;
+  margin: 1px auto;
   max-width: 100%;
   border-radius: 8px;
 }
 
+
 .resource-card h3 {
-  margin: 0 0 8px 0;
+  margin: 0px;
   color: #222;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .resource-card p {
-  margin: 4px 0;
+  margin: 0px;
   color: #444;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.resource-actions {
+
+
+/* .resource-actions {
   margin-top: 12px;
   text-align: center;
+} */
+
+.resource-actions {
+  margin-top: 16px;
+  text-align: center;
+  padding-top: 16px;
+
+  /* subtle top ombre */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.06),
+    rgba(0, 0, 0, 0)
+  );
+  border-radius: 0 0 10px 10px; /* optional */
 }
 
 .resource-actions a {
   text-decoration: none;
   color: #5b34eb;
-  margin: 0 10px;
   font-weight: 600;
-  transition: color 0.2s ease;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
 }
 
 .resource-actions a:hover {
-  color: #2d1dbf;
+  background: #ece7ff; /* soft purple box */
+  color: #3a1bcf;
+}
+
+.resource-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Push image to center vertically */
+.resource-content img {
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 100%;
+  border-radius: 8px;
 }
 
 .searchResult {
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    gap: 4px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 
 }
+.searchResult > .resource-card:last-child:nth-child(odd) {
+    grid-column: span 2;
+    justify-self: center;
+    width: 60%; 
+}
+
+@media (max-width: 900px) {
+  .searchResult {
+    grid-template-columns: 1fr !important;
+  }
+  .searchResult .resource-card {
+    width: 60% !important;
+    justify-self: center;
+
+  }
+  .searchResult > .resource-card:last-child:nth-child(odd) {
+    grid-template-columns: 1fr !important;
+
+
+}
+}
+
 
 .decor{
   text-decoration: none;
   color: black;
+}
+
+.hidden{
+  display: none;
+}
+
+.search-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.find-resource-container {
+  display: flex; 
+  align-items: stretch;
+  justify-content: space-between; 
+}
+
+ .new-resource-box {
+  align-self: center;
+  background: #e5e5e6c3;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.109);
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: column;   
+  align-items: center;  
+  justify-content: center;
+  gap: 10px; 
+ }
+
+@media (max-width: 600px) {
+  .find-resource-container {
+    flex-direction: column;
+  }
+
+   .new-resource-box {
+    margin-top: 20px;
+    align-self: start;
+   }
+}
+
+.new-resource-box span {
+  align-self: center; 
+  color: #4d4c4c;
+}
+.create-resource-btn {
+  background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+.create-resource-btn:hover {
+  background: var(--accentHover);
+}
+
+.new-resource-wrapper {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+  gap: 10px;            
+}
+
+/* Resource list title */
+.resource-title {
+    background: #f3f3f3;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-weight: 600;
+
+    display: flex;                     
+    align-items: center;               
+    justify-content: space-between;   
+    gap: 20px;
+
+    min-width: 350px; 
+}
+.resource-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 8px 0;
+}
+.resource-title-row .status-badge {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+}
+
+
+
+
+.title-text {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.title-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.title-btn {
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #e4e4e4;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.title-btn:hover {
+    background: #d2d2d2;
+}
+
+.unavailable-toggle {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #555555;
+    cursor: pointer;
+}
+
+.unavailable-toggle input {
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .unavailable-toggle,
+    #toggleUnavailable {
+        display: none !important;
+    }
+}
+
+
+
+
+#createBtn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+#createBtn:hover {
+    background: #4338ca;
+}
+
+/* all/room/equipment button when clicked */
+.title-btn.active {
+    background-color: #007bff;   
+    color: white;
+    border-color: #0066d6;
+    transform: translateY(2px); 
+}
+
+/* color of availability + inline round block */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.available {
+  background-color: #d9fdd3;
+  color: #2b7a2b;
+}
+
+.unavailable {
+  background-color: #fdd3d3;
+  color: #9b2b2b;
+}
+
+@media (max-width: 840px) {
+  .resource-container {
+    grid-template-columns: repeat(1, 1fr)  !important;
+   }
 }

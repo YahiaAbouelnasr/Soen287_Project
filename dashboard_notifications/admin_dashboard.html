@@ -1,0 +1,108 @@
+<DOCTYPE! html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Requests</title>
+    
+    <!-- Links to shared team styles and page styles -->
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <!-- Link to Homepage -->
+            <a href="../index.html" style="text-decoration: none; color: inherit;">
+                <h1 class="navbar-title">Campus Resource Booking</h1>
+            </a>
+            
+            <!-- Notification Bell -->
+            <div class="notification-wrapper">
+                <button id="notification-bell" class="notification-bell">
+                    <!-- Bell Icon -->
+                    <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span id="notification-count" class="badge" style="display: none;">0</span>
+                </button>
+                
+                <!-- Notifications Panel (Dropdown) -->
+                <div id="notifications-panel" 
+                     class="dropdown-panel"
+                     style="display: none;">
+                    <div class="dropdown-header">
+                        Notifications
+                    </div>
+                    <ul id="notifications-list" class="dropdown-list">
+                        <!-- Content loaded by script.js -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        
+        <h1 style="margin-top: 0;">Admin Dashboard</h1>
+
+        <!-- Pending Booking Requests Section -->
+        <div class="card">
+            <h2>Pending Booking Requests</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>User</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="pending-requests-list">
+                    <!-- Content loaded by script.js -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Manage Resources Section -->
+        <div class="card">
+            <h2>Manage Resources (Demo)</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Capacity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Study Room 101</td>
+                        <td>4</td>
+                        <td>
+                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Edit</button>
+                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Block</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Computer Lab 205</td>
+                        <td>30</td>
+                        <td>
+                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Edit</button>
+                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Block</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>

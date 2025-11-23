@@ -25,7 +25,7 @@ form.addEventListener("submit", (e) => {
                 alert("Access denied, only admins")
                 return;
             }
-            window.location.href = "../dashboard_notifications/index.html";
+            window.location.href = "../dashboard_notifications/admin_dashboard.html";
         })
     })
     .catch((err)=> {

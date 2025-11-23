@@ -19,6 +19,7 @@ form.addEventListener("submit", (e) => {
     if(!email.endsWith("@live.concordia.ca")) {
         alert("Email must be a concordia email");
         emailInput.focus();
+        emailInput.select();
         return
     }
 

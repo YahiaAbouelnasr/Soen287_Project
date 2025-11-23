@@ -18,9 +18,11 @@ form.addEventListener("submit", (e) => {
     .then((uCredentials) => {
         const user = uCredentials.user;
         alert("Login Sucessful!");
-        window.location.href = "../dashboard_notifications/index.html"
+        window.location.href = "../dashboard_notifications/student_dashboard.html"
     })
     .catch((err) => {
             alert(err.message)
+            emailInput.focus();
+            emailInput.select();
     })
 })

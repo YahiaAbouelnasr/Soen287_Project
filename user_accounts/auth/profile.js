@@ -8,10 +8,13 @@ const nameInput = document.getElementById("name")
 const emailInput = document.getElementById("email");
 const img = document.getElementById("prfPic");
 const deleteBtn = document.getElementById("delete");
+const inputFile = document.getElementById("input-file")
+
 
 onAuthStateChanged(auth, (user) => {
     nameInput.value = user.displayName
     emailInput.value = user.email;
+    
 })
 
 form.addEventListener("submit", (e) => {
@@ -22,6 +25,7 @@ form.addEventListener("submit", (e) => {
     if(!newName) {
         alert("Name must not be empty");
         nameInput.focus();
+        nameInput.select();
         return;
     }
 
@@ -34,15 +38,13 @@ form.addEventListener("submit", (e) => {
     })
 })
 
-let inputFile = document.getElementById("input-file");
-inputFile.onchange = function() {
-    if (inputFile.files && inputFile.files[0]) {
-        img.src = URL.createObjectURL(inputFile.files[0]);
-    }
-}
+
 
 deleteBtn.addEventListener("click", (e) => {
     e.preventDefault();
+
+    if(!confirm("Are you sure you want to delete your account? This cant be undone"))
+        return;
 
     const user = auth.currentUser;
     

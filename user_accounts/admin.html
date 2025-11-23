@@ -15,13 +15,13 @@
 
   <main class="container">
     <section class="card-narrow">
-      <form id="loginForm">
+      <form id="adminForm">
       <h2>Admin Login</h2>
         <label>Email
-          <input type="email" id="email" required placeholder="name@live.concordia.ca" class="input" />
+          <input type="email" id="adminEmail" required placeholder="name@live.concordia.ca" class="input" />
         </label>
         <label>Password
-          <input type="password" id="password" required minlength="8" class="input" />
+          <input type="password" id="adminPassword" required minlength="8" class="input" />
         </label>
         <button type="submit" class="btn">Log in</button>
       </form>
@@ -29,5 +29,7 @@
     </form>
     </section>
   </main>
+  <script type="module" src="auth/admin.js"></script>
+
 </body>
 </html>

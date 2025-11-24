@@ -1,4 +1,4 @@
-import {auth, databse} from "../../firebase.js";
+import {auth, database} from "../../firebase.js";
 
 import {signInWithEmailAndPassword}
 from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
@@ -19,7 +19,7 @@ form.addEventListener("submit", (e) => {
     signInWithEmailAndPassword(auth, email, pass) 
     .then((uCredentials) => {
         const user = uCredentials.user;
-        return getDoc(doc(databse, "users", user.uid))
+        return getDoc(doc(database, "users", user.uid))
         .then((snap)=> {
             if(!snap.exists() || snap.data().isAdmin !== true) {
                 alert("Access denied, only admins")

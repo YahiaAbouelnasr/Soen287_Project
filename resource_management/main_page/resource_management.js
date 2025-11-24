@@ -2,6 +2,7 @@ import { collection, query, where, getDocs } from "https://www.gstatic.com/fireb
 import { database } from '../../firebase.js'
 import { getResourceHtml } from "../../shared/shared_functions.js";
 
+
 export const resources = []; 
 let currentCategory = "All";
 let currentSearchQuery = "";

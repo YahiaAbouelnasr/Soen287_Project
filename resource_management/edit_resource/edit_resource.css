@@ -201,23 +201,19 @@ label {
 
 
 
-/* .resource-actions {
-  margin-top: 12px;
-  text-align: center;
-} */
 
 .resource-actions {
   margin-top: 16px;
   text-align: center;
   padding-top: 16px;
 
-  /* subtle top ombre */
+ 
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.06),
     rgba(0, 0, 0, 0)
   );
-  border-radius: 0 0 10px 10px; /* optional */
+  border-radius: 0 0 10px 10px; 
 }
 
 .resource-actions a {
@@ -230,7 +226,7 @@ label {
 }
 
 .resource-actions a:hover {
-  background: #ece7ff; /* soft purple box */
+  background: #ece7ff; 
   color: #3a1bcf;
 }
 
@@ -272,8 +268,6 @@ label {
   }
   .searchResult > .resource-card:last-child:nth-child(odd) {
     grid-template-columns: 1fr !important;
-
-
 }
 }
 

@@ -1,4 +1,4 @@
-import {auth} from "./firebase.js";
+import {auth} from "../../firebase.js";
 import {
     createUserWithEmailAndPassword, updateProfile
 }from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
@@ -35,7 +35,7 @@ form.addEventListener("submit", (e) => {
     })
     .then((user) => {
         alert("Account Created, Please Log in.");
-        window.location.href = "../home.html";
+        window.location.href = "../index.html";
     }) 
     .catch((err) => {
             alert(err.message)

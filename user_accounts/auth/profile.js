@@ -1,4 +1,4 @@
-import {auth} from "./firebase.js";
+import {auth} from "../../firebase.js";
 
 import {onAuthStateChanged, updateProfile, deleteUser}
 from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";

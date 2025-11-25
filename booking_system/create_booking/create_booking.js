@@ -1,5 +1,6 @@
-import { getResources, getBookings, saveBookings } from '../shared/shared_data.js';
-// Ana -> same comments as others '../shared/shared_data.js'?
+import "/userSafety.js";
+import { getResources, getBookings, addBooking } from '../shared/shared_data.js';
+
 
 const sel = document.getElementById('resourceId');
 const msg = document.getElementById('msg');
@@ -43,11 +44,7 @@ function timeToMinutes(t) {
   return h * 60 + m;
 }
 
-function genBookingId() {
-  return Date.now().toString() + Math.floor(Math.random() * 1000);
-}
-
-saveBtn.addEventListener('click', () => {
+saveBtn.addEventListener('click', async () => {
   msg.textContent = '';
 
   const who = whoEl.value.trim();
@@ -58,15 +55,21 @@ saveBtn.addEventListener('click', () => {
   const purpose = purposeEl.value.trim();
 
   if (!resourceId) return msg.textContent = 'Please select a resource.';
-  if (!who) return msg.textContent = 'Please enter your name.';
-  if (!date) return msg.textContent = 'Please choose a date.';
+  if (!who)       return msg.textContent = 'Please enter your name.';
+  if (!date)      return msg.textContent = 'Please choose a date.';
   if (!start || !end) return msg.textContent = 'Please choose start and end time.';
 
   const startMin = timeToMinutes(start);
-  const endMin = timeToMinutes(end);
-  if (endMin <= startMin) return msg.textContent = 'End time must be after start time.';
+  const endMin   = timeToMinutes(end);
+  if (endMin <= startMin) {
+    msg.textContent = 'End time must be after start time.';
+    return;
+  }
 
-  const list = getBookings();
+  // firestore
+  const list = await getBookings();
+
+  
   const sameDay = list.filter(b => b.resourceId === resourceId && b.date === date);
   const conflict = sameDay.some(b => {
     const s = timeToMinutes(b.start);
@@ -79,17 +82,23 @@ saveBtn.addEventListener('click', () => {
     return;
   }
 
+  
   const booking = {
-    id: genBookingId(),
     who,
     resourceId,
     date,
     start,
     end,
-    purpose
+    purpose,
+    status: 'pending'
   };
 
-  list.push(booking);
-  saveBookings(list);
-  msg.textContent = 'Booking saved ✔';
+  await addBooking(booking);
+
+  msg.textContent = 'Booking saved ✔ (pending approval)';
 });
+whoEl.value = '';
+dateEl.value = '';
+startEl.value = '';
+endEl.value = '';
+purposeEl.value = '';

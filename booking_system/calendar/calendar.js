@@ -1,6 +1,5 @@
+import "/userSafety.js";
 import { getResources, getBookings } from '../shared/shared_data.js';
-// Anastasia: What is ../shared/shared_data.js. Ali might've deleted it (go back in commit if needed in old)
-
 
 const SLOT_MIN = 30;
 const START_HOUR = 8;
@@ -12,8 +11,8 @@ const anyDay = document.getElementById('anyDay');
 const grid = document.getElementById('grid');
 const weekHeader = document.getElementById('weekHeader');
 
-
 const pad = n => String(n).padStart(2, '0');
+
 function toISODate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -26,12 +25,27 @@ function mondayOf(date) {
   const day = d.getDay();
   const diff = (day + 6) % 7;
   d.setDate(d.getDate() - diff);
-  d.setHours(0,0,0,0);
+  d.setHours(0, 0, 0, 0);
   return d;
 }
-function addDays(date, n) { const d = new Date(date); d.setDate(d.getDate() + n); return d; }
-function timeToIndex(hhmm){ const [h,m]=hhmm.split(':').map(Number); return Math.max(0,Math.floor(((h*60+m)-(START_HOUR*60))/SLOT_MIN)); }
-function indexToTime(idx){ const minutes=START_HOUR*60+idx*SLOT_MIN; const h=Math.floor(minutes/60); const m=minutes%60; return `${pad(h)}:${pad(m)}`; }
+
+function addDays(date, n) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+function timeToIndex(hhmm) {
+  const [h, m] = hhmm.split(':').map(Number);
+  return Math.max(0, Math.floor(((h * 60 + m) - (START_HOUR * 60)) / SLOT_MIN));
+}
+
+function indexToTime(idx) {
+  const minutes = START_HOUR * 60 + idx * SLOT_MIN;
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return `${pad(h)}:${pad(m)}`;
+}
 
 function fillResourceOptions() {
   selResource.innerHTML = '';
@@ -58,7 +72,11 @@ function renderHeader(monday) {
   weekHeader.appendChild(first);
   for (let d = 0; d < 7; d++) {
     const day = addDays(monday, d);
-    const title = day.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+    const title = day.toLocaleDateString(undefined, {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    });
     const div = document.createElement('div');
     div.className = 'cell';
     div.textContent = title;
@@ -66,15 +84,17 @@ function renderHeader(monday) {
   }
 }
 
-function renderWeek() {
+async function renderWeek() {
   const resources = getResources();
   const resourceId = selResource.value || (resources[0]?.id ?? '');
   const monday = mondayOf(anyDay.value ? new Date(anyDay.value) : new Date());
+
   renderHeader(monday);
   grid.innerHTML = '';
   grid.style.gridTemplateRows = `repeat(${ROWS}, auto)`;
 
-  const allBookings = getBookings().filter(b => b.resourceId === resourceId);
+  const allBookings = (await getBookings()).filter(b => b.resourceId === resourceId);
+
   const byDate = new Map();
   for (const b of allBookings) {
     if (!byDate.has(b.date)) byDate.set(b.date, []);
@@ -92,29 +112,31 @@ function renderWeek() {
       const iso = toISODate(day);
       const cell = document.createElement('div');
       cell.className = 'cell free';
+
       const dayBookings = byDate.get(iso) || [];
       let hit = null;
       for (const bk of dayBookings) {
-        const s = timeToIndex(bk.start), e = timeToIndex(bk.end);
+        const s = timeToIndex(bk.start);
+        const e = timeToIndex(bk.end);
         if (r >= s && r < e) { hit = bk; break; }
       }
+
       if (hit) {
-        cell.classList.replace('free','booked');
+        cell.classList.replace('free', 'booked');
         cell.innerHTML = `<span class="tag">Booked</span> ${hit.who ?? ''} – ${hit.purpose ?? ''}`;
       }
+
       grid.appendChild(cell);
     }
   }
 }
 
-selResource.addEventListener('change', renderWeek);
-anyDay.addEventListener('change', renderWeek);
+selResource.addEventListener('change', () => { renderWeek(); });
+anyDay.addEventListener('change', () => { renderWeek(); });
 
-(function init() {
+(async function init() {
   fillResourceOptions();
   const monday = mondayOf(new Date());
   anyDay.value = toISODate(monday);
-  renderWeek();
+  await renderWeek();
 })();
-
-

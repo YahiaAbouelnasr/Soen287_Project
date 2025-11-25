@@ -8,7 +8,7 @@
     <!-- Links to shared team styles and page styles -->
     <link rel="stylesheet" href="../shared/styles.css">
     <link rel="stylesheet" href="style.css">
-</head>
+    <script src="../userSafety.js" type="module"></script></head>
 <body>
 
     <!-- Header / Navigation Bar -->
@@ -70,7 +70,10 @@
 
         <!-- Manage Resources Section -->
         <div class="card">
-            <h2>Manage Resources (Demo)</h2>
+            <div class="card-header">
+                <h2>Manage Resources (Demo)</h2>
+                <button id="manage-resources-btn" class="manage-btn">Manage Resources</button>
+            </div>
             <table class="table">
                 <thead>
                     <tr>

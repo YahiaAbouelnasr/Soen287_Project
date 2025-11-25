@@ -1,5 +1,5 @@
 
-import { database } from './firebase.js';
+import { database } from '../../firebase.js';
 import {
   collection,
   getDocs,
@@ -144,4 +144,5 @@ export async function deleteBooking(id) {
   const ref = doc(database, 'bookings', id);
   await deleteDoc(ref);
 }
+
 

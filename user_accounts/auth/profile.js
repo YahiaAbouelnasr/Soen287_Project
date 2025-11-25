@@ -1,14 +1,13 @@
 import {auth} from "../../firebase.js";
 
-import {onAuthStateChanged, updateProfile, deleteUser}
+import {onAuthStateChanged, updateProfile, deleteUser, signOut}
 from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 const form = document.getElementById("profileForm");
 const nameInput = document.getElementById("name")
 const emailInput = document.getElementById("email");
-const img = document.getElementById("prfPic");
 const deleteBtn = document.getElementById("delete");
-const inputFile = document.getElementById("input-file")
+const logoutBtn = document.getElementById("logOut")
 
 
 onAuthStateChanged(auth, (user) => {
@@ -57,3 +56,18 @@ deleteBtn.addEventListener("click", (e) => {
         alert(err.message);
     })
 })
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        signOut(auth)
+        .then(() => {
+            alert("Logged Out");
+            window.location.href = "../index.html"
+        })
+        .catch((err) =>{
+            alert(err.message);
+        })
+        
+
+    } )
+}

@@ -112,12 +112,13 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-/* The .badge class from shared CSS is used for the count */
 
-/* Notification Dropdown Panel */
 .dropdown-panel {
   position: absolute;
-  right: 0;
+  right: auto; 
+  left: 50%; 
+  transform: translateX(-85%); 
+  
   top: 100%;
   margin-top: 8px;
   width: 320px;
@@ -128,6 +129,16 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   z-index: 10;
   display: none; /* Hidden by default */
 }
+
+@media (max-width: 480px) {
+  .dropdown-panel {
+    right: -10px; /* Stick to right edge on small screens */
+    left: auto;
+    transform: none;
+    width: 300px;
+  }
+}
+
 .dropdown-header {
   padding: 12px 16px;
   font-weight: 600;
@@ -169,6 +180,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
     color: var(--accent);
 }
 
+/* Simple list for "Browse Resources" */
 .resource-list {
   list-style: none;
   padding: 0;
@@ -268,4 +280,3 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 .manage-btn:hover {
     background-color: #a10707;
 }
-/* end of resource btn */

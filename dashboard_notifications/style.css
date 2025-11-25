@@ -4,6 +4,7 @@
   --bg:#f9fafb;
   --text:#111827;
   --card:#ffffff;
+  --bgColor: #6A1414;
 }
 
 *{ box-sizing:border-box; }
@@ -62,7 +63,6 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   padding: 0 16px;
 }
 .navbar-content {
-  max-width: 960px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -81,7 +81,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 }
 .notification-bell {
   position: relative;
-  padding: 8px;
+  padding-left: 850px;
   border-radius: 999px;
   background: transparent;
   border: none;
@@ -192,27 +192,48 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   color: #4b5563;
 }
 
-/* For ana's resource btn */
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+#headerBanner {
+  background-color: var(--bgColor);
+  color: #ffffff;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px #d48a8a;
 }
 
-.manage-btn {
-    background-color: #4A90E2;
-    border: none;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
+#headerBanner h1 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 1.5px;
 }
 
-.manage-btn:hover {
-    background-color: #3a78c2;
+#headerBanner span {
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
-/* end of resource btn */
+
+#headerBanner h1 a{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+#headerBanner h1 a:hover{
+  color: #dcdcdc81;
+}
+
+#prflBtn {
+  position: relative;
+  padding-left: 550px;
+  color: #ffffff;
+  text-decoration: none;
+  background: none;
+  font-weight: 300;
+}
+
+#prflBtn:hover {
+  color: #dcdcdc81; 
+  background: none !important;
+}
 

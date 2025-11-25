@@ -1,5 +1,8 @@
 :root{
-  --accent:#3b82f6;
+  --accent: #841212; 
+  --accentHover: #6A1414;
+  
+  /* Standard variables */
   --border:#e5e7eb;
   --bg:#f9fafb;
   --text:#111827;
@@ -37,7 +40,15 @@ h2{ margin:0 0 16px; }
 .btn{
   display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid var(--border);
   background:var(--accent); color:white; text-decoration:none; cursor:pointer; font-weight:600;
+  transition: background-color 0.2s;
 }
+
+/* Added hover state for better UX */
+.btn:hover {
+  background: var(--accentHover);
+  border-color: var(--accentHover);
+}
+
 .btn.secondary{ background:#fff; color:#111; }
 .btn-danger{ background:#ef4444; border-color:#ef4444; }
 .btn:disabled{ opacity:.6; cursor:not-allowed; }
@@ -81,7 +92,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 }
 .notification-bell {
   position: relative;
-  padding-left: 850px;
+  padding: 8px;
   border-radius: 999px;
   background: transparent;
   border: none;
@@ -153,12 +164,11 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   color: white;
 }
 .btn.secondary.active {
-    background: #e0e7ff; /* A light accent color */
+    background: #ffe0e0; 
     border-color: var(--accent);
     color: var(--accent);
 }
 
-/* Simple list for "Browse Resources" */
 .resource-list {
   list-style: none;
   padding: 0;
@@ -224,8 +234,8 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 }
 
 #prflBtn {
-  position: relative;
-  padding-left: 550px;
+  margin-left: auto; 
+  margin-right: 20px;
   color: #ffffff;
   text-decoration: none;
   background: none;
@@ -237,7 +247,6 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   background: none !important;
 }
 
-/* For ana's resource btn */
 .card-header {
     display: flex;
     justify-content: space-between;

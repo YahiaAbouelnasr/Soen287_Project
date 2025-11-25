@@ -18,8 +18,8 @@ export function getResourceHtml(resource, showActions = true) {
 
         ${showActions ? `
         <div class="resource-actions">
-            <a href="../edit_resource/edit_resource.html?resourceId=${resource.id}">Edit</a>
-            <a href="../remove_resource/remove_resource.html?resourceId=${resource.id}">Delete</a> 
+            <a class="edit-btn" data-id="${resource.id}">Edit</a>
+            <a class="delete-btn" data-id="${resource.id}">Delete</a>
         </div>` : ""}
     </div>
     `;

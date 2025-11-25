@@ -1,9 +1,9 @@
-import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { collection, query, where, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 import { database } from '../../firebase.js'
 import { getResourceHtml } from "../../shared/shared_functions.js";
 
 
-export const resources = []; 
+export let resources = []; 
 let currentCategory = "All";
 let currentSearchQuery = "";
 let isSearchMode = false;
@@ -29,6 +29,7 @@ document.getElementById("toggleSearchUnavailable").addEventListener("click", eve
     search();
 });
 
+document.addEventListener("click", handleEditDeleteBtn);
 
 async function loadResources() {
     const collectionRef = collection(database, "resources")
@@ -191,24 +192,49 @@ export function sortByCategory(event){
 }
 
 function resultHandler(result){
-    const searchResult = document.getElementById('searchResult');
-    if (!result){
-        document.getElementById('toggleList').classList.remove("hidden");
-        document.getElementById('resetBtn').classList.add("hidden");
-        document.getElementById('toggleSearchList').classList.add("hidden");
-        isSearchMode = false;
-        document.getElementById('list').scrollIntoView();
-        return;
-    }
-    else if (result.length === 0){
-        searchResult.innerHTML = "No resources found";
-        return;
-    }
-    if (isSearchMode) return; 
+//     const searchResult = document.getElementById('searchResult');
+//     if (!result){
+//         document.getElementById('toggleList').classList.remove("hidden");
+//         document.getElementById('resetBtn').classList.add("hidden");
+//         document.getElementById('toggleSearchList').classList.add("hidden");
+//         isSearchMode = false;
+//         document.getElementById('list').scrollIntoView();
+//         return;
+//     }
+//     else if (result.length === 0){
+//         searchResult.innerHTML = "No resources found";
+//         return;
+//     }
+//     if (isSearchMode) return; 
+//         document.getElementById('toggleList').classList.add("hidden");
+//         document.getElementById('resetBtn').classList.remove("hidden");
+//         document.getElementById('toggleSearchList').classList.remove("hidden");
+//         document.getElementById('searchResult').scrollIntoView();
+   const searchResult = document.getElementById('searchResult');
+
+    // Always hide main list when in search mode
+    if (isSearchMode) {
         document.getElementById('toggleList').classList.add("hidden");
-        document.getElementById('resetBtn').classList.remove("hidden");
         document.getElementById('toggleSearchList').classList.remove("hidden");
-        document.getElementById('searchResult').scrollIntoView();
+        document.getElementById('resetBtn').classList.remove("hidden");
+    } else {
+        document.getElementById('toggleList').classList.remove("hidden");
+        document.getElementById('toggleSearchList').classList.add("hidden");
+        document.getElementById('resetBtn').classList.add("hidden");
+    }
+
+    if (!result || result.length === 0) {
+        searchResult.innerHTML = "<p>No resources found</p>";
+        return;
+    }
+
+    // populate search results
+    searchResult.innerHTML = "";
+    result.forEach(resource => {
+        searchResult.innerHTML += getResourceHtml(resource);
+    });
+
+    document.getElementById('searchResult').scrollIntoView();
 }
 
 function getFilteredResources(resources) {
@@ -242,3 +268,41 @@ function updateUI() {
         viewExistingResources();  // update main list
     }
 }
+
+async function handleEditDeleteBtn(event){
+    // EDIT btn
+    const editBtn = event.target.closest(".edit-btn");
+    if (editBtn) {
+        // "Setting up the edit"
+        event.preventDefault(); // prevent redirect just in case
+        const id = editBtn.dataset.id;
+        console.log("Edit clicked for resource:", id);
+        // edit btn action
+        window.location.href = `../edit_resource/edit_resource.html?resourceId=${id}`;
+        return;
+    }
+
+    // DELETE btn
+    const deleteBtn = event.target.closest(".delete-btn");
+    if (deleteBtn) {
+
+        event.preventDefault(); 
+        const id = deleteBtn.dataset.id;
+        console.log("Delete clicked for resource:", id);
+
+        let deleted = await deleteResource(id);
+        
+        if (deleted) updateUI();
+    }
+}
+
+async function deleteResource(resourceId){
+  
+  const userConfirm = confirm(`Are you sure you want to delete this resource?`);
+  if (!userConfirm) return false;
+  await deleteDoc(doc(database, "resources", resourceId));
+  resources = resources.filter(r => r.id !== resourceId); 
+  alert("Resource was successfully deleted!");
+  return true;
+}
+

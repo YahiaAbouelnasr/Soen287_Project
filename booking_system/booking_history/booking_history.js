@@ -1,11 +1,10 @@
-import { getBookings, saveBookings, getResources } from '../shared/shared_data.js';
-// Ana -> same comments as others '../shared/shared_data.js'?
+import "/userSafety.js";
+import { getBookings, getResources, deleteBooking } from '../shared/shared_data.js';
 
 const whoInput  = document.getElementById('who');
 const filterBtn = document.getElementById('filterBtn');
 const allBtn    = document.getElementById('allBtn');
 const tbody     = document.getElementById('tbody');
-
 
 function buildResourceNameMap() {
   return Object.fromEntries(getResources().map(r => [r.id, r.name]));
@@ -52,17 +51,18 @@ function render(list) {
   }
 }
 
-function cancelBooking(id) {
+async function cancelBooking(id) {
   const ok = confirm('Cancel this booking?');
   if (!ok) return;
-  const list = getBookings().filter(b => b.id !== id);
-  saveBookings(list);
-  currentFilter();
+
+  await deleteBooking(id);
+  await currentFilter();
 }
 
-function currentFilter() {
+async function currentFilter() {
   const term = whoInput.value.trim().toLowerCase();
-  const all  = getBookings();
+  const all  = await getBookings();
+
   if (!term) {
     render(all);
   } else {
@@ -70,13 +70,22 @@ function currentFilter() {
   }
 }
 
-filterBtn.addEventListener('click', currentFilter);
-allBtn.addEventListener('click', () => {
-  whoInput.value = '';
-  render(getBookings());
+filterBtn.addEventListener('click', () => {
+  currentFilter();
 });
+
+allBtn.addEventListener('click', async () => {
+  whoInput.value = '';
+  const all = await getBookings();
+  render(all);
+});
+
 whoInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') currentFilter();
 });
 
-render(getBookings());
+// Initial load
+(async () => {
+  const all = await getBookings();
+  render(all);
+})();

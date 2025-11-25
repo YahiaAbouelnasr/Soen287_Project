@@ -1,7 +1,7 @@
 // **********************************************
 // DASHBOARD & NOTIFICATIONS CORE LOGIC (DELIVERABLE 2)
 // **********************************************
-
+import "/userSafety.js";
 import { auth, database } from "../../firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { 
@@ -32,8 +32,6 @@ const notificationsList = document.getElementById('notifications-list');
 const pendingRequestsList = document.getElementById('pending-requests-list');
 const upcomingBookingsList = document.getElementById('upcoming-bookings-list');
 
-
-// --- Authentication Listener (Central Control) ---
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUserId = user.uid;

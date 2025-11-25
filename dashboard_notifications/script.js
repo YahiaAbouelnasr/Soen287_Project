@@ -1,5 +1,13 @@
 // --- HARD-CODED DATA (for Deliverable 1) ---
 // This data is used by both the student and admin views.
+import "/userSafety.js";
+import {auth} from "../firebase.js";
+import {onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+    const name = user.displayName || "Student";
+    document.getElementById("welcomeUser").textContent = `Welcome, ${name}`;
+})
 const studentBookings = [
     { id: 1, room: 'Study Room 101', time: 'October 28, 2025 at 2:00 PM' },
     { id: 2, room: 'Music Room 3', time: 'October 29, 2025 at 5:00 PM' }
@@ -22,12 +30,6 @@ const notificationBell = document.getElementById('notification-bell');
 const notificationCount = document.getElementById('notification-count');
 const notificationsPanel = document.getElementById('notifications-panel');
 const notificationsList = document.getElementById('notifications-list');
-
-// Ana's resource btn
-document.getElementById("manage-resources-btn").addEventListener("click", () => {
-    window.location.href = "../resource_management/main_page/resource_management.html"; 
-});
-
 
 /**
  * Toggles the visibility of the notification panel.

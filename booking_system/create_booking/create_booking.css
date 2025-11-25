@@ -1,0 +1,31 @@
+#headerBanner {
+    background-color: var(--bgColor);
+    color: #ffffff;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px #d48a8a;
+  }
+  
+  #headerBanner h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 1.5px;
+  }
+  
+  #headerBanner span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+  
+  #headerBanner h1 a{
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  #headerBanner h1 a:hover{
+    color: #dcdcdc81;
+  }
+  

@@ -2,6 +2,7 @@ import "/userSafety.js";
 import { getResources, getBookings, addBooking } from '../shared/shared_data.js';
 
 
+
 const sel = document.getElementById('resourceId');
 const msg = document.getElementById('msg');
 const whoEl = document.getElementById('who');

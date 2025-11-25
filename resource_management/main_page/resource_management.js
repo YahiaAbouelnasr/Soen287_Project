@@ -9,16 +9,14 @@ let currentSearchQuery = "";
 let isSearchMode = false;
 let showUnavailable = false;
 let result;
+let showActions = true, isBooking = false
 
 window.addEventListener("load", loadResources);
 window.addEventListener("load", bindSearchEvent);
 window.addEventListener("load", bindResetEvent);
 window.addEventListener("load", bindSortByCategoryBtn);
 window.addEventListener("load", bindSortBySearchCategoryBtn);
-document.getElementById("createRedirect").addEventListener("click", () =>
-    {
-        window.location.href = "../create_new_resources/create_new_resource.html";
-    });
+window.addEventListener("load", checkUrlLocationOnLoad);
 document.getElementById("toggleUnavailable").addEventListener("change", event => {
     showUnavailable = event.target.checked;
     viewExistingResources();
@@ -30,6 +28,38 @@ document.getElementById("toggleSearchUnavailable").addEventListener("click", eve
 });
 
 document.addEventListener("click", handleEditDeleteBtn);
+document.addEventListener("click", handleBookingBtn);
+
+export function checkUrlLocationOnLoad() {
+    const onBrowsePage = window.location.pathname.includes("browse_page.html");
+    if (onBrowsePage) {
+        showActions = false;
+        isBooking = true;
+    } else {
+        showActions = true;
+        isBooking = false;
+        const btn = document.getElementById("createRedirect");
+        if (btn) {
+            btn.addEventListener("click", () => {
+                window.location.href = "../create_new_resources/create_new_resource.html";
+            });
+        }
+    }
+}
+
+function handleBookingBtn(event){
+    // BOOKING btn
+    const bookingBtn = event.target.closest(".booking-btn");
+     if (bookingBtn) {
+        // "Setting up the booking"
+        event.preventDefault(); // prevent redirect just in case
+        const id = bookingBtn.dataset.id;
+        console.log("Edit clicked for resource:", id);
+        // booking btn action
+        window.location.href = `../../booking_system/create_booking/create_booking.html?resourceId=${id}`;
+        return;
+    }
+}
 
 async function loadResources() {
     const collectionRef = collection(database, "resources")
@@ -84,7 +114,7 @@ function search() {
     }
 
     result.forEach(resource => {
-        searchResult.innerHTML += getResourceHtml(resource);
+        searchResult.innerHTML += getResourceHtml(resource, showActions, isBooking);
     });
     
 }
@@ -131,7 +161,7 @@ export function viewExistingResources() {
     container.innerHTML = ""; // clears my display depending on button click
 
     filteredResources.forEach(resource => {
-        container.insertAdjacentHTML("beforeend", getResourceHtml(resource));
+        container.insertAdjacentHTML("beforeend", getResourceHtml(resource, showActions, isBooking));
     })
 
     if ( (resources.length %2 ) != 0 ) {
@@ -229,7 +259,7 @@ function resultHandler(result){
     // populate search results
     searchResult.innerHTML = "";
     result.forEach(resource => {
-        searchResult.innerHTML += getResourceHtml(resource);
+        searchResult.innerHTML += getResourceHtml(resource, showActions, isBooking);
     });
 
 

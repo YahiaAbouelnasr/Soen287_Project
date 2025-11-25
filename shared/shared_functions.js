@@ -1,6 +1,6 @@
 // Displays resource details 
 // (show action is specific to resource_management, so always do false)
-export function getResourceHtml(resource, showActions = true) {
+export function getResourceHtml(resource, showActions = true, isBooking = false) {
     return `
     <div class="resource-card">
         <div class="resource-content">
@@ -20,6 +20,11 @@ export function getResourceHtml(resource, showActions = true) {
         <div class="resource-actions">
             <a class="edit-btn" data-id="${resource.id}">Edit</a>
             <a class="delete-btn" data-id="${resource.id}">Delete</a>
+        </div>` : ""}
+
+         ${isBooking && resource.availability === "Available" ? `
+        <div class="resource-actions">
+            <a class="booking-btn" data-id="${resource.id}">Book</a>
         </div>` : ""}
     </div>
     `;

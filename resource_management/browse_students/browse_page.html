@@ -1,24 +1,18 @@
-<!-- CATALOGUE / SEARCH -->
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8" />
-    <title>Administrative Resource Management</title>
+    <title>Browse resources</title>
     <link rel="stylesheet" href="../shared_resource.css">
-    <script src="./resource_management.js" type="module"></script>
-    <script src="../../adminSafety.js" type="module"></script>
-
-</head>
-
+    <!-- <script src="./browse_page.js" type="module"></script>  -->
+    <script src="../main_page/resource_management.js" type="module"></script>
+   
 <body>
     <div id="headerBanner">
         <a href="../../dashboard_notifications/admin_dashboard.html" class="btn-home">Back to Dashboard</a>
         <span>Concordia University</span>
     </div>  
-
-    <!-- Search display -->
-    <section class="container card">
+     <section class="container card">
         <div class="find-resource-container">
             <div class="left-side">
                 <h1>Find a Resource</h1>
@@ -26,11 +20,6 @@
                 <input type="text" id="search" name="search" placeholder="Resource name...">
                 <button type="submit" id="searchBtn" class="btn">Search</button>
                 <button type="button" id="resetBtn" class="hidden btn reset">Reset</button>
-            </div>
-            <div class="new-resource-box">
-                <span>Can't find resource?</span>
-                <button class="create-resource-btn" id="createRedirect">
-                    Create New Resource</button>
             </div>
         </div>
 
@@ -49,7 +38,7 @@
         </div>
         <div id="list" class="searchResult"></div>
     </section>
-    <!-- Search list display -->
+        <!-- Search list display -->
     <section class="container card hidden" id="toggleSearchList">
         <div class="resource-title">
             <span class="title-text">Resources found:</span>
@@ -64,5 +53,5 @@
         <div id="searchResult" class="searchResult"></div>
     </section>
 </body>
-
+</body>
 </html>

@@ -8,50 +8,54 @@
     <!-- Links to shared team styles and page styles -->
     <link rel="stylesheet" href="../shared/styles.css">
     <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
+    <!-- AUTHENTICATION: Ensure only admins can access -->
+    <!-- The admin.js script will check user role via adminSafety.js -->
+    <script src="../../firebase.js" type="module"></script>
+    <script src="../../adminSafety.js" type="module"></script>
+    <script src="../user_accounts/auth/admin.js" type="module"></script>
+</head>
+<!-- Unique ID for JavaScript to identify this page -->
+<body id="admin-page">
 
     <div id="headerBanner">
+        <!-- Links back to the main login page -->
         <h1> <a href="../index.html">Campus Resource System </a></h1>
         <span>Concordia University</span>
-        </div>
-    <!-- Header / Navigation Bar -->
-   
+    </div>
 
     <!-- Main Content Area -->
     <main class="container">
         
         <h1 style="margin-top: 0;">Admin Dashboard</h1>
 
-            <div class="navbar-content">
-                <!-- Link to Homepage -->
-                  
-                <!-- Notification Bell -->
-                <div class="notification-wrapper">
-                    <button id="notification-bell" class="notification-bell">
-                        <!-- Bell Icon -->
-                        <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                        </svg>
-                        <span id="notification-count" class="badge" style="display: none;">0</span>
-                    </button>
-                    
-                    <!-- Notifications Panel (Dropdown) -->
-                    <div id="notifications-panel" 
-                         class="dropdown-panel"
-                         style="display: none;">
-                        <div class="dropdown-header">
-                            Notifications
-                        </div>
-                        <ul id="notifications-list" class="dropdown-list">
-                            <!-- Content loaded by script.js -->
-                        </ul>
+        <div class="navbar-content">
+            <!-- Notification Bell -->
+            <div class="notification-wrapper">
+                <button id="notification-bell" class="notification-bell">
+                    <!-- Bell Icon -->
+                    <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <!-- Notification Count Badge -->
+                    <span id="notification-count" class="badge" style="display: none;">0</span>
+                </button>
+                
+                <!-- Notifications Panel (Dropdown) -->
+                <div id="notifications-panel" 
+                        class="dropdown-panel"
+                        style="display: none;">
+                    <div class="dropdown-header">
+                        Notifications
                     </div>
+                    <ul id="notifications-list" class="dropdown-list">
+                        <!-- Content loaded script.js -->
+                        <li style="padding: 12px 16px; color: #6b7280; font-size: 14px;">Loading...</li>
+                    </ul>
                 </div>
             </div>
-        </nav>
+        </div>
 
         <!-- Pending Booking Requests Section -->
         <div class="card">
@@ -60,56 +64,33 @@
                 <thead>
                     <tr>
                         <th>Resource</th>
-                        <th>User</th>
-                        <th>Time</th>
+                        <th>User (ID)</th>
+                        <th>Time & Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="pending-requests-list">
                     <!-- Content loaded by script.js -->
+                    <tr><td colspan="4" style="text-align: center; color: #6b7280; padding: 16px;">Loading requests...</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Manage Resources Section -->
+        <!-- Manage Resources Link -->
         <div class="card">
             <div class="card-header">
-                <h2>Manage Resources (Demo)</h2>
-                <button id="manage-resources-btn" class="manage-btn">Manage Resources</button>
+                <h2>Manage Resources</h2>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Resource</th>
-                        <th>Capacity</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Study Room 101</td>
-                        <td>4</td>
-                        <td>
-                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Edit</button>
-                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Block</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Computer Lab 205</td>
-                        <td>30</td>
-                        <td>
-                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Edit</button>
-                            <button class="btn secondary" style="padding: 4px 8px; font-size: 12px;">Block</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <p>Access the resource catalogue and administrative tools to modify, block, or add resources.</p>
+            <a href="../resource_management/main_page/resource_management.html" id="manage-resources-link" class="btn">
+                Go to Resource Management
+            </a>
         </div>
     </main>
 
-    <!-- Link to JavaScript file -->
+    <!-- Link to the main JavaScript file -->
     <script src="script.js" type="module"></script>
-    <script src="admin.js" type="module"></script>
+    
 
 </body>
 </html>

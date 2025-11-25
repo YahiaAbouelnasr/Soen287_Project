@@ -4,48 +4,62 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit Resource</title>
-  <!-- <script src="../main_page/resource_management.js" type="module"></script> -->
-  <link rel="stylesheet" href="./edit_resource.css">
+  <link rel="stylesheet" href="../shared_resource.css">
   <script src="./edit_resource.js" type="module"></script>
-  <script src="../../userSafety.js" type="module"></script>
+  <script src="../../adminSafety.js" type="module"></script>
 </head>
 
 <body>
-  <a href="../main_page/resource_management.html" class="btn-home">Back to Resource Management</a>
-
+  <div id="headerBanner">
+        <a href="../main_page/resource_management.html" class="btn-home">Back to Resource Management</a>
+        <span>Concordia University</span>
+  </div> 
+  
   <section class="container card">
     <h1>Edit Resource</h1>
 
     <div id="editForm" style="display:none; margin-top:20px;">
       <h3>Edit Resource Details</h3>
 
-      <label>Name:</label>
-      <input type="text" id="newName"><br><br>
+    <form class="form-container">
+      <div>
+        <label>Name:</label>
+        <input type="text" id="newName">
+      </div>
 
-      <label for="myDropdown">Type:</label>
-      <select id="newType" name="myDropdown">
-          <option value="room">Room</option>
-          <option value="equipment">Equipment</option>
-      </select><br><br>
+      <div>
+        <label for="myDropdown">Type:</label>
+        <select id="newType" name="myDropdown">
+            <option value="room">Room</option>
+            <option value="equipment">Equipment</option>
+        </select>
+      </div>
 
-      <label>Description:</label>
-      <textarea id="newDescription" rows="3" cols="40"></textarea><br><br>
+      <div>
+        <label>Description:</label>
+        <textarea id="newDescription" rows="3" cols="40"></textarea>
+      </div>
 
       <div id="capacityDisplay">
         <label>Capacity:</label>
-        <input type="text" id="newCapacity"><br><br>
+        <input type="text" id="newCapacity">
       </div>
 
-      <label for="myDropdown">Resource Status:</label>
-        <select id="newAvailability" name="myDropdown">
-          <option value="Available">Available</option>
-          <option value="Unavailable">Unavailable</option>
-        </select><br><br>
+      <div>
+        <label for="myDropdown">Resource Status:</label>
+          <select id="newAvailability" name="myDropdown">
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+      </div>
 
-      <label>Image URL:</label>
-      <input type="text" id="newImage"><br><br>
+      <div>
+        <label>Image URL:</label>
+        <input type="text" id="newImage">
+      </div>
 
       <button class="btn" type="button" id="saveBtn">Save Changes</button>
+      </form>
     </div>
   </section>
 </body>

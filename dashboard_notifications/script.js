@@ -31,6 +31,12 @@ const notificationCount = document.getElementById('notification-count');
 const notificationsPanel = document.getElementById('notifications-panel');
 const notificationsList = document.getElementById('notifications-list');
 
+
+// Ana's resource btn
+document.getElementById("manage-resources-btn").addEventListener("click", () => {
+    window.location.href = "../resource_management/main_page/resource_management.html"; 
+});
+
 /**
  * Toggles the visibility of the notification panel.
  */

@@ -26,4 +26,6 @@ export function getResourceHtml(resource, showActions = true) {
 }
  // (can change resource-card to something else in your own code)
 
+ // ANA: IF NO ONE NEEDS THIS FOR RESOURCE, WILL MOVE THIS INTO MY OWN
+
 

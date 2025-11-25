@@ -1,10 +1,10 @@
 :root {
-  --accent: #3b82f6;
-  --accentHover: #2563eb;
+  --accent:  #841212;
+  --accentHover: #6A1414;
   --border: #e5e7eb;
-  --bg: #f9fafb;
+  --bg: #ffffff;
   --text: #111827;
-  --card: #ffffff;
+  --card: #ffffff; 
 }
 
 * {
@@ -32,6 +32,17 @@ body {
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+}
+
+form div {
+    margin-bottom: 1.5%;
 }
 
 .resource-container {
@@ -141,9 +152,9 @@ label {
 }
 
 .btn-home {
-  margin: 10px 0 0 10px;
+  margin: 0px 0 0 0px;
   display: inline-block;
-  padding: 16px 24px;
+  padding: 12px 18px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -159,7 +170,7 @@ label {
 .btn-home:hover {
   border-color: var(--accent);
   box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
-  transform: translateY(-2px);
+  transform: translateY(-0.5px);
 }
 
 .resource-card {
@@ -218,7 +229,7 @@ label {
 
 .resource-actions a {
   text-decoration: none;
-  color: #5b34eb;
+  color: var(--accent);
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 6px;
@@ -227,7 +238,7 @@ label {
 
 .resource-actions a:hover {
   background: #ece7ff; 
-  color: #3a1bcf;
+  color: var(--accentHover);
 }
 
 .resource-content {
@@ -408,6 +419,7 @@ label {
     gap: 5px;
     font-size: 12px;
     color: #555555;
+    accent-color: var(--accent);
     cursor: pointer;
 }
 
@@ -424,27 +436,11 @@ label {
 
 
 
-
-#createBtn {
-    background: #4f46e5;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.2s;
-}
-
-#createBtn:hover {
-    background: #4338ca;
-}
-
 /* all/room/equipment button when clicked */
 .title-btn.active {
-    background-color: #007bff;   
+    background-color: var(--accentHover);   
     color: white;
-    border-color: #0066d6;
+    border-color: var(--accentHover);
     transform: translateY(2px); 
 }
 
@@ -471,4 +467,20 @@ label {
   .resource-container {
     grid-template-columns: repeat(1, 1fr)  !important;
    }
+}
+
+
+#headerBanner {
+  background-color: var(--accentHover);
+  color: white;
+  padding: 12.7px 12.7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px #d48a8a;
+}
+#headerBanner span {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  padding: 12.7px 6.3px
 }

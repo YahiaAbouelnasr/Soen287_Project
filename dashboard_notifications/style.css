@@ -237,3 +237,26 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   background: none !important;
 }
 
+/* For ana's resource btn */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.manage-btn {
+    background-color: var(--bgColor);
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.manage-btn:hover {
+    background-color: #a10707;
+}
+/* end of resource btn */

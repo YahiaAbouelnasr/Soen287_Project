@@ -71,11 +71,11 @@ function search() {
 
     // get unified filtered results
     result = [];
+    isSearchMode = true;
     result = getFilteredResources(resources)
         .filter(r => r.name.toLowerCase().includes(currentSearchQuery)).slice(0, 3);
         
     resultHandler(result); // changes display list -> result (if exists)
-    isSearchMode = true;
     searchResult.innerHTML = "";
 
     if (result.length === 0) {
@@ -119,8 +119,6 @@ export function reset(){
 
     document.querySelector('#categoryButtons [data-type="All"]').classList.add("active");
     document.querySelector('#searchCategoryButtons [data-type="All"]').classList.add("active");
-
-    document.getElementById('list').scrollIntoView();
 
     viewExistingResources();
    
@@ -234,7 +232,7 @@ function resultHandler(result){
         searchResult.innerHTML += getResourceHtml(resource);
     });
 
-    document.getElementById('searchResult').scrollIntoView();
+
 }
 
 function getFilteredResources(resources) {

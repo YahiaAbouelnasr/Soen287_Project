@@ -85,6 +85,7 @@ async function currentFilter() {
   }
 
   const filtered = myBookings.filter(b =>
+    (b.who ?? "").toLowerCase().includes(term) ||      
     (b.purpose ?? "").toLowerCase().includes(term) ||
     (b.date ?? "").toLowerCase().includes(term) ||
     (b.start ?? "").toLowerCase().includes(term) ||
@@ -93,6 +94,7 @@ async function currentFilter() {
 
   await render(filtered);
 }
+
 
 filterBtn.addEventListener("click", () => {
   currentFilter();

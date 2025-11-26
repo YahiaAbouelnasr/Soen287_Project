@@ -1,121 +1,119 @@
 import "/userSafety.js";
-import { auth } from '../../firebase.js';
-import { getResourcesFromDB, getBookings, addBooking } from '../shared/shared_data.js';
 
-const sel = document.getElementById('resourceId');
-const msg = document.getElementById('msg');
-const whoEl = document.getElementById('who');
-const dateEl = document.getElementById('date');
-const startEl = document.getElementById('start');
-const endEl = document.getElementById('end');
-const purposeEl = document.getElementById('purpose');
-const saveBtn = document.getElementById('saveBtn');
+import { getBookings, getResourcesFromDB, deleteBooking } from "../shared/shared_data.js";
+import { auth } from "/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-async function renderResources() {
-  sel.innerHTML = '';
-  
-  const resources = await getResourcesFromDB();
+const whoInput  = document.getElementById("who");      
+const filterBtn = document.getElementById("filterBtn");
+const allBtn    = document.getElementById("allBtn");
+const tbody     = document.getElementById("tbody");
 
-  if (!resources.length) {
-    const opt = document.createElement('option');
-    opt.value = '';
-    opt.textContent = 'No resources yet (create one first)';
-    sel.appendChild(opt);
-    sel.disabled = true;
-    saveBtn.disabled = true;
-    msg.textContent = 'Go back and create a resource first.';
+let currentUserEmail = null;
+let myBookings = []; // cache
+
+
+async function buildResourceNameMap() {
+  const resources = await getResourcesFromDB(); // from Firestore
+  return Object.fromEntries(resources.map(r => [r.id, r.name]));
+}
+
+
+async function render(list) {
+  const nameMap = await buildResourceNameMap();
+  tbody.innerHTML = "";
+
+  if (!list.length) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 7;
+    td.style.textAlign = "center";
+    td.textContent = "No bookings found";
+    tr.appendChild(td);
+    tbody.appendChild(tr);
     return;
   }
 
-  const defaultOpt = document.createElement('option');
-  defaultOpt.value = '';
-  defaultOpt.textContent = '-- Select a Resource --';
-  sel.appendChild(defaultOpt);
+  list.sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
 
-  for (const r of resources) {
-    const opt = document.createElement('option');
-    opt.value = r.id;
-    opt.textContent = r.name + ' (' + (r.type || 'resource') + ')';
-    sel.appendChild(opt);
+  for (const b of list) {
+    const tr = document.createElement("tr");
+    const displayName = nameMap[b.resourceId] ?? b.resourceName ?? "(Unknown)";
+
+    tr.innerHTML = `
+      <td>${b.who}</td>
+      <td>${displayName}</td>
+      <td>${b.date}</td>
+      <td>${b.start}</td>
+      <td>${b.end}</td>
+      <td>${b.purpose}</td>
+      <td>
+        <button class="btn danger" data-id="${b.id}">Cancel</button>
+      </td>
+    `;
+
+    tr.querySelector("button[data-id]").addEventListener("click", () => {
+      cancelBooking(b.id);
+    });
+
+    tbody.appendChild(tr);
   }
-  sel.disabled = false;
-  saveBtn.disabled = false;
-  msg.textContent = '';
 }
 
-renderResources();
+async function reloadMyBookings() {
+  if (!currentUserEmail) return;
 
-function timeToMinutes(t) {
-  const [h, m] = t.split(':').map(Number);
-  return h * 60 + m;
+  const all = await getBookings();
+  myBookings = all.filter(b => b.who === currentUserEmail); 
+  await render(myBookings);
 }
 
-saveBtn.addEventListener('click', async () => {
-  msg.textContent = '';
+async function cancelBooking(id) {
+  const ok = confirm("Cancel this booking?");
+  if (!ok) return;
 
-  const user = auth.currentUser;
+  await deleteBooking(id);
+  await reloadMyBookings();
+}
+
+async function currentFilter() {
+  const term = whoInput.value.trim().toLowerCase();
+
+  if (!term) {
+    await render(myBookings);
+    return;
+  }
+
+  const filtered = myBookings.filter(b =>
+    (b.purpose ?? "").toLowerCase().includes(term) ||
+    (b.date ?? "").toLowerCase().includes(term) ||
+    (b.start ?? "").toLowerCase().includes(term) ||
+    (b.end ?? "").toLowerCase().includes(term)
+  );
+
+  await render(filtered);
+}
+
+filterBtn.addEventListener("click", () => {
+  currentFilter();
+});
+
+allBtn.addEventListener("click", async () => {
+  whoInput.value = "";
+  await render(myBookings);
+});
+
+whoInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") currentFilter();
+});
+
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
-      msg.textContent = "Error: You must be logged in to book.";
-      return;
-  }
-
-  const who = whoEl.value.trim();
-  const resourceId = sel.value;
-  const date = dateEl.value;
-  const start = startEl.value; 
-  const end = endEl.value;     
-  const purpose = purposeEl.value.trim();
-
-  const resourceName = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : 'Unknown Resource';
-
-  if (!resourceId) return msg.textContent = 'Please select a resource.';
-  if (!who)       return msg.textContent = 'Please enter your name.';
-  if (!date)      return msg.textContent = 'Please choose a date.';
-  if (!start || !end) return msg.textContent = 'Please choose start and end time.';
-
-  const startMin = timeToMinutes(start);
-  const endMin   = timeToMinutes(end);
-  if (endMin <= startMin) {
-    msg.textContent = 'End time must be after start time.';
-    return;
-  }
-  
-  const list = await getBookings();
-  
-  const sameDay = list.filter(b => b.resourceId === resourceId && b.date === date && b.status !== 'rejected');
-  const conflict = sameDay.some(b => {
-    const s = timeToMinutes(b.start);
-    const e = timeToMinutes(b.end);
-    return Math.max(s, startMin) < Math.min(e, endMin);
-  });
-
-  if (conflict) {
-    msg.textContent = 'That time conflicts with an existing booking.';
+    alert("Please log in first.");
+    window.location.href = "/index.html";
     return;
   }
 
-  const booking = {
-    userId: user.uid,
-    userName: who,
-    
-    resourceId,
-    resourceName: resourceName, 
-    date,
-    start,
-    end,
-    purpose,
-    status: 'pending',
-    timestamp: new Date().toISOString()
-  };
-
-  await addBooking(booking);
-
-  msg.textContent = 'Booking saved ✔ (pending approval)';
-  
-  // Clear fields
-  whoEl.value = '';
-  dateEl.value = '';
-  startEl.value = '';
-  endEl.value = '';
-  purposeEl.value = '';
+  currentUserEmail = user.email;
+  await reloadMyBookings();
 });

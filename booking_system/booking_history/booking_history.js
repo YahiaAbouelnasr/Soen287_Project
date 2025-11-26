@@ -1,26 +1,34 @@
 import "/userSafety.js";
-import { getBookings, getResources, deleteBooking } from '../shared/shared_data.js';
 
-const whoInput  = document.getElementById('who');
-const filterBtn = document.getElementById('filterBtn');
-const allBtn    = document.getElementById('allBtn');
-const tbody     = document.getElementById('tbody');
+import { getBookings, getResourcesFromDB, deleteBooking } from "../shared/shared_data.js";
+import { auth } from "/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+const whoInput  = document.getElementById("who");      
+const filterBtn = document.getElementById("filterBtn");
+const allBtn    = document.getElementById("allBtn");
+const tbody     = document.getElementById("tbody");
+
+let currentUserEmail = null;
+let myBookings = []; // cache
+
 
 async function buildResourceNameMap() {
-  const resources = await getResources();   // <— Firestore
+  const resources = await getResourcesFromDB(); // from Firestore
   return Object.fromEntries(resources.map(r => [r.id, r.name]));
 }
 
+
 async function render(list) {
   const nameMap = await buildResourceNameMap();
-  tbody.innerHTML = '';
+  tbody.innerHTML = "";
 
   if (!list.length) {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
     td.colSpan = 7;
-    td.style.textAlign = 'center';
-    td.textContent = 'No bookings found';
+    td.style.textAlign = "center";
+    td.textContent = "No bookings found";
     tr.appendChild(td);
     tbody.appendChild(tr);
     return;
@@ -29,8 +37,8 @@ async function render(list) {
   list.sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
 
   for (const b of list) {
-    const tr = document.createElement('tr');
-    const displayName = nameMap[b.resourceId] ?? b.resourceName ?? '(Unknown)';
+    const tr = document.createElement("tr");
+    const displayName = nameMap[b.resourceId] ?? b.resourceName ?? "(Unknown)";
 
     tr.innerHTML = `
       <td>${b.who}</td>
@@ -44,7 +52,7 @@ async function render(list) {
       </td>
     `;
 
-    tr.querySelector('button[data-id]').addEventListener('click', () => {
+    tr.querySelector("button[data-id]").addEventListener("click", () => {
       cancelBooking(b.id);
     });
 
@@ -52,41 +60,60 @@ async function render(list) {
   }
 }
 
+async function reloadMyBookings() {
+  if (!currentUserEmail) return;
+
+  const all = await getBookings();
+  myBookings = all.filter(b => b.who === currentUserEmail); 
+  await render(myBookings);
+}
+
 async function cancelBooking(id) {
-  const ok = confirm('Cancel this booking?');
+  const ok = confirm("Cancel this booking?");
   if (!ok) return;
 
   await deleteBooking(id);
-  await currentFilter();
+  await reloadMyBookings();
 }
 
 async function currentFilter() {
   const term = whoInput.value.trim().toLowerCase();
-  const all  = await getBookings();
 
   if (!term) {
-    await render(all);
-  } else {
-    await render(all.filter(b => (b.who ?? '').toLowerCase().includes(term)));
+    await render(myBookings);
+    return;
   }
+
+  const filtered = myBookings.filter(b =>
+    (b.purpose ?? "").toLowerCase().includes(term) ||
+    (b.date ?? "").toLowerCase().includes(term) ||
+    (b.start ?? "").toLowerCase().includes(term) ||
+    (b.end ?? "").toLowerCase().includes(term)
+  );
+
+  await render(filtered);
 }
 
-filterBtn.addEventListener('click', () => {
+filterBtn.addEventListener("click", () => {
   currentFilter();
 });
 
-allBtn.addEventListener('click', async () => {
-  whoInput.value = '';
-  const all = await getBookings();
-  await render(all);
+allBtn.addEventListener("click", async () => {
+  whoInput.value = "";
+  await render(myBookings);
 });
 
-whoInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') currentFilter();
+whoInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") currentFilter();
 });
 
-// Initial load
-(async () => {
-  const all = await getBookings();
-  await render(all);
-})();
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    alert("Please log in first.");
+    window.location.href = "/index.html";
+    return;
+  }
+
+  currentUserEmail = user.email;
+  await reloadMyBookings();
+});

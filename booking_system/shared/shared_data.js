@@ -1,5 +1,6 @@
-// shared/shared_data.js
-import { database } from '/firebase.js';
+
+import { database } from "/firebase.js";
+
 import {
   collection,
   getDocs,
@@ -10,33 +11,29 @@ import {
   where
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-const resourcesCol = collection(database, 'resources');
 
-export async function getResources() {
+
+const resourcesCol = collection(database, "resources");
+
+export async function getResourcesFromDB() {
   const snap = await getDocs(resourcesCol);
   return snap.docs.map(d => {
     const data = d.data();
     return {
-      id: d.id,                         // Firestore doc id
-      name: data.name ?? '',
-      type: data.type ?? '',
-      capacity: data.capacity ?? '',
-      location: data.location ?? '',
-      notes: data.description ?? '',
-      availability: data.availability ?? '',
-      image: data.image ?? ''
+      id: d.id,//firestore id
+      name: data.name ?? "",
+      type: data.type ?? "",
+      capacity: data.capacity ?? "",
+      location: data.location ?? "",
+      notes: data.description ?? "",
+      availability: data.availability ?? "",
+      image: data.image ?? ""
     };
   });
 }
 
-export async function getResourceById(id) {
-  const all = await getResources();
-  return all.find(r => r.id === id) || null;
-}
 
-//bookin firestore
-
-const bookingsCol = collection(database, 'bookings');
+const bookingsCol = collection(database, "bookings");
 
 export async function getBookings() {
   const snap = await getDocs(bookingsCol);
@@ -46,8 +43,8 @@ export async function getBookings() {
 export async function getBookingsForDay(resourceId, yyyyMmDd) {
   const q = query(
     bookingsCol,
-    where('resourceId', '==', resourceId),
-    where('date', '==', yyyyMmDd)
+    where("resourceId", "==", resourceId),
+    where("date", "==", yyyyMmDd)
   );
   const snap = await getDocs(q);
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -59,6 +56,6 @@ export async function addBooking(booking) {
 }
 
 export async function deleteBooking(id) {
-  const ref = doc(database, 'bookings', id);
+  const ref = doc(database, "bookings", id);
   await deleteDoc(ref);
 }

@@ -70,9 +70,6 @@ node_modules/
 
 
 # ignoring this for now so no one gets confused. Will stop ignoring at deployement
-.firebaserc
-firebase.json
-404.html
 
 # Mac being mac
 .DS_Store

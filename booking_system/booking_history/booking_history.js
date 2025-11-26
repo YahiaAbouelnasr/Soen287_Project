@@ -12,10 +12,7 @@ const tbody     = document.getElementById('tbody');
 
 
 const CURRENT_USER =
-  (localStorage.getItem('currentUserEmail')  
-   || localStorage.getItem('currentUserName')
-   || localStorage.getItem('email')
-   || ''
+  (localStorage.getItem('currentUserEmail')  || localStorage.getItem('currentUserName')|| localStorage.getItem('email')|| ''
   ).trim().toLowerCase();
 
 

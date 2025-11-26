@@ -24,7 +24,7 @@ html, body {
 /* Base body style for student page background */
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('https://library.concordia.ca/images/webster-course-reserve-room-new.png');
+              url('https://images.unsplash.com/photo-1497366754035-482700000000?q=80&w=1000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; 
@@ -34,11 +34,16 @@ body {
 /* --- ADMIN DASHBOARD SPECIFIC BACKGROUND --- */
 body#admin-page {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('https://www.concordia.ca/content/shared/en/news/stories/2025/09/22/concordia-launches-plan-net-zero-pilot-project-with-deep-energy-retrofit-of-the-guy-de-maisonneuve-building.social.png/1759153383731.jpg');
+              url('1759153383731.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   filter: grayscale(100%); 
+}
+
+/* Reset filter for content so text/buttons stay colored */
+body > * {
+  filter: grayscale(0%);
 }
 
 .container{
@@ -59,6 +64,7 @@ body#admin-page {
 h1{ margin:0 0 16px; }
 h2{ margin:0 0 16px; }
 
+/* --- WELCOME MESSAGE STYLE --- */
 #welcomeUser {
   margin-top: 0;
   color: var(--accent); 
@@ -85,7 +91,6 @@ h1[style*="color: white"] {
     border-radius: 8px;
     display: inline-block;
 }
-
 
 .btn{
   display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid var(--border);
@@ -114,7 +119,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 .table th{ background:#f3f4f6; text-align:left; }
 .badge{ padding:2px 8px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:12px; }
 
-/* --- STYLES ADDED FOR DASHBOARD --- */
+/* --- DASHBOARD SPECIFIC STYLES --- */
 
 /* Header/Navbar */
 .navbar {
@@ -149,6 +154,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   color: #6b7280; 
 }
 
+/* Override bell color for Admin page with dark background */
 body#admin-page .notification-bell {
     color: #ffffff;
 }
@@ -182,15 +188,16 @@ body#admin-page .notification-bell:hover {
   z-index: 10;
   display: none; 
   
-
-  right: 0;
-  left: auto;
-  transform: none; 
+  left: 50%;
+  transform: translateX(-50%); 
+  right: auto; 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .dropdown-panel {
+    left: auto;
     right: -10px; 
+    transform: none;
     width: 300px;
   }
 }

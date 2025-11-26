@@ -2,7 +2,6 @@
   --accent: #841212; 
   --accentHover: #6A1414;
   
-  /* Standard variables */
   --border:#e5e7eb;
   --bg:#f9fafb;
   --text:#111827;
@@ -11,12 +10,35 @@
 }
 
 *{ box-sizing:border-box; }
-html,body{ 
+
+html, body { 
   margin:0; 
   padding:0; 
   font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; 
   color:var(--text); 
-  background:var(--bg); 
+  min-height: 100vh;
+}
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('https://library.concordia.ca/images/webster-course-reserve-room-new.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+  filter: grayscale(100%); 
+}
+
+body#admin-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('https://www.concordia.ca/content/shared/en/news/stories/2025/09/22/concordia-launches-plan-net-zero-pilot-project-with-deep-energy-retrofit-of-the-guy-de-maisonneuve-building.social.png/1759153383731.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: grayscale(100%); 
+}
+
+body > * {
+  filter: grayscale(0%);
 }
 
 .container{
@@ -31,7 +53,7 @@ html,body{
   border-radius:12px;
   padding:20px;
   box-shadow:0 6px 20px rgba(0,0,0,.06);
-  margin-bottom: 24px; /* Added for spacing */
+  margin-bottom: 24px; 
 }
 
 h1{ margin:0 0 16px; }
@@ -43,7 +65,6 @@ h2{ margin:0 0 16px; }
   transition: background-color 0.2s;
 }
 
-/* Added hover state for better UX */
 .btn:hover {
   background: var(--accentHover);
   border-color: var(--accentHover);
@@ -65,26 +86,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
 .table th{ background:#f3f4f6; text-align:left; }
 .badge{ padding:2px 8px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:12px; }
 
-/* --- STYLES ADDED FOR DASHBOARD --- */
-
-/* Header/Navbar */
-.navbar {
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-  padding: 0 16px;
-}
-.navbar-content {
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 64px;
-}
-.navbar-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-}
+/* DASHBOARD SPECIFIC STYLES */
 
 /* Notification Bell */
 .notification-wrapper {
@@ -97,11 +99,11 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #6b7280;
+  color: #ffffff; 
 }
 .notification-bell:hover {
-  background: var(--bg);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.2); 
+  color: #ffffff;
 }
 .bell-icon {
   width: 24px;
@@ -113,12 +115,12 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   stroke-linejoin: round;
 }
 
+/* Notification Dropdown Panel */
 .dropdown-panel {
   position: absolute;
   right: auto; 
   left: 50%; 
   transform: translateX(-85%); 
-  
   top: 100%;
   margin-top: 8px;
   width: 320px;
@@ -127,12 +129,12 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,.06);
   z-index: 10;
-  display: none; /* Hidden by default */
+  display: none; 
 }
 
 @media (max-width: 480px) {
   .dropdown-panel {
-    right: -10px; /* Stick to right edge on small screens */
+    right: -10px; 
     left: auto;
     transform: none;
     width: 300px;
@@ -169,51 +171,7 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   margin: 0;
 }
 
-/* Active state for view toggle buttons */
-.btn.active {
-  background: var(--accent);
-  color: white;
-}
-.btn.secondary.active {
-    background: #ffe0e0; 
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-/* Simple list for "Browse Resources" */
-.resource-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
-}
-.resource-list-item a {
-  display: block;
-  padding: 16px;
-  background: var(--bg);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: var(--text);
-}
-.resource-list-item a:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-}
-.resource-list-item p {
-  margin: 0;
-}
-.resource-list-item .title {
-  font-weight: 600;
-  color: var(--accent);
-}
-.resource-list-item .desc {
-  font-size: 14px;
-  color: #4b5563;
-}
-
+/* HEADER BANNER */
 #headerBanner {
   background-color: var(--bgColor);
   color: #ffffff;

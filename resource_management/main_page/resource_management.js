@@ -11,6 +11,16 @@ let showUnavailable = false;
 let result;
 let showActions = true, isBooking = false
 
+window.addEventListener("load", () => {
+    const params = new URLSearchParams(window.location.search); 
+    let buttonSelector = 'All';
+    currentCategory = params.get("currentCategory"); // returns "'room'" (with quotes) 
+    if(currentCategory !== undefined) 
+        buttonSelector = currentCategory;
+
+    const btns = document.querySelectorAll(`[data-type='${buttonSelector}']`);
+    if (btns) btns.forEach((btn) => btn.classList.add("active"));
+})
 window.addEventListener("load", loadResources);
 window.addEventListener("load", bindSearchEvent);
 window.addEventListener("load", bindResetEvent);
@@ -72,14 +82,13 @@ async function loadResources() {
     }); 
     console.log(resources)
     viewExistingResources();
-    const allBtn = document.querySelectorAll("[data-type='All']");
-    if (allBtn) allBtn.forEach(btn => btn.classList.add("active"));
+
 }
 
 function bindSearchEvent() {
     const searchBtn = document.getElementById('searchBtn');
     if (searchBtn) {
-        currentCategory = "All";
+        // currentCategory = "All";
         searchBtn.addEventListener("click", search);  
     }
     
@@ -96,7 +105,12 @@ function search() {
     if (!isSearchMode){
         currentCategory = "All";
         showUnavailable = false;
+        document.getElementById('toggleUnavailable').checked = false;
+        document.querySelectorAll("#categoryButtons button, #searchCategoryButtons button")
+        .forEach(buttonByCategory => buttonByCategory.classList.remove("active"));
         document.getElementById("toggleSearchList").classList.remove("hidden");
+        const btns = document.querySelectorAll(`[data-type='All']`);
+        if (btns) btns.forEach((btn) => btn.classList.add("active"));
     }
 
     // get unified filtered results
@@ -220,24 +234,6 @@ export function sortByCategory(event){
 }
 
 function resultHandler(result){
-//     const searchResult = document.getElementById('searchResult');
-//     if (!result){
-//         document.getElementById('toggleList').classList.remove("hidden");
-//         document.getElementById('resetBtn').classList.add("hidden");
-//         document.getElementById('toggleSearchList').classList.add("hidden");
-//         isSearchMode = false;
-//         document.getElementById('list').scrollIntoView();
-//         return;
-//     }
-//     else if (result.length === 0){
-//         searchResult.innerHTML = "No resources found";
-//         return;
-//     }
-//     if (isSearchMode) return; 
-//         document.getElementById('toggleList').classList.add("hidden");
-//         document.getElementById('resetBtn').classList.remove("hidden");
-//         document.getElementById('toggleSearchList').classList.remove("hidden");
-//         document.getElementById('searchResult').scrollIntoView();
    const searchResult = document.getElementById('searchResult');
 
     // Always hide main list when in search mode

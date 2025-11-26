@@ -6,6 +6,7 @@ from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 const form = document.getElementById("profileForm");
 const nameInput = document.getElementById("name")
 const emailInput = document.getElementById("email");
+const studentIdInput = document.getElementById("studentID");
 const deleteBtn = document.getElementById("delete");
 const logoutBtn = document.getElementById("logOut")
 
@@ -17,6 +18,7 @@ onAuthStateChanged(auth, (user) => {
     }
     nameInput.value = user.displayName
     emailInput.value = user.email;
+    studentIdInput.value = user.photoURL;
     
 })
 
@@ -30,6 +32,7 @@ form.addEventListener("submit", (e) => {
     }
 
     const newName = nameInput.value;
+    const newStudentId = studentIdInput.value;
 
     if(!newName) {
         alert("Name must not be empty");
@@ -38,7 +41,13 @@ form.addEventListener("submit", (e) => {
         return;
     }
 
-    updateProfile(user, {displayName: newName})
+    if(!newStudentId) {
+        alert("Student ID must not be empty");
+        studentIdInput.focus();
+        studentIdInput.select();
+    }
+
+    updateProfile(user, {displayName: newName, photoURL: newStudentId})
     .then(() => {
         alert("Profile updated");
     })

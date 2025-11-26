@@ -41,11 +41,6 @@ body#admin-page {
   filter: grayscale(100%); 
 }
 
-/* Reset filter for content */
-body > * {
-  filter: grayscale(0%);
-}
-
 .container{
   max-width: 960px;
   margin: 24px auto;

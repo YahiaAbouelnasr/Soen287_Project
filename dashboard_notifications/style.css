@@ -8,7 +8,7 @@
   --bg:#f9fafb;
   --text:#111827;
   --card:#ffffff;
-  --bgColor: #6A1414;
+  --bgColor: #6A1414; /* Used in header */
 }
 
 *{ box-sizing:border-box; }
@@ -21,8 +21,9 @@ html, body {
   min-height: 100vh;
 }
 
-/* Base body style for student page background */
+
 body {
+
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
               url('https://images.unsplash.com/photo-1497366754035-482700000000?q=80&w=1000&auto=format&fit=crop');
   background-size: cover;
@@ -31,8 +32,9 @@ body {
   filter: grayscale(100%); 
 }
 
-/* --- ADMIN DASHBOARD SPECIFIC BACKGROUND --- */
+
 body#admin-page {
+  
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
               url('1759153383731.jpg');
   background-size: cover;
@@ -41,10 +43,14 @@ body#admin-page {
   filter: grayscale(100%); 
 }
 
-/* Reset filter for content so text/buttons stay colored */
-body > * {
+
+.card, 
+#welcomeUser, 
+h1[style*="color: white"],
+.navbar {
   filter: grayscale(0%);
 }
+
 
 .container{
   max-width: 960px;
@@ -64,7 +70,6 @@ body > * {
 h1{ margin:0 0 16px; }
 h2{ margin:0 0 16px; }
 
-/* --- WELCOME MESSAGE STYLE --- */
 #welcomeUser {
   margin-top: 0;
   color: var(--accent); 
@@ -73,11 +78,13 @@ h2{ margin:0 0 16px; }
      1px -1px 0 #fff,
     -1px  1px 0 #fff,
      1px  1px 0 #fff;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9); 
   padding: 10px 20px;
   border-radius: 8px;
   display: inline-block;
+  font-size: 2em; 
 }
+
 
 h1[style*="color: white"] {
     color: var(--accent) !important;
@@ -86,7 +93,7 @@ h1[style*="color: white"] {
      1px -1px 0 #fff,
     -1px  1px 0 #fff,
      1px  1px 0 #fff !important;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 10px 20px;
     border-radius: 8px;
     display: inline-block;
@@ -154,7 +161,6 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   color: #6b7280; 
 }
 
-/* Override bell color for Admin page with dark background */
 body#admin-page .notification-bell {
     color: #ffffff;
 }
@@ -188,11 +194,12 @@ body#admin-page .notification-bell:hover {
   z-index: 10;
   display: none; 
   
-  left: 50%;
+  /* Center horizontally relative to bell icon */
   transform: translateX(-50%); 
   right: auto; 
 }
 
+/* Ensure it doesn't overflow on very small screens */
 @media (max-width: 480px) {
   .dropdown-panel {
     left: auto;

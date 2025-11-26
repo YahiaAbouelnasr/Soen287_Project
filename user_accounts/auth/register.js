@@ -16,7 +16,7 @@ form.addEventListener("submit", (e) => {
     const email = emailInput.value;
     const pass = passInput.value;
 
-    if(!email.endsWith("@live.concordia.ca")) {
+    if(!email.endsWith("@live.concordia.ca") && !email.endsWith("@concordia.ca")) {
         alert("Email must be a concordia email");
         emailInput.focus();
         emailInput.select();

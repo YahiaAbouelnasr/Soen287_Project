@@ -19,36 +19,20 @@ html, body {
   font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; 
   color:var(--text); 
   min-height: 100vh;
+  background: var(--bg); 
+  filter: none;
 }
 
-/* --- BASE BACKGROUND STYLE (APPLIED TO STUDENT DASHBOARD) --- */
-body {
-  /* Placeholder image URL for the student dashboard */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('https://images.unsplash.com/photo-1497366754035-482700000000?q=80&w=1000&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; 
-  filter: grayscale(100%); 
-}
-
-/* --- ADMIN DASHBOARD SPECIFIC BACKGROUND --- */
 body#admin-page {
-
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('1759153383731.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  filter: grayscale(100%); 
+  background: var(--bg) !important;
+  filter: none !important; 
 }
-
 
 .card, 
 #welcomeUser, 
 h1[style*="color: white"],
 .navbar {
-  filter: grayscale(0%);
+  filter: none !important;
 }
 
 
@@ -70,35 +54,24 @@ h1[style*="color: white"],
 h1{ margin:0 0 16px; }
 h2{ margin:0 0 16px; }
 
-/* --- WELCOME MESSAGE STYLE FIX --- */
 #welcomeUser {
   margin-top: 0;
   color: var(--accent); 
-  text-shadow: 
-    -1px -1px 0 #fff,  
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff;
-  background-color: rgba(255, 255, 255, 0.9); /* Slight white background for contrast */
+  background-color: rgba(255, 255, 255, 0.9); 
   padding: 10px 20px;
   border-radius: 8px;
   display: inline-block;
-  font-size: 2em; /* Ensure it stands out as the main title */
+  font-size: 2em; 
 }
 
-/* Ensure Admin dashboard title also gets this treatment */
 h1[style*="color: white"] {
     color: var(--accent) !important;
-    text-shadow: 
-    -1px -1px 0 #fff,  
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff !important;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10px 20px;
     border-radius: 8px;
     display: inline-block;
 }
+
 
 .btn{
   display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid var(--border);
@@ -162,12 +135,11 @@ label{ font-weight:600; display:block; margin-bottom:6px; }
   color: #6b7280; 
 }
 
-/* Override bell color for Admin page with dark background */
 body#admin-page .notification-bell {
-    color: #ffffff;
+    color: #6b7280;
 }
 body#admin-page .notification-bell:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg);
 }
 
 .notification-bell:hover {
@@ -184,7 +156,6 @@ body#admin-page .notification-bell:hover {
   stroke-linejoin: round;
 }
 
-/* --- NOTIFICATION PANEL POSITION FIX (Centered) --- */
 .dropdown-panel {
   position: absolute;
   top: 100%;
@@ -201,6 +172,7 @@ body#admin-page .notification-bell:hover {
   right: auto; 
 }
 
+/* Ensure it doesn't overflow on very small screens */
 @media (max-width: 480px) {
   .dropdown-panel {
     left: auto;

@@ -7,21 +7,21 @@ const END_HOUR = 22;
 const ROWS = ((END_HOUR - START_HOUR) * 60) / SLOT_MIN;
 
 const selResource = document.getElementById('resourceId');
-const anyDay = document.getElementById('anyDay');
-const grid = document.getElementById('grid');
-const weekHeader = document.getElementById('weekHeader');
+const anyDay      = document.getElementById('anyDay');
+const grid        = document.getElementById('grid');
+const weekHeader  = document.getElementById('weekHeader');
 
 const pad = n => String(n).padStart(2, '0');
 
 function toISODate(date) {
-  const year = date.getFullYear();
+  const year  = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const day   = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
 
 function mondayOf(date) {
-  const d = new Date(date);
+  const d   = new Date(date);
   const day = d.getDay();
   const diff = (day + 6) % 7;
   d.setDate(d.getDate() - diff);
@@ -47,15 +47,17 @@ function indexToTime(idx) {
   return `${pad(h)}:${pad(m)}`;
 }
 
-function fillResourceOptions() {
+async function fillResourceOptions() {
   selResource.innerHTML = '';
-  const resources = getResources();
+  const resources = await getResources();   // <— Firestore
+
   if (resources.length === 0) {
     const opt = document.createElement('option');
     opt.textContent = '— No resources yet —';
     selResource.appendChild(opt);
     return;
   }
+
   for (const r of resources) {
     const opt = document.createElement('option');
     opt.value = r.id;
@@ -70,8 +72,9 @@ function renderHeader(monday) {
   first.className = 'cell';
   first.textContent = 'Time';
   weekHeader.appendChild(first);
+
   for (let d = 0; d < 7; d++) {
-    const day = addDays(monday, d);
+    const day   = addDays(monday, d);
     const title = day.toLocaleDateString(undefined, {
       weekday: 'short',
       month: 'short',
@@ -85,7 +88,7 @@ function renderHeader(monday) {
 }
 
 async function renderWeek() {
-  const resources = getResources();
+  const resources = await getResources();   // <— need await here
   const resourceId = selResource.value || (resources[0]?.id ?? '');
   const monday = mondayOf(anyDay.value ? new Date(anyDay.value) : new Date());
 
@@ -135,7 +138,7 @@ selResource.addEventListener('change', () => { renderWeek(); });
 anyDay.addEventListener('change', () => { renderWeek(); });
 
 (async function init() {
-  fillResourceOptions();
+  await fillResourceOptions();              
   const monday = mondayOf(new Date());
   anyDay.value = toISODate(monday);
   await renderWeek();

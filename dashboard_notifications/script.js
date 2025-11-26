@@ -224,7 +224,7 @@ function renderPendingRequests(requestArray) {
     requestArray.forEach(request => {
         const tr = document.createElement('tr');
         // Use 'userName' saved during creation
-        const userNameId = `${request.userName || 'User'} (ID: ${request.userId ? request.userId.substring(0, 5) + '...' : '?'})`;
+        const userNameId = `${request.userName || ''} (ID: ${request.studentId || "N/A" })`;
         
         tr.innerHTML = `
             <td>${request.resourceName || 'Resource'}</td>

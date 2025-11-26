@@ -6,12 +6,13 @@ const filterBtn = document.getElementById('filterBtn');
 const allBtn    = document.getElementById('allBtn');
 const tbody     = document.getElementById('tbody');
 
-function buildResourceNameMap() {
-  return Object.fromEntries(getResources().map(r => [r.id, r.name]));
+async function buildResourceNameMap() {
+  const resources = await getResources();   // <— Firestore
+  return Object.fromEntries(resources.map(r => [r.id, r.name]));
 }
 
-function render(list) {
-  const nameMap = buildResourceNameMap();
+async function render(list) {
+  const nameMap = await buildResourceNameMap();
   tbody.innerHTML = '';
 
   if (!list.length) {
@@ -64,9 +65,9 @@ async function currentFilter() {
   const all  = await getBookings();
 
   if (!term) {
-    render(all);
+    await render(all);
   } else {
-    render(all.filter(b => (b.who ?? '').toLowerCase().includes(term)));
+    await render(all.filter(b => (b.who ?? '').toLowerCase().includes(term)));
   }
 }
 
@@ -77,7 +78,7 @@ filterBtn.addEventListener('click', () => {
 allBtn.addEventListener('click', async () => {
   whoInput.value = '';
   const all = await getBookings();
-  render(all);
+  await render(all);
 });
 
 whoInput.addEventListener('keydown', e => {
@@ -87,5 +88,5 @@ whoInput.addEventListener('keydown', e => {
 // Initial load
 (async () => {
   const all = await getBookings();
-  render(all);
+  await render(all);
 })();

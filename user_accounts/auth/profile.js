@@ -11,6 +11,10 @@ const logoutBtn = document.getElementById("logOut")
 
 
 onAuthStateChanged(auth, (user) => {
+    if(!user) {
+        window.location.href = "../index.html"
+        return;
+    }
     nameInput.value = user.displayName
     emailInput.value = user.email;
     
@@ -19,6 +23,12 @@ onAuthStateChanged(auth, (user) => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     const user = auth.currentUser;
+
+    if(!user) {
+        window.location.href = "../index.html"
+        return;
+    }
+
     const newName = nameInput.value;
 
     if(!newName) {
@@ -46,11 +56,15 @@ deleteBtn.addEventListener("click", (e) => {
         return;
 
     const user = auth.currentUser;
+    if(!user) {
+        window.location.href = "../index.html"
+        return;
+    }
     
     deleteUser(user) 
     .then(()=> {
         alert("Account deleted");
-        window.location.href = "register.html";
+        window.location.href = "..index/.html";
     })
     .catch((err) => {
         alert(err.message);

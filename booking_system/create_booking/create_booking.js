@@ -13,7 +13,6 @@ const saveBtn = document.getElementById('saveBtn');
 
 async function renderResources() {
   sel.innerHTML = '';
-  
   const resources = await getResourcesFromDB();
 
   if (!resources.length) {
@@ -35,6 +34,7 @@ async function renderResources() {
   for (const r of resources) {
     const opt = document.createElement('option');
     opt.value = r.id;
+    opt.setAttribute('data-name', r.name); 
     opt.textContent = r.name + ' (' + (r.type || 'resource') + ')';
     sel.appendChild(opt);
   }
@@ -66,7 +66,8 @@ saveBtn.addEventListener('click', async () => {
   const end = endEl.value;     
   const purpose = purposeEl.value.trim();
 
-  const resourceName = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : 'Unknown Resource';
+  const selectedOption = sel.options[sel.selectedIndex];
+  const resourceName = selectedOption ? selectedOption.getAttribute('data-name') : 'Unknown Resource';
 
   if (!resourceId) return msg.textContent = 'Please select a resource.';
   if (!who)       return msg.textContent = 'Please enter your name.';
@@ -79,7 +80,7 @@ saveBtn.addEventListener('click', async () => {
     msg.textContent = 'End time must be after start time.';
     return;
   }
-  
+
   const list = await getBookings();
   
   const sameDay = list.filter(b => b.resourceId === resourceId && b.date === date && b.status !== 'rejected');
@@ -96,10 +97,11 @@ saveBtn.addEventListener('click', async () => {
 
   const booking = {
     userId: user.uid,
-    userName: who,
+    userName: who, 
     
     resourceId,
     resourceName: resourceName, 
+    
     date,
     start,
     end,
@@ -112,10 +114,10 @@ saveBtn.addEventListener('click', async () => {
 
   msg.textContent = 'Booking saved ✔ (pending approval)';
   
-  // Clear fields
   whoEl.value = '';
   dateEl.value = '';
   startEl.value = '';
   endEl.value = '';
   purposeEl.value = '';
+  sel.value = '';
 });

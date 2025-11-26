@@ -1,13 +1,32 @@
 import "/userSafety.js";
-import { getBookings, getResources, deleteBooking } from '../shared/shared_data.js';
+import {
+  getBookings,
+  getResourcesFromDB,   // Firestore resources
+  deleteBooking
+} from '../shared/shared_data.js';
 
 const whoInput  = document.getElementById('who');
 const filterBtn = document.getElementById('filterBtn');
 const allBtn    = document.getElementById('allBtn');
 const tbody     = document.getElementById('tbody');
 
+
+const CURRENT_USER =
+  (localStorage.getItem('currentUserEmail')  
+   || localStorage.getItem('currentUserName')
+   || localStorage.getItem('email')
+   || ''
+  ).trim().toLowerCase();
+
+
+if (CURRENT_USER) {
+  whoInput.value = CURRENT_USER;
+  whoInput.readOnly = true;   
+}
+
+// firestore 
 async function buildResourceNameMap() {
-  const resources = await getResources();   // <— Firestore
+  const resources = await getResourcesFromDB();
   return Object.fromEntries(resources.map(r => [r.id, r.name]));
 }
 
@@ -60,15 +79,21 @@ async function cancelBooking(id) {
   await currentFilter();
 }
 
+
 async function currentFilter() {
   const term = whoInput.value.trim().toLowerCase();
   const all  = await getBookings();
 
-  if (!term) {
-    await render(all);
-  } else {
-    await render(all.filter(b => (b.who ?? '').toLowerCase().includes(term)));
-  }
+  
+  const mine = CURRENT_USER
+    ? all.filter(b => (b.who ?? '').toLowerCase() === CURRENT_USER)
+    : all; 
+
+  const finalList = term
+    ? mine.filter(b => (b.who ?? '').toLowerCase().includes(term))
+    : mine;
+
+  await render(finalList);
 }
 
 filterBtn.addEventListener('click', () => {
@@ -76,17 +101,14 @@ filterBtn.addEventListener('click', () => {
 });
 
 allBtn.addEventListener('click', async () => {
-  whoInput.value = '';
-  const all = await getBookings();
-  await render(all);
+  if (CURRENT_USER) whoInput.value = CURRENT_USER;
+  await currentFilter();
 });
 
 whoInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') currentFilter();
 });
 
-// Initial load
 (async () => {
-  const all = await getBookings();
-  await render(all);
+  await currentFilter();
 })();

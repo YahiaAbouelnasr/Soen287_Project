@@ -1,18 +1,32 @@
-
 import "/userSafety.js";
-import { getResources, getBookings, addBooking } from '../shared/shared_data.js';
+import { getResourcesFromDB, getBookings, addBooking } from '../shared/shared_data.js';
 
-const sel      = document.getElementById('resourceId');
-const msg      = document.getElementById('msg');
-const whoEl    = document.getElementById('who');
-const dateEl   = document.getElementById('date');
-const startEl  = document.getElementById('start');
-const endEl    = document.getElementById('end');
-const purposeEl= document.getElementById('purpose');
-const saveBtn  = document.getElementById('saveBtn');
+
+const CURRENT_USER_KEY_MAIN = 'currentUserEmail';   
+const CURRENT_USER_KEY_ALT  = 'email';             
+const loggedInUser =
+  (localStorage.getItem(CURRENT_USER_KEY_MAIN)
+   || localStorage.getItem(CURRENT_USER_KEY_ALT)
+   || '').trim();
+
+const sel       = document.getElementById('resourceId');
+const msg       = document.getElementById('msg');
+const whoEl     = document.getElementById('who');
+const dateEl    = document.getElementById('date');
+const startEl   = document.getElementById('start');
+const endEl     = document.getElementById('end');
+const purposeEl = document.getElementById('purpose');
+const saveBtn   = document.getElementById('saveBtn');
+
+
+if (loggedInUser) {
+  whoEl.value = loggedInUser;
+  whoEl.readOnly = true;
+}
+
 
 async function renderResources() {
-  const resources = await getResources();    
+  const resources = await getResourcesFromDB();  
   sel.innerHTML = '';
 
   if (!resources.length) {
@@ -28,7 +42,7 @@ async function renderResources() {
 
   for (const r of resources) {
     const opt = document.createElement('option');
-    opt.value = r.id;                         
+    opt.value = r.id; // Firestore document id
     opt.textContent = r.name + ' (' + (r.type || 'resource') + ')';
     sel.appendChild(opt);
   }
@@ -40,25 +54,28 @@ async function renderResources() {
 
 renderResources();
 
+
 function timeToMinutes(t) {
   const [h, m] = t.split(':').map(Number);
   return h * 60 + m;
 }
 
+
 saveBtn.addEventListener('click', async () => {
   msg.textContent = '';
 
-  const who        = whoEl.value.trim();
+ 
+  const who        = (loggedInUser || whoEl.value).trim();
   const resourceId = sel.value;
   const date       = dateEl.value;
   const start      = startEl.value;
   const end        = endEl.value;
   const purpose    = purposeEl.value.trim();
 
-  if (!resourceId) return msg.textContent = 'Please select a resource.';
-  if (!who)        return msg.textContent = 'Please enter your name.';
-  if (!date)       return msg.textContent = 'Please choose a date.';
-  if (!start || !end) return msg.textContent = 'Please choose start and end time.';
+  if (!resourceId)      return msg.textContent = 'Please select a resource.';
+  if (!who)             return msg.textContent = 'Missing user information.';
+  if (!date)            return msg.textContent = 'Please choose a date.';
+  if (!start || !end)   return msg.textContent = 'Please choose start and end time.';
 
   const startMin = timeToMinutes(start);
   const endMin   = timeToMinutes(end);
@@ -67,7 +84,8 @@ saveBtn.addEventListener('click', async () => {
     return;
   }
 
-  const list    = await getBookings();
+  // firestore bookings
+  const list = await getBookings();
   const sameDay = list.filter(b => b.resourceId === resourceId && b.date === date);
   const conflict = sameDay.some(b => {
     const s = timeToMinutes(b.start);
@@ -82,7 +100,7 @@ saveBtn.addEventListener('click', async () => {
 
   // Save booking to Firestore
   const booking = {
-    who,
+    who,          
     resourceId,
     date,
     start,
@@ -95,8 +113,7 @@ saveBtn.addEventListener('click', async () => {
 
   msg.textContent = 'Booking saved ✔ (pending approval)';
 
-
-  whoEl.value     = '';
+  
   dateEl.value    = '';
   startEl.value   = '';
   endEl.value     = '';

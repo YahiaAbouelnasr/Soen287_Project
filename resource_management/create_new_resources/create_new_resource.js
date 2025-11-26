@@ -8,13 +8,15 @@ async function createResourceOnSubmit(e){
     const resourceName = document.getElementById('name').value.trim();
     const resourceType = document.getElementById('type').value;
     const resourceDescription = document.getElementById('description').value.trim();
-    const resourceCapacity = document.getElementById('type').value.trim();
+    const resourceCapacity = document.getElementById('capacity').value.trim();
+    const resourceLocation = document.getElementById("location").value.trim();
     const resourceAvailability = document.getElementById('availability').value;
     const resourceImage = document.getElementById('image').value.trim();
 
     if (resourceName === "" 
         || resourceType === ""
         || resourceDescription === "" 
+        || resourceLocation === ""
         || (resourceType === "room" && resourceCapacity === "")
         || resourceAvailability === ""
         || resourceImage === ""){
@@ -28,6 +30,7 @@ async function createResourceOnSubmit(e){
         name: resourceName, 
         type: resourceType, 
         description: resourceDescription, 
+        location: resourceLocation,
         capacity: resourceCapacity, 
         availability: resourceAvailability,
         image: resourceImage 

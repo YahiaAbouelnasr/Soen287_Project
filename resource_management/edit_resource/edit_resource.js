@@ -11,6 +11,7 @@ export function loadFormData() {
   document.getElementById("newName").value = resource.name;
   document.getElementById("newType").value = resource.type;
   document.getElementById("newDescription").value = resource.description;
+  document.getElementById("newLocation").value = resource.location;
   document.getElementById("newCapacity").value = resource.capacity;
   document.getElementById('newAvailability').value = resource.availability;
   document.getElementById("newImage").value = resource.image;
@@ -23,6 +24,7 @@ async function readResource() {
   let updatedName = document.getElementById("newName").value.trim();
   let updatedType = document.getElementById("newType").value;
   let updatedDescription = document.getElementById("newDescription").value.trim();
+  let updatedLocation = document.getElementById("newLocation").value.trim();
   let updatedCapacity = document.getElementById("newCapacity").value.trim();
   let updatedAvailability = document.getElementById('newAvailability').value;
   let updatedImage = document.getElementById("newImage").value.trim();
@@ -35,6 +37,7 @@ async function readResource() {
     if (updatedType === "equipment") updatedCapacity = "";
   }
   if (resource.description !== updatedDescription) updates.description = updatedDescription;
+  if (resource.location !== updatedLocation) updates.location = updatedLocation;
   if (resource.capacity !== updatedCapacity) updates.capacity = updatedCapacity;
   if (resource.availability !== updatedAvailability) updates.availability = updatedAvailability;
   if (resource.image !== updatedImage) updates.image = updatedImage;
@@ -44,7 +47,7 @@ async function readResource() {
     const resourceRef = doc(database, "resources", resource.id);
     await updateDoc(resourceRef, updates);
     alert(`Resource has successfully updated!`);
-    window.location.href = "../main_page/resource_management.html";
+    window.location.href = "../main_page/resource_management.html?currentCategory=All";
   }
   else {
     alert("No change in details was found. Resource update was unsuccesful!");
@@ -72,7 +75,7 @@ async function loadResource() {
     // FIXME:toast.success("🚀 Successfully loaded your toast!");
   } else {
     alert("No such document!");
-    window.location.href = "../main_page/resource_management.html";
+    window.location.href = "../main_page/resource_management.html?currentCategory=All";
   }
   loadFormData();
   if (resource.type === "equipment") document.getElementById("capacityDisplay").classList.add("hidden");

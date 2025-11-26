@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { collection, query, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 import { database } from '../../firebase.js'
 import { getResourceHtml } from "../../shared/shared_functions.js";
 

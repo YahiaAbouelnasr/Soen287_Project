@@ -12,6 +12,7 @@ export function getResourceHtml(resource, showActions = true, isBooking = false)
             </h3>
             <p>Type: ${resource.type}</p>
             <p>Description: ${resource.description}</p>
+            <p>Location: ${resource.location}</p>
             <p>Capacity: ${resource.capacity || "—"}</p>
             <img src="${resource.image}" alt="${resource.name}">
         </div>

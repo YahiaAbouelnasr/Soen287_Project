@@ -1,19 +1,18 @@
+
 import "/userSafety.js";
 import { getResources, getBookings, addBooking } from '../shared/shared_data.js';
 
+const sel      = document.getElementById('resourceId');
+const msg      = document.getElementById('msg');
+const whoEl    = document.getElementById('who');
+const dateEl   = document.getElementById('date');
+const startEl  = document.getElementById('start');
+const endEl    = document.getElementById('end');
+const purposeEl= document.getElementById('purpose');
+const saveBtn  = document.getElementById('saveBtn');
 
-
-const sel = document.getElementById('resourceId');
-const msg = document.getElementById('msg');
-const whoEl = document.getElementById('who');
-const dateEl = document.getElementById('date');
-const startEl = document.getElementById('start');
-const endEl = document.getElementById('end');
-const purposeEl = document.getElementById('purpose');
-const saveBtn = document.getElementById('saveBtn');
-
-function renderResources() {
-  const resources = getResources();
+async function renderResources() {
+  const resources = await getResources();    
   sel.innerHTML = '';
 
   if (!resources.length) {
@@ -28,11 +27,12 @@ function renderResources() {
   }
 
   for (const r of resources) {
-  const opt = document.createElement('option');
-  opt.value = r.id;
-  opt.textContent = r.name + ' (' + (r.type || 'resource') + ')';
-  sel.appendChild(opt);
-}
+    const opt = document.createElement('option');
+    opt.value = r.id;                         
+    opt.textContent = r.name + ' (' + (r.type || 'resource') + ')';
+    sel.appendChild(opt);
+  }
+
   sel.disabled = false;
   saveBtn.disabled = false;
   msg.textContent = '';
@@ -48,16 +48,16 @@ function timeToMinutes(t) {
 saveBtn.addEventListener('click', async () => {
   msg.textContent = '';
 
-  const who = whoEl.value.trim();
+  const who        = whoEl.value.trim();
   const resourceId = sel.value;
-  const date = dateEl.value;
-  const start = startEl.value; 
-  const end = endEl.value;     
-  const purpose = purposeEl.value.trim();
+  const date       = dateEl.value;
+  const start      = startEl.value;
+  const end        = endEl.value;
+  const purpose    = purposeEl.value.trim();
 
   if (!resourceId) return msg.textContent = 'Please select a resource.';
-  if (!who)       return msg.textContent = 'Please enter your name.';
-  if (!date)      return msg.textContent = 'Please choose a date.';
+  if (!who)        return msg.textContent = 'Please enter your name.';
+  if (!date)       return msg.textContent = 'Please choose a date.';
   if (!start || !end) return msg.textContent = 'Please choose start and end time.';
 
   const startMin = timeToMinutes(start);
@@ -67,10 +67,7 @@ saveBtn.addEventListener('click', async () => {
     return;
   }
 
-  // firestore
-  const list = await getBookings();
-
-  
+  const list    = await getBookings();
   const sameDay = list.filter(b => b.resourceId === resourceId && b.date === date);
   const conflict = sameDay.some(b => {
     const s = timeToMinutes(b.start);
@@ -83,7 +80,7 @@ saveBtn.addEventListener('click', async () => {
     return;
   }
 
-  
+  // Save booking to Firestore
   const booking = {
     who,
     resourceId,
@@ -97,9 +94,11 @@ saveBtn.addEventListener('click', async () => {
   await addBooking(booking);
 
   msg.textContent = 'Booking saved ✔ (pending approval)';
+
+
+  whoEl.value     = '';
+  dateEl.value    = '';
+  startEl.value   = '';
+  endEl.value     = '';
+  purposeEl.value = '';
 });
-whoEl.value = '';
-dateEl.value = '';
-startEl.value = '';
-endEl.value = '';
-purposeEl.value = '';
